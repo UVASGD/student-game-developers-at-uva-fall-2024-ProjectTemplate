@@ -69,6 +69,7 @@ func chase(delta):
 
 	
 func retreat(delta):
+	offset = add_rand_offset(randf_range(-5,5))
 	target_pos = target.global_transform.origin
 	face_target_y.face_point(target_pos, delta)
 	face_target_x.face_point(target_pos, delta)

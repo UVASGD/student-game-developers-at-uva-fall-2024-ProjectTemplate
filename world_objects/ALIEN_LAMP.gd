@@ -20,3 +20,4 @@ func _on_hit(target):
 		$AudioStreamPlayer.play()
 		$OmniLight3D3.light_energy = 0
 		
+

@@ -1530,7 +1530,7 @@ mouse_force_pass_scroll_events = false
 [node name="Weapons_Manager" type="Node3D" parent="Head/Camera3D"]
 script = ExtResource("2_wsucc")
 _weapon_resources = Array[Resource("res://Models/Weapons/weapon_resource.gd")]([ExtResource("3_0poh5"), ExtResource("4_kb8oe"), ExtResource("6_ikr8b")])
-Starting_Weapons = Array[String](["smgModel"])
+Starting_Weapons = Array[String](["smgModel", "burst_rifle"])
 
 [node name="WeaponRig" type="Node3D" parent="Head/Camera3D/Weapons_Manager"]
 unique_name_in_owner = true
@@ -1562,6 +1562,14 @@ light_color = Color(1, 0.541176, 0.227451, 1)
 light_energy = 0.0
 light_angular_distance = 22.5
 sky_mode = 1
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Head/Camera3D/Weapons_Manager/WeaponRig/smgModel"]
+transform = Transform3D(20, 0, 4.54747e-12, 0, 20, 0, -4.54747e-12, 0, 20, -6.51725, 2.7834, -18.724)
+layers = 2
+light_color = Color(1, 0.286275, 0.313726, 1)
+light_energy = 0.0
+omni_range = 1.391
+omni_attenuation = 0.176777
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/Weapons_Manager/WeaponRig"]
 unique_name_in_owner = true
@@ -1598,6 +1606,15 @@ light_color = Color(1, 0.541176, 0.227451, 1)
 light_energy = 0.0
 light_angular_distance = 22.5
 sky_mode = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera3D/Weapons_Manager/WeaponRig/burst_rifle"]
+transform = Transform3D(-40, 0, 0.000101407, 0, 40, 0, -0.000101407, 0, -40, 22.8583, 8.8846, 39.5006)
+layers = 2
+light_color = Color(0.411765, 0.52549, 1, 1)
+light_energy = 0.39
+light_size = 0.037
+omni_range = 1.391
+omni_attenuation = 0.176777
 
 [node name="smg_of_the_future" type="Node3D" parent="Head/Camera3D/Weapons_Manager/WeaponRig"]
 transform = Transform3D(0.003, 0, 0, 0, 0.003, 0, 0, 0, 0.003, 0.383209, -0.172425, -0.799539)

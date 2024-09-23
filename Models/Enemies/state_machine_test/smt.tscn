@@ -740,7 +740,7 @@ shadow_mesh = SubResource("ArrayMesh_ibk6x")
 [node name="Smt" type="CharacterBody3D" groups=["enemies"]]
 script = ExtResource("1_n7xwg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06617, 0)
 shape = SubResource("CapsuleShape3D_je42x")
 
