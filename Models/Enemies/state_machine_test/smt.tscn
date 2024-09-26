@@ -746,7 +746,6 @@ shape = SubResource("CapsuleShape3D_je42x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06617, 0)
-visible = false
 material_override = SubResource("StandardMaterial3D_ulsyh")
 mesh = SubResource("CapsuleMesh_leyqv")
 
@@ -771,6 +770,7 @@ shape = SubResource("SphereShape3D_gupe6")
 
 [node name="f_t_y" type="Node3D" parent="."]
 transform = Transform3D(1.07324e-09, 0, -0.09, 0, 0.09, 0, 0.09, 0, 1.07324e-09, 0, 0.600404, 0)
+visible = false
 script = ExtResource("2_p12mc")
 
 [node name="f_t_y_model_group" type="Node3D" parent="f_t_y"]
