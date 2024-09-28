@@ -21,9 +21,15 @@ var headbob_time = 0.0
 #@onready var gun:Node3D = $Head/Camera3D/Weapons_Manager/WeaponRig/smgModel/smgModel
 @onready var mainCam = $Head/Camera3D
 @onready var gunCam = $Head/Camera3D/SubViewportContainer/SubViewport/GunCam
+@onready var dash_length_timer := $Timers/DashLength
+@onready var dash_cooldown_timer := $Timers/DashCooldown
 
 var wish_dir := Vector3.ZERO
 
+var can_dash : bool = true
+var is_dashing : bool = false
+
+@export var dash_speed := 20.0  
 
 func get_move_speed() -> float:
 	return walk_speed
@@ -45,16 +51,16 @@ func _unhandled_input(event):
 			%Camera3D.rotate_x(-event.relative.y * look_sens)
 			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
-# func _headbob_effect(delta):
-# 	if self.velocity.length() > 0:
-# 		headbob_time += delta * self.velocity.length()
-# 		var sway_x = cos(headbob_time * HEADBOB_FREQ * 0.5) * HEADBOB_SWAY_AMOUNT
-# 		var sway_y = sin(headbob_time * HEADBOB_FREQ) * HEADBOB_SWAY_AMOUNT
+func _headbob_effect(delta):
+	if self.velocity.length() > 0:
+		headbob_time += delta * self.velocity.length()
+	var sway_x = cos(headbob_time * HEADBOB_FREQ * 0.5) * HEADBOB_SWAY_AMOUNT
+	var sway_y = sin(headbob_time * HEADBOB_FREQ) * HEADBOB_SWAY_AMOUNT
 		
-# 		%Camera3D.position += Vector3(sway_x, sway_y, 0)
+	%Camera3D.position += Vector3(sway_x, sway_y, 0)
 
-# 		#var gun_bob_offset = Vector3(0, sin(headbob_time * gun_bobbing_frequency) * gun_bobbing_amplitude, 0)
-# 		#gun.position += gun_bob_offset
+ 		#var gun_bob_offset = Vector3(0, sin(headbob_time * gun_bobbing_frequency) * gun_bobbing_amplitude, 0)
+ 		#gun.position += gun_bob_offset
 	
 func _process(delta):
 	gunCam.global_transform = mainCam.global_transform
@@ -88,5 +94,29 @@ func _physics_process(delta):
 		_handle_ground_physics(delta)
 	else:
 		_handle_air_physics(delta)
+		
+	if Input.is_action_just_pressed("Dash") and can_dash:
+		_start_dash()
+	if is_dashing:
+		_apply_dash()
 	
 	move_and_slide()
+
+func _start_dash():
+	can_dash = false
+	is_dashing = true
+	dash_cooldown_timer.start()
+	dash_length_timer.start()
+
+func _apply_dash():
+	var dash_direction = wish_dir
+	if dash_direction.length() == 0: # if the player is not pressing any movement key (WASD), dash forward
+		dash_direction = -global_transform.basis.z  
+
+	velocity = dash_direction.normalized() * dash_speed
+
+func _on_dash_length_timeout():
+	is_dashing = false
+
+func _on_dash_cooldown_timeout():
+	can_dash = true
