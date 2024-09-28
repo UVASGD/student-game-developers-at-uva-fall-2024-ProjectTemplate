@@ -738,6 +738,57 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ibk6x")
 
+[sub_resource type="Animation" id="Animation_d8tn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/leftarm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/leftarm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/rightarm:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/rightarm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bk6ch"]
 resource_name = "smt_shoot"
 length = 0.1
@@ -791,57 +842,6 @@ tracks/3/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-9.61724e-21, 3.31869e-20, 0.479459), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_d8tn4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/leftarm:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/leftarm:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/rightarm:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("f_t_y/f_t_x/f_t_x_model_group/rightarm:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kxpsa"]
 _data = {
 "RESET": SubResource("Animation_d8tn4"),
@@ -860,6 +860,7 @@ shape = SubResource("CapsuleShape3D_je42x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06617, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_ulsyh")
 mesh = SubResource("CapsuleMesh_leyqv")
 
@@ -884,7 +885,6 @@ shape = SubResource("SphereShape3D_gupe6")
 
 [node name="f_t_y" type="Node3D" parent="."]
 transform = Transform3D(1.07324e-09, 0, -0.09, 0, 0.09, 0, 0.09, 0, 1.07324e-09, 0, 0.600404, 0)
-visible = false
 script = ExtResource("2_p12mc")
 
 [node name="f_t_y_model_group" type="Node3D" parent="f_t_y"]
