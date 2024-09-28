@@ -15,6 +15,8 @@ var headbob_time = 0.0
 @export var air_accel := 880.0
 @export var air_move_speed := 500.0
 
+@export var dash_speed := 20.0  
+
 #@export var gun_bobbing_amplitude := 0.002
 #@export var gun_bobbing_frequency := 1
 
@@ -24,12 +26,13 @@ var headbob_time = 0.0
 @onready var dash_length_timer := $Timers/DashLength
 @onready var dash_cooldown_timer := $Timers/DashCooldown
 
+# The direction which the player "wishes" to move (according to WASD keys)
 var wish_dir := Vector3.ZERO
 
 var can_dash : bool = true
 var is_dashing : bool = false
-
-@export var dash_speed := 20.0  
+var dash_tween: Tween
+var dash_velocity := Vector3.ZERO
 
 func get_move_speed() -> float:
 	return walk_speed
@@ -95,25 +98,40 @@ func _physics_process(delta):
 	else:
 		_handle_air_physics(delta)
 		
+	_handle_dash_logic()
+	
+	move_and_slide()
+
+func _handle_dash_logic():
 	if Input.is_action_just_pressed("Dash") and can_dash:
 		_start_dash()
 	if is_dashing:
 		_apply_dash()
-	
-	move_and_slide()
 
 func _start_dash():
 	can_dash = false
 	is_dashing = true
 	dash_cooldown_timer.start()
 	dash_length_timer.start()
+	
+	var dash_direction = wish_dir
+	dash_direction = dash_direction.normalized()
+	if dash_tween:
+		dash_tween.kill()  # Stop any existing tween
+	dash_tween = create_tween()
+	dash_tween.set_ease(Tween.EASE_IN)
+	dash_tween.set_trans(Tween.TRANS_BOUNCE)
+	
+	# Tween the dash velocity
+	dash_velocity = dash_direction * dash_speed
+	dash_tween.tween_property(self, "dash_velocity", dash_direction * (dash_speed * 0.1), dash_length_timer.wait_time)
 
 func _apply_dash():
-	var dash_direction = wish_dir
+	var dash_direction := wish_dir
 	if dash_direction.length() == 0: # if the player is not pressing any movement key (WASD), dash forward
 		dash_direction = -global_transform.basis.z  
-
-	velocity = dash_direction.normalized() * dash_speed
+	
+	self.velocity = dash_direction.normalized() * dash_speed
 
 func _on_dash_length_timeout():
 	is_dashing = false
