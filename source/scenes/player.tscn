@@ -1,15 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=9 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
-[ext_resource type="Script" path="res://source/scenes/item_handler.gd" id="2_cjdm3"]
-[ext_resource type="Resource" uid="uid://1qjff6n2w5m" path="res://source/item/base_player_stats.tres" id="3_0avcd"]
+[ext_resource type="Script" path="res://source/item/stats_and_item_handler.gd" id="3_3yyiq"]
+[ext_resource type="Script" path="res://source/item/item.gd" id="4_imn1n"]
+[ext_resource type="Script" path="res://source/item/item_resource.gd" id="5_qrgxk"]
+
+[sub_resource type="Resource" id="Resource_t33mb"]
+script = ExtResource("5_qrgxk")
+damage = 0.0
+dmg_mult = 0.0
+max_health = 0.0
+strength = 0.0
+top_speed = 10.0
+func_name = ""
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1d7hi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tx0kn"]
 
+[sub_resource type="Resource" id="Resource_qmnsb"]
+script = ExtResource("5_qrgxk")
+damage = 0.0
+dmg_mult = 0.0
+max_health = 0.0
+strength = 0.0
+top_speed = 3.0
+func_name = "do_nothing"
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ws1a7")
+base_stats = SubResource("Resource_t33mb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1d7hi")
@@ -19,6 +39,9 @@ position = Vector2(1.07288e-06, 1.90735e-06)
 scale = Vector2(20, 15)
 mesh = SubResource("CapsuleMesh_tx0kn")
 
-[node name="ItemHandler" type="Node2D" parent="."]
-script = ExtResource("2_cjdm3")
-base_stats = ExtResource("3_0avcd")
+[node name="StatsAndItemHandler" type="Node2D" parent="."]
+script = ExtResource("3_3yyiq")
+
+[node name="Item" type="Node2D" parent="StatsAndItemHandler"]
+script = ExtResource("4_imn1n")
+item_res = SubResource("Resource_qmnsb")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://1qjff6n2w5m"]
+[gd_resource type="Resource" script_class="Item_Res" load_steps=2 format=3 uid="uid://1qjff6n2w5m"]
 
 [ext_resource type="Script" path="res://source/item/item_resource.gd" id="1_3dkj6"]
 
@@ -8,5 +8,5 @@ damage = 5.0
 dmg_mult = 1.0
 max_health = 100.0
 strength = 2.0
-speed = 4.0
+top_speed = 0.0
 func_name = ""
