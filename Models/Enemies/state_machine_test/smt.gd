@@ -111,7 +111,7 @@ func _on_chase_body_entered(body):
 		
 
 func shoot(tm):
-	if not is_firing:
+	if face_target_x.is_facing_target(target_pos) and not is_firing:
 		tm.start()
 		is_firing = true
 		Animation_Player.queue("smt_shoot")
