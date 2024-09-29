@@ -1,42 +1,49 @@
 extends CharacterBody2D
 
+class_name Player
+
 var Speed := 0.0
-var topSpeed := 150.0
-var hDirection := 0.0
-var vDirection := 0.0 
+var movement := Vector2.ZERO
 
-const SPEED_INC := 15.0
-
+const TOP_SPEED_FACTOR := 15.0
+const ACCELERATION := 15.0
 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
-	handle_move(delta)
+	handle_move()
 
 
-
-func handle_move(delta) -> void:
-	hDirection = Input.get_axis("Left", "Right")
-	vDirection = Input.get_axis("Up", "Down")
-	if hDirection and vDirection:
-		Speed = move_toward(Speed, topSpeed, SPEED_INC) #slowed velocity's to account for increased movement
-		velocity.x = hDirection * Speed / 1.4
-		velocity.y = vDirection * Speed / 1.4
-	elif hDirection:
-		Speed = move_toward(Speed, topSpeed, SPEED_INC)
-		velocity.x = hDirection * Speed
-		velocity.y = move_toward(velocity.y, 0, SPEED_INC)
-	elif vDirection:
-		Speed = move_toward(Speed, topSpeed, SPEED_INC)
-		velocity.y = vDirection * Speed
-		velocity.x = move_toward(velocity.x, 0, SPEED_INC)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED_INC)
-		velocity.y = move_toward(velocity.y, 0, SPEED_INC)
+func handle_move() -> void:
+	movement = Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Up", "Down")).normalized()
+	if movement.length() :
+		Speed = move_toward(Speed, stats.topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
+	
+	if movement.x :
+		velocity.x = movement.x * Speed
+	else :
+		velocity.x = move_toward(velocity.x, 0, ACCELERATION)
+	
+	if movement.y :
+		velocity.y = movement.y * Speed
+	else :
+		velocity.y = move_toward(velocity.y, 0, ACCELERATION)
+	
 	move_and_slide()
+
+#### item and stats handling (everything else is implemented in the stats_and_item_handler)
+@onready var stats_and_item_handler : Node2D = $StatsAndItemHandler
+@export var base_stats : Item_Res
+var stats : Stats = Stats.new()
+
+func pickup_item(item : Item) :
+	stats_and_item_handler.handle_pickup(item)
+	pass
+
+func drop_item(item : Item, destroy : bool) :
+	#if destroy is false, you should be reparenting the item
+	stats_and_item_handler.handle_drop(item, destroy)
+	pass
