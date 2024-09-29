@@ -4,11 +4,6 @@ extends Node2D
 @onready var unconditional_stats : Stats = player.base_stats.get_stats().copy()		#player base stats + unconditional stats from items (updated when a new item is picked up)
 
 
-func _ready():
-	#temp code allowing items to be added before runtime
-	for item in get_children() :
-		handle_pickup(item)
-
 func _process(delta):
 	handle_process_effects()
 	pass
@@ -18,8 +13,10 @@ func handle_process_effects() :
 	player.stats = unconditional_stats.copy()
 	#add any conditional values
 	for item in get_children() :
-		if item.item_res.func_name == "" : continue
-		item.item_res.call(item.item_res.func_name, player) #calls the item specific function, passes the player
+		#calls the item specific functions, passes the player
+		for func_name in item.item_res.func_names :
+			if func_name == "" : continue
+			item.item_res.call(func_name, player) #this line calls a one of the static functions in the Item_Res class
 	pass
 
 func handle_pickup(item : Item) :

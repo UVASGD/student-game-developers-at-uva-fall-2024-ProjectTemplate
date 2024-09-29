@@ -1,30 +1,38 @@
 class_name Stats
 
-var damage : float = 0
-var dmg_mult : float = 0
-var max_health : float = 0
-var strength : float = 0
-var top_speed : float = 0
+var health : float = 0
+var topSpeed : float = 0
+var attackSpeed : float = 0
+var attackDamage : float = 0
+var dashCooldown : float = 0
+var abilityCooldown : float = 0
+var cost : int = 0
 
 func add_stats(s : Stats) :
-	damage += s.damage
-	dmg_mult += s.dmg_mult
-	max_health += s.max_health
-	strength += s.strength
-	top_speed += s.top_speed
+	health += s.health
+	topSpeed += s.topSpeed
+	attackSpeed += s.attackSpeed
+	attackDamage += s.attackDamage
+	dashCooldown += s.dashCooldown
+	abilityCooldown += s.abilityCooldown
+	cost += s.cost
 
 func subtract_stats(s : Stats) :
-	damage -= s.damage
-	dmg_mult -= s.dmg_mult
-	max_health -= s.max_health
-	strength -= s.strength
-	top_speed -= s.top_speed
+	health -= s.health
+	topSpeed -= s.topSpeed
+	attackSpeed -= s.attackSpeed
+	attackDamage -= s.attackDamage
+	dashCooldown -= s.dashCooldown
+	abilityCooldown -= s.abilityCooldown
+	cost -= s.cost
 
 func copy() -> Stats :
 	var s = Stats.new()
-	s.damage = damage
-	s.dmg_mult = dmg_mult
-	s.max_health = max_health
-	s.strength = strength
-	s.top_speed = top_speed
+	s.health = health
+	s.topSpeed = topSpeed
+	s.attackSpeed = attackSpeed
+	s.attackDamage = attackDamage
+	s.dashCooldown = dashCooldown
+	s.abilityCooldown = abilityCooldown
+	s.cost = cost
 	return s

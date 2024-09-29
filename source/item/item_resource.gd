@@ -1,23 +1,43 @@
 extends Resource
-
 class_name Item_Res
 
-@export var damage : float = 0
-@export var dmg_mult : float = 0
-@export var max_health : float = 0
-@export var strength : float = 0
-@export var top_speed : float = 0
-@export var func_name : String = ""
+enum Rarity {
+    COMMON,
+    UNCOMMON,
+    RARE,
+    LEGENDARY
+}
+
+#Info
+@export var sprite : Texture
+@export var name : String
+@export var description : String
+@export var rarity : Rarity
+
+#Functions
+@export var func_names : Array[String]
+
+#Stats
+@export var health : float
+@export var topSpeed : float
+@export var attackSpeed : float
+@export var attackDamage : float
+@export var dashCooldown : float
+@export var abilityCooldown : float
+@export var cost : int
+
 
 #note that when adding a stat, a few lines need to be added in stats.gd and in get_stats() in this class
 
 func get_stats() -> Stats :
 	var s = Stats.new()
-	s.damage = damage
-	s.dmg_mult = dmg_mult
-	s.max_health = max_health
-	s.strength = strength
-	s.top_speed = top_speed
+	s.health = health
+	s.topSpeed = topSpeed
+	s.attackSpeed = attackSpeed
+	s.attackDamage = attackDamage
+	s.dashCooldown = dashCooldown
+	s.abilityCooldown = abilityCooldown
+	s.cost = cost
 	return s
 
 ####################################################################

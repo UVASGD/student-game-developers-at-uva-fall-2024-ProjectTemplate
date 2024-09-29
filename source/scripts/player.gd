@@ -20,7 +20,7 @@ func _process(delta) -> void:
 func handle_move() -> void:
 	movement = Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Up", "Down")).normalized()
 	if movement.length() :
-		Speed = move_toward(Speed, stats.top_speed * TOP_SPEED_FACTOR, ACCELERATION)
+		Speed = move_toward(Speed, stats.topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
 	
 	if movement.x :
 		velocity.x = movement.x * Speed
