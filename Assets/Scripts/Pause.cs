@@ -5,12 +5,15 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
 
-public GameObject pauseMenu;
+private GameObject pauseMenu;
 private bool isPaused = false;
+
+
 
     // Start is called before the first frame update
     void Start()
-    {
+    {  
+        pauseMenu = GameObject.Find("PauseMenu");        
         pauseMenu.SetActive(false);
     }
 
