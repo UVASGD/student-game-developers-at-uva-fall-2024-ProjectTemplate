@@ -21,8 +21,6 @@ public class NPC : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI textMeshPro;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
-
-    [SerializeField] private UnityEngine.Vector3 dialogueBoxOffset;
     private string[] dialogueSplit;
     private int dialogueIndex = 0;
     private int curDialogue;
