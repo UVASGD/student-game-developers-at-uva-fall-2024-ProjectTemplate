@@ -2,5 +2,4 @@
 
 [node name="StageTemplate" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
