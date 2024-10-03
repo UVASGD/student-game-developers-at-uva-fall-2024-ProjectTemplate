@@ -43,10 +43,12 @@ public class Player : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
 
         SaveData data = SaveSystem.LoadPlayer();
+
         for(int i=0; i < data.flags.Length; i++)
         {
             dialogueFlags.Add((flags)data.flags[i]);
         }
+        
         transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
         moveLock = true;
         Invoke("moveLockOff", 0.5f);
@@ -59,11 +61,6 @@ public class Player : MonoBehaviour
         {
             Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _characterController.Move(move * Time.deltaTime * speed);
-        }
-
-        if (Input.GetButtonDown("esc"))
-        {
-            SaveSystem.SavePlayer(this);
         }
     }
 

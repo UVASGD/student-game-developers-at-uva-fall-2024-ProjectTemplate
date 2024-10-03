@@ -13,6 +13,7 @@ public class StartMenu : MonoBehaviour
     void Start()
     {
         data = SaveSystem.LoadPlayer();
+
         if(data == null)
         {
             loadButton.color = new Color(32, 65, 29, 0.5f);

@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using TMPro;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +25,8 @@ public class NPC : MonoBehaviour{
     private int dialogueIndex = 0;
     private int curDialogue;
 
+    private RectTransform dialogueTransform;
+
     [SerializeField] private string[] dialogue;
     [SerializeField] private string[] reqsToConv;
     private Player.flags[][] reqs;
@@ -31,6 +35,7 @@ public class NPC : MonoBehaviour{
     {
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
+        dialogueTransform = textbox.GetComponent<RectTransform>();
 
         string[] tempStr;
         reqs = new Player.flags[reqsToConv.Length][];
@@ -131,6 +136,8 @@ public class NPC : MonoBehaviour{
         if(dialogueIndex < dialogueSplit.Length)
         {
             textbox.enabled = true;
+            UnityEngine.Vector3 npcPosition = transform.position;
+            dialogueTransform.position = npcPosition + new UnityEngine.Vector3(12,16,0); //Hardcoded offset
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             dialogueIndex++;
         }
