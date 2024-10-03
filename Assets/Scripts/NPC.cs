@@ -137,7 +137,7 @@ public class NPC : MonoBehaviour{
         {
             textbox.enabled = true;
             UnityEngine.Vector3 npcPosition = transform.position;
-            dialogueTransform.position = npcPosition + new UnityEngine.Vector3(12,16,0);
+            dialogueTransform.position = npcPosition + new UnityEngine.Vector3(12,16,0); //Hardcoded offset
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             dialogueIndex++;
         }
