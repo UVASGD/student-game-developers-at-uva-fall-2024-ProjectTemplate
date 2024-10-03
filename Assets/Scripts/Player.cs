@@ -62,11 +62,6 @@ public class Player : MonoBehaviour
             Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _characterController.Move(move * Time.deltaTime * speed);
         }
-
-        if (Input.GetButtonDown("esc"))
-        {
-            SaveSystem.SavePlayer(this);
-        }
     }
 
     void moveLockOff()
