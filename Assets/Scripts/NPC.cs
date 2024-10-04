@@ -17,15 +17,23 @@ public class NPC : MonoBehaviour{
     private bool curDisplay = false;
     private bool dialogueMode = false;
 
+    [SerializeField] private new Camera camera;
+
     [SerializeField] private Canvas textbox;
+
+
     [SerializeField] private TextMeshProUGUI textMeshPro;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
+
+    [SerializeField] private float minXBoundary; // Minimum x boundary in screen space
+    [SerializeField] private float maxXBoundary; // Maximum x boundary in screen space
+    
+    private RectTransform arrowRectTransform;
     private string[] dialogueSplit;
     private int dialogueIndex = 0;
     private int curDialogue;
 
-    private RectTransform dialogueTransform;
 
     [SerializeField] private string[] dialogue;
     [SerializeField] private string[] reqsToConv;
@@ -33,9 +41,11 @@ public class NPC : MonoBehaviour{
 
     void Start()
     {
+        minXBoundary = Screen.width * 0.25f;
+        maxXBoundary = Screen.width * 0.75f;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
-        dialogueTransform = textbox.GetComponent<RectTransform>();
+        arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
 
         string[] tempStr;
         reqs = new Player.flags[reqsToConv.Length][];
@@ -61,7 +71,7 @@ public class NPC : MonoBehaviour{
     {
         double dist = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
         double height = Mathf.Abs(player.transform.position.y - transform.position.y);
-        if (dist <= 70 && height <= 20 && !curDisplay && !dialogueMode)
+        if (dist <= 50 && height <= 20 && !curDisplay && !dialogueMode)
         {
             curDisplay = true;
             dialogueCheck();
@@ -76,6 +86,23 @@ public class NPC : MonoBehaviour{
         {
             if (curDisplay)
             {
+                UnityEngine.Vector3 npcPosition = transform.position;
+                UnityEngine.Vector3 npcScreenPosition = camera.WorldToScreenPoint(npcPosition);
+                
+                if (npcScreenPosition.x > minXBoundary && npcScreenPosition.x < maxXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(npcScreenPosition.x, Screen.height * .60f);
+
+                } else if (npcScreenPosition.x < minXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .60f);
+                }  else if (npcScreenPosition.x > maxXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .60f);
+                }
+                
+
+
                 dialogueMode = true;
                 playerScript.moveLock = true;
                 spriteRenderer.sprite = dialogueQueue[0];
@@ -136,8 +163,6 @@ public class NPC : MonoBehaviour{
         if(dialogueIndex < dialogueSplit.Length)
         {
             textbox.enabled = true;
-            UnityEngine.Vector3 npcPosition = transform.position;
-            dialogueTransform.position = npcPosition + new UnityEngine.Vector3(12,16,0); //Hardcoded offset
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             dialogueIndex++;
         }
