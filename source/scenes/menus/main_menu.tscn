@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://ol5fp5ldsygt"]
+
+[ext_resource type="Script" path="res://source/scenes/menus/switch_to_stage.gd" id="1_7ap72"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("button")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7ap72")
+button = NodePath("PlayButton")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 73.0
+offset_right = 250.0
+offset_bottom = 122.0
+text = "Play"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 25.0
+offset_right = 262.0
+offset_bottom = 48.0
+text = "Hallows Thief"
