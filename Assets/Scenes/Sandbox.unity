@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11478237, g: 0.28003007, b: 0.3356672, a: 1}
+  m_IndirectSpecularColor: {r: 0.11478237, g: 0.28003004, b: 0.3356672, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1689,6 +1689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301619acc3a40f54f8900e5d90ed03eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 909121066}
   textbox: {fileID: 2024628938}
   textMeshPro: {fileID: 1359247117}
   spriteRenderer: {fileID: 332742725}
@@ -1696,6 +1697,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0e82b2e437bb4324e9886fa3182aef8d, type: 3}
   - {fileID: 21300000, guid: 4e93045d69a5e424eabdcb2c6ba873b6, type: 3}
   - {fileID: 21300000, guid: 75a4de4baebb7a6468eb3a85ad9a4fda, type: 3}
+  minXBoundary: 100
+  maxXBoundary: 100
   dialogue:
   - Hey!!|You should go talk to John
   - Some weird things are going on here...|I heard john might know something|May
@@ -5044,16 +5047,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296744202}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2206887, w: 0.9753443}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2024628939}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -49, y: 50}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.499}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 325}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296744204
@@ -5290,7 +5293,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359247115}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7224,7 +7227,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744265386}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7533,6 +7536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301619acc3a40f54f8900e5d90ed03eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 909121066}
   textbox: {fileID: 2024628938}
   textMeshPro: {fileID: 1359247117}
   spriteRenderer: {fileID: 664409098}
@@ -7540,6 +7544,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0e82b2e437bb4324e9886fa3182aef8d, type: 3}
   - {fileID: 21300000, guid: 4e93045d69a5e424eabdcb2c6ba873b6, type: 3}
   - {fileID: 21300000, guid: 75a4de4baebb7a6468eb3a85ad9a4fda, type: 3}
+  minXBoundary: 100
+  maxXBoundary: 100
   dialogue:
   - Go away bud
   - Whoever said I know something must hiding something|They're the real culprit
@@ -7933,7 +7939,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990971886}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8114,7 +8120,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 20
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &2024628938
 Canvas:
   m_ObjectHideFlags: 0
@@ -8124,7 +8130,7 @@ Canvas:
   m_GameObject: {fileID: 2024628935}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 909121066}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -8146,8 +8152,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024628935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 86.23}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1990971887}
@@ -8155,12 +8161,12 @@ RectTransform:
   - {fileID: 1744265387}
   - {fileID: 1359247116}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.693}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 98.3, y: 35}
-  m_SizeDelta: {x: 1543, y: 818}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!4 &2053550693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 108225653778528902, guid: 3e2accafa3a5f1b40ba86cf39bcb49a7, type: 3}
