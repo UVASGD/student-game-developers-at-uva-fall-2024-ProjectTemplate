@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dajeyyd76x0vu"]
+
+[node name="GameContainer" type="Node2D"]
+
+[node name="ActiveScene" type="Node2D" parent="."]
+
+[node name="OverlayPanels" type="Node2D" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
