@@ -8,9 +8,20 @@ var movement := Vector2.ZERO
 const TOP_SPEED_FACTOR := 15.0
 const ACCELERATION := 15.0
 
+enum PlayerType { FRANKENSTEIN, PUMPKIN, WITCH, GHOST, MPUMPKIN, MFRANKENSTEIN, MWITCH, MGHOST}
+@export var type: PlayerType
+
+@onready var sprite = $Sprite2D
+
+const sprite_settings = [{"texture": "res://source/assets/character/frankenstein/frankenstein_idle/Frankenstein.png",
+						"color": Color8(255, 254, 176, 255), "size": 1},
+						{"texture": "res://objects/lights/candelabra.png", 
+						"color": Color8(255, 100, 100, 255), "size": 1.5},
+						{"texture": "res://objects/lights/lantern.png", 
+						"color": Color8(100, 255, 100, 255), "size": 2}]
 
 func _ready() -> void:
-	pass
+	sprite.texture = load(sprite_settings[type]["texture"])
 
 
 func _process(delta) -> void:
