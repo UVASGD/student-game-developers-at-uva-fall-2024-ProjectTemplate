@@ -39,7 +39,7 @@ enum Scene {
 }
 
 #Scoring
-var PLAYER_SCORES : Array[int] = [0,0,0,0]
+var player_scores : Array[int] = [0,0,0,0]
 var winning_score : int = 5
 
 #### METHODS ####
@@ -60,17 +60,21 @@ func switch_to_scene(scene_enum : Scene) :
 	if scene_enum == Scene.SHOP :
 		award_point_to_player(1)
 		print("POINTS AWARDED FOR DEBUG PURPOSES")
-		if PLAYER_SCORES[0] == winning_score :
+		if player_scores[0] == winning_score :
 			switch_active_scene(game_over)
+			player_scores = [0,0,0,0]
 		else :
-			switch_active_scene(getScene(scene_enum))
+			switch_active_scene(shop)
+	else :
+		switch_active_scene(getSceneFromEnum(scene_enum))
+	
 
 func switch_active_scene(scene : PackedScene) :
 	ActiveSceneHolder.get_child(0).queue_free()
 	var s = scene.instantiate()
 	ActiveSceneHolder.add_child(s)
 
-func getScene(scene_enum : Scene) -> PackedScene:
+func getSceneFromEnum(scene_enum : Scene) -> PackedScene:
 	match (scene_enum) :
 		Scene.MAIN_MENU : return main_menu
 		Scene.CREDITS : return credits
@@ -96,11 +100,11 @@ func get_random_stage() -> PackedScene:
 	else : return stage4
 
 func award_point_to_player(player : int) :
-	PLAYER_SCORES[player] += 1
+	player_scores[player-1] += 1
 
 func award_points_to_player(player : int, points : int) :
-	PLAYER_SCORES[player] += points
+	player_scores[player-1] += points
 
 func award_points_to_players(points : Array[int]) :
-	for i in PLAYER_SCORES.size() :
-		PLAYER_SCORES[i] += points[i]
+	for i in player_scores.size() :
+		player_scores[i] += points[i]

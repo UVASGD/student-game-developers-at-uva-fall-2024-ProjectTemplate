@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c35tr47yom1wt"]
 
-[ext_resource type="Script" path="res://source/scenes/switch_to_scene.gd" id="1_vm7w5"]
+[ext_resource type="Script" path="res://source/scenes/game_container/switch_to_scene.gd" id="1_vm7w5"]
 
 [node name="Shop" type="Node2D"]
 
@@ -9,7 +9,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Play"
 script = ExtResource("1_vm7w5")
-switch_to = 10
+switch_to = 11
 
 [node name="THIS SCENE IS TEMP" type="Label" parent="."]
 offset_left = 117.0

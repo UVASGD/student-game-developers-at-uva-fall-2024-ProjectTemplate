@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bn5ejiljdkkwe"]
 
-[ext_resource type="Script" path="res://source/scenes/switch_to_scene.gd" id="1_dulpl"]
+[ext_resource type="Script" path="res://source/scenes/game_container/switch_to_scene.gd" id="1_dulpl"]
 
 [node name="PreGameCutScene" type="Node2D"]
 
@@ -9,7 +9,7 @@ offset_right = 128.0
 offset_bottom = 31.0
 text = "[CutSceneOver]"
 script = ExtResource("1_dulpl")
-switch_to = 10
+switch_to = 11
 
 [node name="THIS SCENE IS TEMP" type="Label" parent="."]
 offset_left = 142.0

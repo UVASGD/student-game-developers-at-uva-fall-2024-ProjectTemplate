@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dmg3rcypapom8"]
 
-[ext_resource type="Script" path="res://source/scenes/switch_to_scene.gd" id="1_bh3vu"]
+[ext_resource type="Script" path="res://source/scenes/game_container/switch_to_scene.gd" id="1_bh3vu"]
 
 [node name="CharacterSelect" type="Node2D"]
 

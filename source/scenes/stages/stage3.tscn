@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dydnt3eq7h3wx"]
 
-[ext_resource type="Script" path="res://source/scenes/switch_to_scene.gd" id="1_cb363"]
+[ext_resource type="Script" path="res://source/scenes/game_container/switch_to_scene.gd" id="1_cb363"]
 
 [node name="Stage3" type="Node2D"]
 
@@ -9,7 +9,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "[StageOver]"
 script = ExtResource("1_cb363")
-switch_to = 5
+switch_to = 6
 
 [node name="THIS SCENE IS TEMP" type="Label" parent="."]
 offset_left = 117.0
