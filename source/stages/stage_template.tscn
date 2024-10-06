@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dfbde6txjyuca"]
+
+[node name="StageTemplate" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
