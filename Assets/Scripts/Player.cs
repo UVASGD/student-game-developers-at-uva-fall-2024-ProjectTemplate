@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private CharacterController _characterController;
     private float speed = 50f;
 
+    private Inventory inventory;
+
     [SerializeField] private SpriteRenderer body;
     [SerializeField] private SpriteRenderer hair;
     [SerializeField] private SpriteRenderer eyes;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] mouths;
     [SerializeField] private Sprite[] tops;
 
+    [SerializeField] private UI_Inventory uI_Inventory;
     public enum flags { defaultFlag, //flag put on all dialogue
             testFlag1, 
             testFlag2,
@@ -39,6 +42,8 @@ public class Player : MonoBehaviour
         eyes.sprite = eyePairs[PlayerPrefs.GetInt("eyeIndex")];
         mouth.sprite = mouths[PlayerPrefs.GetInt("mouthIndex")];
         top.sprite = tops[PlayerPrefs.GetInt("topIndex")];
+        inventory = new Inventory();
+        uI_Inventory.SetInventory(inventory);
 
         _characterController = GetComponent<CharacterController>();
 
