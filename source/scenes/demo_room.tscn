@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://diprigu67ubnb"]
+[gd_scene load_steps=4 format=3 uid="uid://diprigu67ubnb"]
 
 [ext_resource type="PackedScene" uid="uid://rgfnpcsvv534" path="res://source/scenes/player.tscn" id="1_uxgo6"]
 [ext_resource type="Script" path="res://source/scripts/quit.gd" id="2_c3313"]
+[ext_resource type="PackedScene" uid="uid://b55salwd6xeoq" path="res://source/scenes/settings.tscn" id="3_c83ju"]
 
 [node name="DemoRoom" type="Node2D"]
 
@@ -33,3 +34,10 @@ color = Color(1, 0, 1, 1)
 
 [node name="quit" type="Node2D" parent="."]
 script = ExtResource("2_c3313")
+
+[node name="Settings" parent="." instance=ExtResource("3_c83ju")]
+visible = false
+offset_left = -508.0
+offset_top = -258.0
+offset_right = 516.0
+offset_bottom = 254.0
