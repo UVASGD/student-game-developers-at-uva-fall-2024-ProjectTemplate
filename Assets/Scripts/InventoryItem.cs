@@ -15,5 +15,17 @@ public class InventoryItem
     public ItemType itemType;
     public int amount;
 
+    public Sprite GetSprite()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.MattressSpring:   return ItemAssets.Instance.mattressSpringSprite;
+            case ItemType.Note:             return ItemAssets.Instance.noteSprite;
+            case ItemType.Shoes:            return ItemAssets.Instance.shoesSprite;
+            case ItemType.Pencil:           return ItemAssets.Instance.pencilSprite;
+        }
+    }
+
 
 }

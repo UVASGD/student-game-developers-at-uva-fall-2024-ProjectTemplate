@@ -10,11 +10,10 @@ public class Inventory
     public Inventory()
     {
         inventoryItems = new List<InventoryItem>();
-        Debug.Log("invetory created");
         inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.MattressSpring});
         inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.Shoes});
         inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.Note});
-        Debug.Log(inventoryItems.Count);
+        inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.Pencil});
     }
 
     public void AddInventoryItem(InventoryItem item)

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public bool moveLock = true;
+
+    private bool firstTimeInventoryOpen = true;
     
     //private Vector2 _input;
     private CharacterController _characterController;
@@ -43,7 +45,6 @@ public class Player : MonoBehaviour
         mouth.sprite = mouths[PlayerPrefs.GetInt("mouthIndex")];
         top.sprite = tops[PlayerPrefs.GetInt("topIndex")];
         inventory = new Inventory();
-        uI_Inventory.SetInventory(inventory);
 
         _characterController = GetComponent<CharacterController>();
 
@@ -72,6 +73,12 @@ public class Player : MonoBehaviour
         {
             SaveSystem.SavePlayer(this);
         }
+
+        if (Input.GetKeyDown(KeyCode.I) && firstTimeInventoryOpen)
+        {
+            firstTimeInventoryOpen = false;
+            uI_Inventory.SetInventory(inventory);
+        }
     }
 
     void moveLockOff()
@@ -91,5 +98,10 @@ public class Player : MonoBehaviour
             output += " ";
         }
         Debug.Log(output);
+    }
+
+    public void AddToInventory(InventoryItem inventoryItem)
+    {
+        inventory.AddInventoryItem(inventoryItem);
     }
 }
