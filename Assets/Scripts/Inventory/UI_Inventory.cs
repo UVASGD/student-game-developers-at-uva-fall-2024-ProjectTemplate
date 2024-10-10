@@ -7,14 +7,12 @@ using UnityEngine.UI;
 public class UI_Inventory : MonoBehaviour
 {
     private Inventory inventory;
-    private Transform inventoryScreenBackground;
     private Transform itemTemplate;
 
     private Transform inventoryEnabler;
 
     private void Start()
     {
-        inventoryScreenBackground = transform.Find("InventoryScreenBackground");
         itemTemplate = transform.Find("Item Template");
         inventoryEnabler = transform.Find("Inventory Enabler");
 
@@ -37,9 +35,12 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.SetParent(inventoryEnabler, false);
             itemSlotRectTransform.gameObject.SetActive(true);
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
+
             UnityEngine.UI.Image image = itemSlotRectTransform.Find("image").GetComponent<UnityEngine.UI.Image>();
             image.sprite = item.GetSprite();
+
             x++;
+            
             if (x > 3)
             {
                 x = 0;
