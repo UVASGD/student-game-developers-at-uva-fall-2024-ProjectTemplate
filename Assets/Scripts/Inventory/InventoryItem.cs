@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryItem
@@ -9,7 +10,8 @@ public class InventoryItem
         MattressSpring,
         Note,
         Shoes,
-        Pencil
+        Pencil,
+        None
     }
 
     public ItemType itemType;
@@ -24,6 +26,7 @@ public class InventoryItem
             case ItemType.Note:             return ItemAssets.Instance.noteSprite;
             case ItemType.Shoes:            return ItemAssets.Instance.shoesSprite;
             case ItemType.Pencil:           return ItemAssets.Instance.pencilSprite;
+            case ItemType.None:             return null;
         }
     }
 

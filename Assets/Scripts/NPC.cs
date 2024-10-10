@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour{
     private bool curDisplay = false;
     private bool dialogueMode = false;
 
+    [SerializeField] private InventoryItem.ItemType itemtype;
+
     [SerializeField] private new Camera camera;
 
     [SerializeField] private Canvas textbox;
@@ -26,8 +28,8 @@ public class NPC : MonoBehaviour{
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
 
-    [SerializeField] private float minXBoundary; // Minimum x boundary in screen space
-    [SerializeField] private float maxXBoundary; // Maximum x boundary in screen space
+    private float minXBoundary; // Minimum x boundary in screen space
+    private float maxXBoundary; // Maximum x boundary in screen space
     
     private RectTransform arrowRectTransform;
     private string[] dialogueSplit;
