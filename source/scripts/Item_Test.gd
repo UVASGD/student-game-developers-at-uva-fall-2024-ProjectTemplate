@@ -1,8 +1,10 @@
+class_name Item_Test
 extends Resource
 
 #basic stats
 @export var damage :int
 @export var health : int
+@export var onStartFunctions : String
 @export var onFireFunctions : String #Array[String] for multiple on fire functions
 #Could exports strings of other events that have item functions
 #On hit, On take damage, On every frame
