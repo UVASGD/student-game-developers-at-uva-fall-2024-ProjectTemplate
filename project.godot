@@ -18,8 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 ItemAdvancedFunctions="*res://source/scripts/Item_Advanced_Functions.gd"
-
-
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
