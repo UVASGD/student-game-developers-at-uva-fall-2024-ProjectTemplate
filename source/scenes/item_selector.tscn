@@ -32,7 +32,7 @@ layout_mode = 2
 
 [node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Item1"
+text = "test_item"
 
 [node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
