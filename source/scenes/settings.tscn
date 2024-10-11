@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b55salwd6xeoq"]
 
-[ext_resource type="Script" path="res://source/scenes/settings.gd" id="1_lmc7t"]
+[ext_resource type="Script" path="res://source/scripts/settings.gd" id="1_lmc7t"]
 [ext_resource type="PackedScene" uid="uid://cl8jv2cft44qw" path="res://source/scenes/input_controls.tscn" id="1_ovefd"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_awq37"]

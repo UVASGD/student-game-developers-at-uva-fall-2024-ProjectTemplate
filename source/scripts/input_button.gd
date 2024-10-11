@@ -35,7 +35,6 @@ func _process(delta) -> void:
 	
 	if waiting == true: button.text = "Press Any Key"
 	if waiting == false:
-		
 		for input in InputMap.action_get_events(action):
 			if input is InputEventKey: inputK = input
 			else: inputJ = input
@@ -44,7 +43,6 @@ func _process(delta) -> void:
 			if inputK: button.text = "%s" % OS.get_keycode_string(inputK.physical_keycode)
 			else: button.text = "---"
 		else: button.text = "wip"
-
 
 func _on_button_pressed() -> void:
 	if input_type == "Keyboard":
