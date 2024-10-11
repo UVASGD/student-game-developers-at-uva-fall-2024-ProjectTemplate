@@ -5,8 +5,9 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
 
-private GameObject pauseMenu;
-private bool isPaused = false;
+    private GameObject pauseMenu;
+    private bool isPaused = false;
+    private Player player;
 
 
 
@@ -15,6 +16,7 @@ private bool isPaused = false;
     {  
         pauseMenu = GameObject.Find("PauseMenu");        
         pauseMenu.SetActive(false);
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,11 @@ private bool isPaused = false;
 
 
         
+    }
+
+    public void SaveGame()
+    {
+        SaveSystem.SavePlayer(player);
     }
 
     public void QuitApp(){

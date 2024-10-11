@@ -77,11 +77,6 @@ public class Player : MonoBehaviour
             _characterController.Move(move * Time.deltaTime * speed);
         }
 
-        if (Input.GetButtonDown("esc"))
-        {
-            SaveSystem.SavePlayer(this);
-        }
-
         if (Input.GetKeyDown(KeyCode.I) && firstTimeInventoryOpen)
         {
             firstTimeInventoryOpen = false;
