@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private CharacterController _characterController;
     private float speed = 50f;
 
-    private Inventory inventory;
+    public Inventory inventory;
 
     [SerializeField] private SpriteRenderer body;
     [SerializeField] private SpriteRenderer hair;
@@ -54,6 +54,14 @@ public class Player : MonoBehaviour
         {
             dialogueFlags.Add((flags)data.flags[i]);
         }
+
+        for(int i=0; i < data.inventoryItems.Length; i++)
+        {
+            InventoryItem inventoryItemData = new InventoryItem();
+            Debug.Log("int being tried to add " + data.inventoryItems[i]);
+            inventoryItemData.itemType = (InventoryItem.ItemType) data.inventoryItems[i];
+            inventory.AddInventoryItem(inventoryItemData);
+        }
         
         transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
         moveLock = true;
@@ -78,6 +86,10 @@ public class Player : MonoBehaviour
         {
             firstTimeInventoryOpen = false;
             uI_Inventory.SetInventory(inventory);
+
+        } else if (Input.GetKeyDown(KeyCode.I))
+        {
+            uI_Inventory.RefreshInventoryItems();
         }
     }
 

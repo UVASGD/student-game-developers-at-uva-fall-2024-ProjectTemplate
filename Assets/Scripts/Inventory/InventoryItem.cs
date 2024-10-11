@@ -14,6 +14,11 @@ public class InventoryItem
         None
     }
 
+    public InventoryItem()
+    {
+        this.itemType = ItemType.None;
+    }
+
     public ItemType itemType;
     public int amount;
 

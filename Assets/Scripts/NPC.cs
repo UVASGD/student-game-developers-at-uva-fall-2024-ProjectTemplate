@@ -17,7 +17,9 @@ public class NPC : MonoBehaviour{
     private bool curDisplay = false;
     private bool dialogueMode = false;
 
-    [SerializeField] private InventoryItem.ItemType itemtype;
+    private InventoryItem item = new InventoryItem();
+
+    [SerializeField] private InventoryItem.ItemType itemtype = InventoryItem.ItemType.None;
 
     [SerializeField] private new Camera camera;
 
@@ -43,6 +45,7 @@ public class NPC : MonoBehaviour{
 
     void Start()
     {
+        item.itemType = itemtype;
         minXBoundary = Screen.width * 0.25f;
         maxXBoundary = Screen.width * 0.75f;
         player = GameObject.Find("Player");

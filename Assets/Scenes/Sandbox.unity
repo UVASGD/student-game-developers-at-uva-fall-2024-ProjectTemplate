@@ -8157,7 +8157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301619acc3a40f54f8900e5d90ed03eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemtype: 4
+  itemtype: 0
   camera: {fileID: 909121066}
   textbox: {fileID: 2024628938}
   textMeshPro: {fileID: 1359247117}
@@ -8601,6 +8601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d717194523a231541b8075dfc6ae9ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   flag: 5
   self: {fileID: 1966052337}
 --- !u!4 &1966052339

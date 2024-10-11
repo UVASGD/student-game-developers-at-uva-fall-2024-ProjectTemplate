@@ -7,6 +7,10 @@ public class Item : MonoBehaviour
 
     private GameObject player;
     private Player playerScript;
+
+    private InventoryItem item = new InventoryItem();
+
+    [SerializeField] private InventoryItem.ItemType type = InventoryItem.ItemType.None;
     [SerializeField] private Player.flags flag;
     [SerializeField] private GameObject self;
 
@@ -20,6 +24,8 @@ public class Item : MonoBehaviour
         {
             Destroy(self);
         }
+
+        item.itemType = type;
     }
 
     // Update is called once per frame
@@ -30,6 +36,7 @@ public class Item : MonoBehaviour
         if (dist <= 25 && height <= 20 && Input.GetButtonDown("E"))
         {
             playerScript.dialogueFlags.Add(flag);
+            playerScript.AddToInventory(item);
             Destroy(self);
         }
     }
