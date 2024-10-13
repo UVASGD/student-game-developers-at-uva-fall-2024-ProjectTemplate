@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11478237, g: 0.28003004, b: 0.3356672, a: 1}
+  m_IndirectSpecularColor: {r: 0.11478237, g: 0.28003007, b: 0.3356672, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1873,7 +1873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301619acc3a40f54f8900e5d90ed03eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemtype: 0
+  itemtype: 040000000300000004000000
   camera: {fileID: 909121066}
   textbox: {fileID: 2024628938}
   textMeshPro: {fileID: 1359247117}
@@ -8291,7 +8291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301619acc3a40f54f8900e5d90ed03eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemtype: 0
+  itemtype: 040000000100000004000000
   camera: {fileID: 909121066}
   textbox: {fileID: 2024628938}
   textMeshPro: {fileID: 1359247117}
