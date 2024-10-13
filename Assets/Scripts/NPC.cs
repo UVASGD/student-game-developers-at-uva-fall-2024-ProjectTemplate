@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour{
 
     private InventoryItem item = new InventoryItem();
 
-    [SerializeField] private InventoryItem.ItemType itemtype = InventoryItem.ItemType.None;
+    [SerializeField] private InventoryItem.ItemType[] itemtype;
 
     [SerializeField] private new Camera camera;
 
@@ -45,7 +45,6 @@ public class NPC : MonoBehaviour{
 
     void Start()
     {
-        item.itemType = itemtype;
         minXBoundary = Screen.width * 0.25f;
         maxXBoundary = Screen.width * 0.75f;
         player = GameObject.Find("Player");
@@ -147,6 +146,7 @@ public class NPC : MonoBehaviour{
             {
                 dialogueSplit = dialogue[i].Split('|');
                 curDialogue = i;
+                item.itemType = itemtype[i];
                 break;
             }
         }
@@ -155,6 +155,7 @@ public class NPC : MonoBehaviour{
         {
             dialogueSplit = dialogue[0].Split('|');
             curDialogue = 0;
+            item.itemType = itemtype[0];
             spriteRenderer.sprite = dialogueQueue[1];
         }
         else
@@ -177,6 +178,7 @@ public class NPC : MonoBehaviour{
             if (curDialogue != 0)
             {
                 playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
+                playerScript.AddToInventory(item);
             }
             dialogueIndex = 0;
             dialogueMode = false;

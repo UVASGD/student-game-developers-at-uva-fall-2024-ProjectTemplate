@@ -17,7 +17,11 @@ public class Inventory
 
     public void AddInventoryItem(InventoryItem item)
     {
-        inventoryItems.Add(item);
+        if (item.itemType == InventoryItem.ItemType.None)
+        {
+             inventoryItems.Add(item);
+        }
+
     }
 
     public List<InventoryItem> GetItemList()
