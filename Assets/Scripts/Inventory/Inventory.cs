@@ -10,14 +10,12 @@ public class Inventory
     public Inventory()
     {
         inventoryItems = new List<InventoryItem>();
-        // inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.MattressSpring});
-        // inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.Note});
-        // inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.Pencil});
+        inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.MattressSpring});
     }
 
     public void AddInventoryItem(InventoryItem item)
     {
-        if (item.itemType == InventoryItem.ItemType.None)
+        if (item.itemType != InventoryItem.ItemType.None)
         {
              inventoryItems.Add(item);
         }
@@ -26,7 +24,6 @@ public class Inventory
 
     public List<InventoryItem> GetItemList()
     {
-
         return inventoryItems;
     }
 

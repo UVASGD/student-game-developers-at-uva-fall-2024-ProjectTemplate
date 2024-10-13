@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour{
     private bool curDisplay = false;
     private bool dialogueMode = false;
 
+    private bool firstTimeRead = true;
+
     private InventoryItem item = new InventoryItem();
 
     [SerializeField] private InventoryItem.ItemType[] itemtype;
@@ -146,7 +148,6 @@ public class NPC : MonoBehaviour{
             {
                 dialogueSplit = dialogue[i].Split('|');
                 curDialogue = i;
-                item.itemType = itemtype[i];
                 break;
             }
         }
@@ -155,7 +156,6 @@ public class NPC : MonoBehaviour{
         {
             dialogueSplit = dialogue[0].Split('|');
             curDialogue = 0;
-            item.itemType = itemtype[0];
             spriteRenderer.sprite = dialogueQueue[1];
         }
         else
@@ -170,6 +170,13 @@ public class NPC : MonoBehaviour{
         {
             textbox.enabled = true;
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
+            
+            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None)
+            {
+                item.itemType = itemtype[dialogueIndex];
+                playerScript.AddToInventory(item);
+            }
+
             dialogueIndex++;
         }
         else
@@ -178,11 +185,11 @@ public class NPC : MonoBehaviour{
             if (curDialogue != 0)
             {
                 playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
-                playerScript.AddToInventory(item);
             }
             dialogueIndex = 0;
             dialogueMode = false;
             playerScript.moveLock = false;
+            firstTimeRead = false;
         }
     }
 }
