@@ -92,22 +92,8 @@ public class NPC : MonoBehaviour{
         {
             if (curDisplay)
             {
-                UnityEngine.Vector3 npcPosition = transform.position;
-                UnityEngine.Vector3 npcScreenPosition = camera.WorldToScreenPoint(npcPosition);
                 
-                if (npcScreenPosition.x > minXBoundary && npcScreenPosition.x < maxXBoundary)
-                {
-                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(npcScreenPosition.x, Screen.height * .55f);
-
-                } else if (npcScreenPosition.x < minXBoundary)
-                {
-                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .55f);
-                }  else if (npcScreenPosition.x > maxXBoundary)
-                {
-                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .55f);
-                }
-                
-
+                AdjustDialogueArrow();
 
                 dialogueMode = true;
                 playerScript.moveLock = true;
@@ -191,5 +177,23 @@ public class NPC : MonoBehaviour{
             playerScript.moveLock = false;
             firstTimeRead = false;
         }
+    }
+
+    void AdjustDialogueArrow()
+    {
+        UnityEngine.Vector3 npcPosition = transform.position;
+                UnityEngine.Vector3 npcScreenPosition = camera.WorldToScreenPoint(npcPosition);
+                
+                if (npcScreenPosition.x > minXBoundary && npcScreenPosition.x < maxXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(npcScreenPosition.x, Screen.height * .55f);
+
+                } else if (npcScreenPosition.x < minXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .55f);
+                }  else if (npcScreenPosition.x > maxXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .55f);
+                }
     }
 }
