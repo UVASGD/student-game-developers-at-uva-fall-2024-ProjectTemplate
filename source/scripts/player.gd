@@ -15,8 +15,8 @@ func _process(delta) -> void:
 	handle_move()
 
 func handle_move() -> void:
-	var player_num = get_meta("player_num")
-	movement = Vector2(Input.get_axis("Left%s" % player_num, "Right%s" % player_num), Input.get_axis("Up%s" % player_num, "Down%s" % player_num)).normalized()
+	var player_num = str(get_meta("player_num"))
+	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	
 	if movement.length() :
 		Speed = move_toward(Speed, stats.topSpeed * TOP_SPEED_FACTOR, ACCELERATION)

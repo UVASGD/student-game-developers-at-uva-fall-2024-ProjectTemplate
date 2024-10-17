@@ -65,7 +65,8 @@ text = "Player 2"
 [node name="Input Controls2" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_ovefd")]
 layout_mode = 2
 metadata/player_num = 2
-metadata/input_type = "Controller"
+metadata/input_type = "Keyboard"
+metadata/device_id = 1
 
 [node name="Label3" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -74,7 +75,8 @@ text = "Player 3"
 [node name="Input Controls3" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_ovefd")]
 layout_mode = 2
 metadata/player_num = 3
-metadata/input_type = "Controller"
+metadata/input_type = "Keyboard"
+metadata/device_id = 2
 
 [node name="Label4" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -83,4 +85,5 @@ text = "Player 4"
 [node name="Input Controls4" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_ovefd")]
 layout_mode = 2
 metadata/player_num = 4
-metadata/input_type = "Controller"
+metadata/input_type = "Keyboard"
+metadata/device_id = 3

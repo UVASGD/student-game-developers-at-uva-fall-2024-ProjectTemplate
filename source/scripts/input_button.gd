@@ -14,13 +14,14 @@ var inputJ
 
 func _ready() -> void:
 	label.text = get_meta("input_name")
-	action = label.text + "%s" % player_num
+	action = label.text + str(player_num)
 	
 	for input in InputMap.action_get_events(action):
 		if input is InputEventKey: inputK = input
 		else: inputJ = input
 	
 	InputMap.action_erase_events(action)
+	
 	if input_type == "Keyboard": InputMap.action_add_event(action, inputK)
 	else: InputMap.action_add_event(action, inputJ)
 
@@ -39,7 +40,7 @@ func _process(delta) -> void:
 			else: inputJ = input
 		
 		if input_type == "Keyboard":
-			if inputK: button.text = "%s" % OS.get_keycode_string(inputK.physical_keycode)
+			if inputK: button.text = str(OS.get_keycode_string(inputK.physical_keycode))
 			else: button.text = "---"
 		else: button.text = "wip"
 
