@@ -25,11 +25,11 @@ func _process(delta):
 				deviceIDs[deviceIDs.find(4)] = i
 				break
 	
-	if Input.get_connected_joypads() != old_connected_joypads:
-		for i in range(4):
-			if !(i in deviceIDs) && (i+1) in deviceIDs:
-				deviceIDs[deviceIDs.find(i+1)] = i
-		old_connected_joypads = Input.get_connected_joypads()
+	#if Input.get_connected_joypads() != old_connected_joypads:
+		#for i in range(4):
+			#if !(i in deviceIDs) && (i+1) in deviceIDs:
+				#deviceIDs[deviceIDs.find(i+1)] = i
+		#old_connected_joypads = Input.get_connected_joypads()
 	
 	for node in vbox.get_children():
 		if node.has_meta("player_num"):
