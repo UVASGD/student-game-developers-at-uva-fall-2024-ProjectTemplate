@@ -28,4 +28,9 @@ public class InventoryEnabler : MonoBehaviour
         }
     }
 
+    public bool GetCurrentUIState()
+    {
+        return inventoryEnabledState;
+    }
+
 }

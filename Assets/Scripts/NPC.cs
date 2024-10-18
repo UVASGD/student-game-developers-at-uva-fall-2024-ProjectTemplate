@@ -21,6 +21,8 @@ public class NPC : MonoBehaviour{
 
     private InventoryItem item = new InventoryItem();
 
+    private InventoryEnabler uiEnabler;
+
     [SerializeField] private InventoryItem.ItemType[] itemtype;
 
     [SerializeField] private new Camera camera;
@@ -52,6 +54,7 @@ public class NPC : MonoBehaviour{
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
         arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
+        uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
 
         string[] tempStr;
         reqs = new Player.flags[reqsToConv.Length][];
@@ -88,8 +91,11 @@ public class NPC : MonoBehaviour{
             spriteRenderer.sprite = dialogueQueue[0];
         }
 
-        if (Input.GetButtonDown("E"))
+        if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState())
         {
+
+
+
             if (curDisplay)
             {
                 AdjustDialogueArrow();
