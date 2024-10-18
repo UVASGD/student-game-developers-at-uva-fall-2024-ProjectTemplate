@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dneing502fg0w"]
+[gd_scene load_steps=3 format=3 uid="uid://dneing502fg0w"]
+
+[ext_resource type="Script" path="res://source/scenes/button_generator.gd" id="1_env2u"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wuym8"]
 
-[node name="ItemDirectory" type="Control"]
+[node name="ItemSelector" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 350.0
@@ -29,30 +31,4 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "test_item"
-
-[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Item1"
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Item1"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Item1"
-
-[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Item1"
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Item1"
+script = ExtResource("1_env2u")
