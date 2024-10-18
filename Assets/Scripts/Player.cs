@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
         for(int i=0; i < data.inventoryItems.Length; i++)
         {
             InventoryItem inventoryItemData = new InventoryItem();
-            Debug.Log("int being tried to add " + data.inventoryItems[i]);
             inventoryItemData.itemType = (InventoryItem.ItemType) data.inventoryItems[i];
             inventory.AddInventoryItem(inventoryItemData);
         }

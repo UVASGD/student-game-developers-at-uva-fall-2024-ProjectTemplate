@@ -92,9 +92,7 @@ public class NPC : MonoBehaviour{
         {
             if (curDisplay)
             {
-                
                 AdjustDialogueArrow();
-
                 dialogueMode = true;
                 playerScript.moveLock = true;
                 spriteRenderer.sprite = dialogueQueue[0];
@@ -132,6 +130,7 @@ public class NPC : MonoBehaviour{
 
             if (toRead)
             {
+                //add if statement that gets boolean from specific quest "can move on" function
                 dialogueSplit = dialogue[i].Split('|');
                 curDialogue = i;
                 break;
@@ -191,9 +190,15 @@ public class NPC : MonoBehaviour{
                 } else if (npcScreenPosition.x < minXBoundary)
                 {
                     arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .55f);
+
                 }  else if (npcScreenPosition.x > maxXBoundary)
                 {
                     arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .55f);
                 }
+    }
+
+    public int getCurrentDialogueIndex()
+    {
+        return curDialogue;
     }
 }

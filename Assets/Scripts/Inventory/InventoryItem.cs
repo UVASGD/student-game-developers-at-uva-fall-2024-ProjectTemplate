@@ -20,7 +20,6 @@ public class InventoryItem
     }
 
     public ItemType itemType;
-    public int amount;
 
     public Sprite GetSprite()
     {

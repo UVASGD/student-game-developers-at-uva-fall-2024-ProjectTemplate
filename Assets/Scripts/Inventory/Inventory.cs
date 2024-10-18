@@ -10,15 +10,16 @@ public class Inventory
     public Inventory()
     {
         inventoryItems = new List<InventoryItem>();
-        inventoryItems.Add(new InventoryItem{ itemType = InventoryItem.ItemType.MattressSpring});
     }
 
     public void AddInventoryItem(InventoryItem item)
     {
-        if (item.itemType != InventoryItem.ItemType.None)
+        if (item.itemType == InventoryItem.ItemType.None)
         {
-             inventoryItems.Add(item);
+            return;
         }
+
+        inventoryItems.Add(item);
 
     }
 

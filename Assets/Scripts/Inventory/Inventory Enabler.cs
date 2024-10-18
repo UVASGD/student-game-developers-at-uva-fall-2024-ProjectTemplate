@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class InventoryEnabler : MonoBehaviour
 {
-    private bool isInventoryEnabled = false;
+    private bool inventoryEnabledState = false;
     void Start()
     {
         foreach (Transform child in transform)
             {
-                child.gameObject.SetActive(isInventoryEnabled);
+                child.gameObject.SetActive(inventoryEnabledState);
             }
     }
 
@@ -19,11 +19,11 @@ public class InventoryEnabler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I)) 
         {
-            isInventoryEnabled = !isInventoryEnabled;
+            inventoryEnabledState = !inventoryEnabledState;
 
             foreach (Transform child in transform)
             {
-                child.gameObject.SetActive(isInventoryEnabled);
+                child.gameObject.SetActive(inventoryEnabledState);
             }
         }
     }

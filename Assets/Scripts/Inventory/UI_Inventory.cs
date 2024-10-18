@@ -17,7 +17,6 @@ public class UI_Inventory : MonoBehaviour
     {
         itemTemplate = transform.Find("Item Template");
         inventoryEnabler = transform.Find("Inventory Enabler");
-
     }
 
     public void SetInventory(Inventory inventory)
@@ -28,10 +27,12 @@ public class UI_Inventory : MonoBehaviour
 
     public void RefreshInventoryItems()
     {
+        List<InventoryItem> itemList = inventory.GetItemList();
+
         int x = 0;
         int y = 0;
         float itemSlotCellSize = 100f;
-        List<InventoryItem> itemList = inventory.GetItemList();
+
 
         for (int i = 0; i < itemList.Count; i++)
         {
@@ -43,6 +44,7 @@ public class UI_Inventory : MonoBehaviour
             {
                 itemSlotRectTransform = instantiatedItems[i];
             }
+            
             else
             {
                 // If the slot doesn't exist, instantiate a new one

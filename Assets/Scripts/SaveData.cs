@@ -35,16 +35,11 @@ public class SaveData
         inventoryItems = new int[lenInventory];
 
 
-
         for(int i=0; i < lenInventory; i++)
         {
             inventoryItems[i] = (int) flagsInventoryEnum[i].itemType;
         }
 
-        foreach (int item in inventoryItems)
-        {
-            Debug.Log(item);
-        }
     }
 
     public SaveData()
