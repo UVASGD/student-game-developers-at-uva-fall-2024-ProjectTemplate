@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dneing502fg0w"]
 
-[ext_resource type="Script" path="res://source/scenes/item_selector.gd" id="1_6rw5j"]
-[ext_resource type="Script" path="res://source/scenes/button_generator.gd" id="1_env2u"]
+[ext_resource type="Script" path="res://source/scenes/itemSelector/item_selector.gd" id="1_6rw5j"]
+[ext_resource type="Script" path="res://source/scenes/itemSelector/button_generator.gd" id="1_env2u"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wuym8"]
 
