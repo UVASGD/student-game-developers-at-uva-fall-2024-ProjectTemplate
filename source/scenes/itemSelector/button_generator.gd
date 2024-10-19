@@ -1,7 +1,7 @@
 extends FlowContainer
 
 const resourcePath = "res://source/item/item_resources"
-var buttonScene: PackedScene = preload("res://source/scenes/item_button.tscn")
+var buttonScene: PackedScene = preload("res://source/scenes/itemSelector/item_button.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
