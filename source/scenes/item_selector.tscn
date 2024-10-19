@@ -14,7 +14,7 @@ offset_right = 350.0
 offset_bottom = 191.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.258824, 0.529412, 0.960784, 1)
+modulate = Color(0.258824, 0.529412, 0.960784, 0.470588)
 layout_mode = 0
 offset_right = 983.0
 offset_bottom = 562.0
@@ -38,6 +38,14 @@ text = "Item Selector"
 label_settings = SubResource("LabelSettings_j1tjw")
 horizontal_alignment = 1
 
-[node name="FlowContainer" type="FlowContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="FlowContainer" type="FlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_env2u")
