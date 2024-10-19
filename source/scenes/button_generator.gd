@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends FlowContainer
 
 const resourcePath = "res://source/item/item_resources"
 var buttonScene: PackedScene = preload("res://source/scenes/item_button.tscn")
