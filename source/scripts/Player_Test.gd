@@ -4,10 +4,11 @@ extends Node
 #this is just a test repleca of the player
 @export var items: Array[Resource]
 
-
+var maxHealth : int = 12
 var damage :int = 0
-var health :int = 0
-signal onAttack(player)
+var health :int = 12
+signal onAttack(player)#This signals will emit every attack
+signal onGetHit(player)#This signal will emit every time the player gets hit
 #more signals to tell items when to trigger their effects
 
 
@@ -18,7 +19,7 @@ var testToggle :bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	statusEffects.setStartingStatusFunctions(self)
+	statusEffects.setStartingStatusFunctions(self)#i wana move this somewhere else
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,15 +36,19 @@ func manage_test_input():
 	if Input.is_action_just_pressed("2"):
 		print("Gave Item " + str(items[1].resource_path))
 		get_item(items[1])
+	if Input.is_action_just_pressed("3"):
+		print("Gave Item " + str(items[2].resource_path))
+		get_item(items[2])		
 	#press left mouse to "fire"
 	if Input.is_action_just_pressed("mouse_0"):
 		print("Just Fired")
 		onAttack.emit(self)
+		#change_health(1)
 	#press right mouse to check damage stat
 	if Input.is_action_just_pressed("mouse_1"):
 		testToggle = !testToggle
 	if Input.is_action_just_pressed("ui_accept"):
-		statusEffects.giveStatus("Fire",3)
+		statusEffects.giveStatusTimed("Fire",3, StatusEffectManager.OverLapBehavior.STACK)
 
 func get_item(item : Item_Test):
 	damage += item.damage
@@ -52,13 +57,18 @@ func get_item(item : Item_Test):
 		Callable(ItemAdvancedFunctions, item.onStartFunctions).bind(self).call() #NEED TO DO ERROR HANDLING WHEN USER PASSES STRING THATS NOT A FUNCTION NAME
 	if(item.onFireFunctions != ""):
 		onAttack.connect(Callable(ItemAdvancedFunctions,item.onFireFunctions))
+	if(item.onGetHitFunctions != ""):
+		print("new on get hit function: " + item.onGetHitFunctions)
+		onGetHit.connect(Callable(ItemAdvancedFunctions,item.onGetHitFunctions))
 	
 func hit_object(ps: Player_Test):
 	pass
 
 func change_health(deltaHealth : float):
 	print("Player took " + str(-deltaHealth) + " damage") 
+	health += deltaHealth
+	onGetHit.emit(self);
+	if(health < 0):
+		print("You died fool")
 #func give_status_effect(effect : StatusEffect, duration : float):
 	#statusEffects.giveStatus(effect, duration)
-	
-#this function can be moved basically anywhere	
