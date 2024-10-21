@@ -17,9 +17,6 @@ signal onGetHit(player)#This signal will emit every time the player gets hit
 #strictly for testing damage
 var testToggle :bool = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	statusEffects.setStartingStatusFunctions(self)#i wana move this somewhere else
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

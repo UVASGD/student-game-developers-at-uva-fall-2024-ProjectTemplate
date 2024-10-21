@@ -7,12 +7,15 @@ var statusFunctionsEnd : Dictionary#[String,Array[Callable]]
 
 var timers : Dictionary#[Timer, String]
 #might need to be list of statuses for status effect stacking
-
+@onready var player : Player_Test = get_parent()
 enum OverLapBehavior{
 	IGNORE,
 	REFRESH,
 	STACK
 }
+
+func _ready() -> void:
+	setStartingStatusFunctions(player)
 
 func setStartingStatusFunctions(ps : Player_Test):
 	#Temperary. StatusEffect behavior should be stored elsewhere
