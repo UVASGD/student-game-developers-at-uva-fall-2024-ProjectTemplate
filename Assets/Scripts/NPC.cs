@@ -162,9 +162,9 @@ public class NPC : MonoBehaviour{
             textbox.enabled = true;
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             
-            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None)
+            if (firstTimeRead && itemtype[curDialogue] != InventoryItem.ItemType.None)
             {
-                item.itemType = itemtype[dialogueIndex];
+                item.itemType = itemtype[curDialogue];
                 playerScript.AddToInventory(item);
             }
 
