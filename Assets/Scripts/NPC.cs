@@ -164,7 +164,6 @@ public class NPC : MonoBehaviour{
             
             if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None && !playerScript.inventory.HasItemOfType(itemtype[dialogueIndex]))
             {
-                Debug.Log("first time read" + dialogueIndex);
                 item.itemType = itemtype[dialogueIndex];
                 playerScript.AddToInventory(item);
             }
