@@ -23,6 +23,24 @@ public class Inventory
 
     }
 
+    public bool HasItemOfType(InventoryItem.ItemType type)
+    {
+
+        bool typeFound = false;
+
+        foreach (InventoryItem item in inventoryItems)
+        {
+            if (item.itemType == type)
+            {
+                return true;
+            }
+        }
+
+
+        return typeFound;
+    }
+
+
     public List<InventoryItem> GetItemList()
     {
         return inventoryItems;

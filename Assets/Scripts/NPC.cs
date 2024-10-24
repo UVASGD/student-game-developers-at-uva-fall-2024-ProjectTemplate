@@ -162,8 +162,9 @@ public class NPC : MonoBehaviour{
             textbox.enabled = true;
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             
-            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None)
+            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None && !playerScript.inventory.HasItemOfType(itemtype[dialogueIndex]))
             {
+                Debug.Log("first time read" + dialogueIndex);
                 item.itemType = itemtype[dialogueIndex];
                 playerScript.AddToInventory(item);
             }
@@ -191,15 +192,15 @@ public class NPC : MonoBehaviour{
                 
                 if (npcScreenPosition.x > minXBoundary && npcScreenPosition.x < maxXBoundary)
                 {
-                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(npcScreenPosition.x, Screen.height * .55f);
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(npcScreenPosition.x, Screen.height * .60f);
 
                 } else if (npcScreenPosition.x < minXBoundary)
                 {
-                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .55f);
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .60f);
 
                 }  else if (npcScreenPosition.x > maxXBoundary)
                 {
-                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .55f);
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .60f);
                 }
     }
 
