@@ -1,5 +1,7 @@
 extends Control
+class Item_Selector
 
+var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,3 +13,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Item Selector"): # should be Ctrl + I
 		if visible: visible = false
 		else: visible = true
+
+func setPlayer(entered: Player):
+	player = entered
+	
+func getPlayer():
+	return player
