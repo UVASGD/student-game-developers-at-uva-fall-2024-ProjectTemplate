@@ -8,17 +8,16 @@ var movement := Vector2.ZERO
 const TOP_SPEED_FACTOR := 15.0
 const ACCELERATION := 15.0
 
-
 func _ready() -> void:
 	pass
-
 
 func _process(delta) -> void:
 	handle_move()
 
-
 func handle_move() -> void:
-	movement = Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Up", "Down")).normalized()
+	var player_num = str(get_meta("player_num"))
+	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
+	
 	if movement.length() :
 		Speed = move_toward(Speed, stats.topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
 	
