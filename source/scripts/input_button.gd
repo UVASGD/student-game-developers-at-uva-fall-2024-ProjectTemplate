@@ -60,3 +60,4 @@ func _input(event):
 			InputMap.action_add_event(action, event)
 			if input_type == "Keyboard": inputK = event
 			else: inputJ = event
+			waiting = false
