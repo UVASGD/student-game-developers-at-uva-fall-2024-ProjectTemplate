@@ -63,14 +63,9 @@ public class SpriteChange : MonoBehaviour
     {
         PlayerPrefs.SetInt("bodyIndex", bodyIndex);
         PlayerPrefs.SetInt("hairIndex", hairIndex);
-        PlayerPrefs.SetInt("hairIndex", hairCIndex);
+        PlayerPrefs.SetInt("hairCIndex", hairCIndex);
         PlayerPrefs.SetInt("eyeIndex", eyeIndex);
-        PlayerPrefs.SetInt("eyeIndex", eyeCIndex);
-        Debug.Log(bodyIndex);
-        Debug.Log(hairIndex);
-        Debug.Log(hairCIndex);
-        Debug.Log(eyeIndex);
-        Debug.Log(eyeCIndex);
+        PlayerPrefs.SetInt("eyeCIndex", eyeCIndex);
         SceneManager.LoadScene(sceneName: "Sandbox");
     }
 
