@@ -1,5 +1,5 @@
 extends Control
-class Item_Selector
+class_name Item_Selector
 
 var player: Player
 
