@@ -16,16 +16,15 @@ func _process(delta) -> void:
 	
 	for node in $VBoxContainer.get_children():
 		if node.has_meta("input_name"):
-			var inputsArray = InputMap.action_get_events(node.get_meta("input_name") + str(player_num))
-			if len(inputsArray) > 0:
-				var input = InputMap.action_get_events(node.get_meta("input_name") + str(player_num))[0]
-				if input is InputEventJoypadButton || input is InputEventJoypadMotion:
-					input.set_device(get_meta("device_id"))
+			var inputs = InputMap.action_get_events(node.get_meta("input_name") + str(player_num))
+			if len(inputs) > 0:
+				if inputs[0] is InputEventJoypadButton || inputs[0] is InputEventJoypadMotion:
+					inputs[0].set_device(get_meta("device_id"))
 
 func _on_button_pressed() -> void:
 	if input_type == "Keyboard": 
 		set_meta("input_type", "Controller")
 		set_meta("device_id", 4)
-	else: 
+	else:
 		set_meta("input_type", "Keyboard")
 		set_meta("device_id", -1)
