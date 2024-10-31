@@ -32,27 +32,28 @@ func _process(_delta: float) -> void:
 		print("damage is " + str(damage))
 		
 func manage_test_input():
+	pass
 	#Press enter to get item (currently only the DmgBuffItem)
-	if Input.is_action_just_pressed("1"):
-		print("Gave Item " + str(items[0].resource_path))
-		get_item(items[0])
-	if Input.is_action_just_pressed("2"):
-		print("Gave Item " + str(items[1].resource_path))
-		get_item(items[1])
-	if Input.is_action_just_pressed("3"):
-		print("Gave Item " + str(items[2].resource_path))
-		get_item(items[2])		
-	#press left mouse to "fire"
-	if Input.is_action_just_pressed("mouse_0"):
-		print("Just Fired")
-		#onAttack.emit(self)
-		call_functions(onAttackFunctions)
-		#change_health(1)
-	#press right mouse to check damage stat
-	if Input.is_action_just_pressed("mouse_1"):
-		testToggle = !testToggle
-	if Input.is_action_just_pressed("ui_accept"):
-		statusEffects.giveStatusTimed("Fire",3, StatusEffectManager.OverLapBehavior.STACK)
+	#if Input.is_action_just_pressed("1"):
+		#print("Gave Item " + str(items[0].resource_path))
+		#get_item(items[0])
+	#if Input.is_action_just_pressed("2"):
+		#print("Gave Item " + str(items[1].resource_path))
+		#get_item(items[1])
+	#if Input.is_action_just_pressed("3"):
+		#print("Gave Item " + str(items[2].resource_path))
+		#get_item(items[2])		
+	##press left mouse to "fire"
+	#if Input.is_action_just_pressed("mouse_0"):
+		#print("Just Fired")
+		##onAttack.emit(self)
+		#call_functions(onAttackFunctions)
+		##change_health(1)
+	##press right mouse to check damage stat
+	#if Input.is_action_just_pressed("mouse_1"):
+		#testToggle = !testToggle
+	#if Input.is_action_just_pressed("ui_accept"):
+		#statusEffects.giveStatusTimed("Fire",3, StatusEffectManager.OverLapBehavior.STACK)
 
 func get_item(item : Item):
 	damage += item.damage
