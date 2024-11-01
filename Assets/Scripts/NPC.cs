@@ -19,11 +19,9 @@ public class NPC : MonoBehaviour{
 
     private bool firstTimeRead = true;
 
-    private InventoryItem item = new InventoryItem();
-
     private InventoryEnabler uiEnabler;
 
-    [SerializeField] private InventoryItem.ItemType[] itemtype;
+    [SerializeField] private InventoryItem[] inventoryItem;
 
     [SerializeField] private new Camera camera;
 
@@ -162,10 +160,9 @@ public class NPC : MonoBehaviour{
             textbox.enabled = true;
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             
-            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None && !playerScript.inventory.HasItemOfType(itemtype[dialogueIndex]))
+            if (firstTimeRead && inventoryItem[dialogueIndex].itemType != InventoryItem.ItemType.None)
             {
-                item.itemType = itemtype[dialogueIndex];
-                playerScript.AddToInventory(item);
+                playerScript.AddToInventory(inventoryItem[dialogueIndex]);
             }
 
             dialogueIndex++;
