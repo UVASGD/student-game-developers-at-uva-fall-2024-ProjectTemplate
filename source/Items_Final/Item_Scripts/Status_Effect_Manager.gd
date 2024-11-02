@@ -19,8 +19,8 @@ func _ready() -> void:
 
 func setStartingStatusFunctions(ps : Player_Test):
 	#Temperary. StatusEffect behavior should be stored elsewhere
-	addStatusStartFunction("Fire", Callable(ItemAdvancedFunctions,"fire_start").bind(ps))
-	addStatusEndFunction("FireTick", Callable(ItemAdvancedFunctions,"fire_tick_end").bind(ps))
+	addStatusStartFunction("Fire", Callable(Item,"fire_start").bind(ps))
+	addStatusEndFunction("FireTick", Callable(Item_Functions,"fire_tick_end").bind(ps))
 	addStatusStartFunction("Damage Buff 2", (func(x : Player_Test): x.damage += 3).bind(ps))
 	addStatusEndFunction("Damage Buff 2", (func(x : Player_Test): x.damage -= 3).bind(ps))
 
