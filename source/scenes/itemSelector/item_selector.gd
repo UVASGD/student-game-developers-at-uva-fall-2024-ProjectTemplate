@@ -1,7 +1,7 @@
 extends Control
 class_name Item_Selector
 
-const resourcePath = "res://source/item/item_resources"
+const resourcePath = "res://source/Items_Final/Item_Resources"
 var buttonScene: PackedScene = preload("res://source/scenes/itemSelector/item_button.tscn")
 var player: Player
 @onready var container: FlowContainer = $MarginContainer/VBoxContainer/ScrollContainer/FlowContainer
@@ -36,7 +36,7 @@ func getPlayer():
 	
 func addButton(file_name: String):
 	# We'll just assume it's a resource of the correct type for now
-	var resource: Item_Res = load(resourcePath + "/" + file_name)
+	var resource: Item = load(resourcePath + "/" + file_name) as Item
 	var button: Item_Button = buttonScene.instantiate()
 	container.add_child(button)
 	button.setItem(resource)
