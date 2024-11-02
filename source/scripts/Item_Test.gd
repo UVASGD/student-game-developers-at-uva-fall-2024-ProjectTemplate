@@ -1,4 +1,6 @@
-class_name Item_Test
+#LEGACY TESTING CODE
+#CAN BE DELETED
+#class_name Item_Test
 extends Resource
 
 #basic stats
