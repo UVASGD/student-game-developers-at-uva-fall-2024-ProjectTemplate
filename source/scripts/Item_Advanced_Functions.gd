@@ -1,3 +1,6 @@
+#THIS IS THE TESTING VERIONS
+#DELETE LATER
+
 #class_name Item_Advanced_Functions
 extends Node#extend node to allow global script
 #THIS NEEDS TO BE SET AS A GLOBAL SCRIPT
