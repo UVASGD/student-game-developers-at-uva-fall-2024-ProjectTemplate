@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5bt1g0wd5co0"]
+
+[ext_resource type="Script" path="res://source/scripts/Characters/Mage/Mage.gd" id="1_o0jci"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rwr60"]
+radius = 4.47214
+
+[sub_resource type="SphereMesh" id="SphereMesh_tj1lu"]
+
+[sub_resource type="Gradient" id="Gradient_x8asn"]
+offsets = PackedFloat32Array(0, 0.772727, 0.993506, 1)
+colors = PackedColorArray(0.662027, 0.149798, 0.647956, 1, 0.0722162, 0.44274, 0.423865, 1, 0.58611, 0.441567, 0.138476, 1, 0.00977853, 0.155621, 0.195236, 1)
+metadata/_snap_count = 11
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qd7h3"]
+gradient = SubResource("Gradient_x8asn")
+
+[node name="Mage" type="Node2D"]
+
+[node name="Mage" type="CharacterBody2D" parent="."]
+script = ExtResource("1_o0jci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mage"]
+shape = SubResource("CircleShape2D_rwr60")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Mage"]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(8.50907, 8.75)
+mesh = SubResource("SphereMesh_tj1lu")
+texture = SubResource("GradientTexture2D_qd7h3")
