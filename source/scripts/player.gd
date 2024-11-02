@@ -5,9 +5,12 @@ class_name Player
 var Speed := 0.0
 var movement := Vector2.ZERO
 
-const TOP_SPEED_FACTOR := 15.0
-const ACCELERATION := 15.0
-const DECELERATION := 15.0
+var TOP_SPEED_FACTOR := 15.0
+var ACCELERATION := 15.0
+var DECELERATION := 15.0
+var dash_timer := Timer.new()
+var dash_cooldown := Timer.new()
+var dash: bool
 
 func _ready() -> void:
 	pass
@@ -26,16 +29,27 @@ func _process(delta) -> void:
 	if Input.is_action_pressed('Down'):
 		movement2.y += 1
 		print("Moving down")
-
+	if Input.is_action_just_pressed('Dash') and dash_cooldown.time_left == 0:
+		#dash time
+		Speed = 500
+		dash_timer.wait_time = 0.5
+		dash_timer.start()
+		dash_cooldown.wait_time = 1
+		dash_cooldown.start()
+		print("Dashing")
 	movement = movement2.normalized()
 	print("Movement vector:", movement2)
 	# Apply movement logic here
 	handle_move()
 
 func handle_move() -> void:
-	movement = Vector2(Input.get_axis("Left", "Right"), Input.get_axis("Up", "Down")).normalized()
+	var player_num = str(get_meta("player_num"))
+	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	
-	if movement.length(): #stats.topSpeed = 10
+	if movement.length():
+		Speed = move_toward(Speed, stats.topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
+	
+	if movement.length(): # stats.topSpeed = 10
 		Speed = move_toward(Speed, 10 * TOP_SPEED_FACTOR, ACCELERATION)
 	else:
 		Speed = move_toward(Speed, 0, DECELERATION) # Gradually decrease speed to zero
