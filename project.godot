@@ -25,7 +25,6 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 ItemFunctions="*res://source/Items_Final/Item_Scripts/Item_Functions.gd"
 
-
 [input]
 
 Left1={
