@@ -22,14 +22,16 @@ func _ready() -> void:
 	
 	InputMap.action_erase_events(action)
 	
-	if input_type == "Keyboard": InputMap.action_add_event(action, inputK)
+	if input_type == "Keyboard": 
+		if inputK: InputMap.action_add_event(action, inputK)
 	else: InputMap.action_add_event(action, inputJ)
 
 func _process(delta) -> void:
 	var cur_input_type = get_parent().get_parent().get_meta("input_type")
 	if cur_input_type != input_type:
 		InputMap.action_erase_events(action)
-		if cur_input_type == "Keyboard": InputMap.action_add_event(action, inputK)
+		if cur_input_type == "Keyboard": 
+			if inputK: InputMap.action_add_event(action, inputK)
 		else: InputMap.action_add_event(action, inputJ)
 		input_type = cur_input_type
 	
