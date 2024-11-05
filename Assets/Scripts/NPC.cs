@@ -68,7 +68,7 @@ public class NPC : MonoBehaviour{
                 if (!Enum.TryParse<Player.flags>(tempStr[j], out reqs[i][j]))
                 {
                     reqs[i][j] = 0;
-                    Debug.Log("Error in parsing " + tempStr[j] + " for reqs " + reqsToConv[i]);
+                    Debug.Log("Error in parsing " + tempStr [j] + " for reqs " + reqsToConv[i]);
                 }
 
             }
@@ -79,7 +79,7 @@ public class NPC : MonoBehaviour{
 
     void Update()
     {
-        if (!imScript.speaking)
+        if (!imScript.dialogueMode)
         {
             double dist = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
             double height = Mathf.Abs(player.transform.position.y - transform.position.y);
@@ -94,24 +94,19 @@ public class NPC : MonoBehaviour{
                 spriteRenderer.sprite = dialogueQueue[0];
             }
 
-            if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState())
+            if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
             {
+                AdjustDialogueArrow();
+                dialogueMode = true;
+                playerScript.moveLock = true;
+                spriteRenderer.sprite = dialogueQueue[0];
+                curDisplay = false;
+                displayDialogue();
+            }
 
-
-
-                if (curDisplay)
-                {
-                    AdjustDialogueArrow();
-                    dialogueMode = true;
-                    playerScript.moveLock = true;
-                    spriteRenderer.sprite = dialogueQueue[0];
-                    curDisplay = false;
-                }
-
-                if (dialogueMode)
-                {
-                    displayDialogue();
-                }
+            if (Input.GetButtonDown("Space") && !uiEnabler.GetCurrentUIState() && dialogueMode)
+            {
+                displayDialogue();
             }
         }
     }

@@ -42,7 +42,7 @@ public class InnerMonologue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && dialogueMode)
+        if (Input.GetButtonDown("Space") && !uiEnabler.GetCurrentUIState() && dialogueMode)
         {
             displayDialogue();
         }
@@ -82,6 +82,8 @@ public class InnerMonologue : MonoBehaviour
             playerScript.dialogueFlags.Add(flags[dialogueIndex]);
             playerScript.moveLock = false;
             dialogueIndex = 0;
+
+            dialogueMode = true;
         }
     }
 }
