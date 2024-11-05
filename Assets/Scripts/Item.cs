@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
     [SerializeField] private InventoryItem.ItemType type = InventoryItem.ItemType.None;
     [SerializeField] private Player.flags flag;
     [SerializeField] private GameObject self;
+    [SerializeField] private InnerMonologue imScript;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class Item : MonoBehaviour
         {
             playerScript.dialogueFlags.Add(flag);
             playerScript.AddToInventory(item);
+            imScript.monologueCheck(flag);
             Destroy(self);
         }
     }
