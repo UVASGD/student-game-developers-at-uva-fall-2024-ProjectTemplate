@@ -17,15 +17,32 @@ public class NPC : MonoBehaviour{
     private bool curDisplay = false;
     private bool dialogueMode = false;
 
+    private bool firstTimeRead = true;
+
+    private InventoryItem item = new InventoryItem();
+
+    private InventoryEnabler uiEnabler;
+
+    [SerializeField] private InventoryItem.ItemType[] itemtype;
+
+    [SerializeField] private new Camera camera;
+
     [SerializeField] private Canvas textbox;
+
+
     [SerializeField] private TextMeshProUGUI textMeshPro;
+    [SerializeField] private InnerMonologue imScript;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
+
+    private float minXBoundary; // Minimum x boundary in screen space
+    private float maxXBoundary; // Maximum x boundary in screen space
+    
+    private RectTransform arrowRectTransform;
     private string[] dialogueSplit;
     private int dialogueIndex = 0;
     private int curDialogue;
 
-    private RectTransform dialogueTransform;
 
     [SerializeField] private string[] dialogue;
     [SerializeField] private string[] reqsToConv;
@@ -33,9 +50,12 @@ public class NPC : MonoBehaviour{
 
     void Start()
     {
+        minXBoundary = Screen.width * 0.25f;
+        maxXBoundary = Screen.width * 0.75f;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
-        dialogueTransform = textbox.GetComponent<RectTransform>();
+        arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
+        uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
 
         string[] tempStr;
         reqs = new Player.flags[reqsToConv.Length][];
@@ -48,7 +68,7 @@ public class NPC : MonoBehaviour{
                 if (!Enum.TryParse<Player.flags>(tempStr[j], out reqs[i][j]))
                 {
                     reqs[i][j] = 0;
-                    Debug.Log("Error in parsing " + tempStr[j] + " for reqs " + reqsToConv[i]);
+                    Debug.Log("Error in parsing " + tempStr [j] + " for reqs " + reqsToConv[i]);
                 }
 
             }
@@ -59,30 +79,32 @@ public class NPC : MonoBehaviour{
 
     void Update()
     {
-        double dist = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
-        double height = Mathf.Abs(player.transform.position.y - transform.position.y);
-        if (dist <= 70 && height <= 20 && !curDisplay && !dialogueMode)
+        if (!imScript.dialogueMode)
         {
-            curDisplay = true;
-            dialogueCheck();
-        }
-        else if ((dist > 70 || height > 20) && curDisplay)
-        {
-            curDisplay = false;
-            spriteRenderer.sprite = dialogueQueue[0];
-        }
-
-        if (Input.GetButtonDown("E"))
-        {
-            if (curDisplay)
+            double dist = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
+            double height = Mathf.Abs(player.transform.position.y - transform.position.y);
+            if (dist <= 50 && height <= 20 && !curDisplay && !dialogueMode)
             {
+                curDisplay = true;
+                dialogueCheck();
+            }
+            else if ((dist > 70 || height > 20) && curDisplay)
+            {
+                curDisplay = false;
+                spriteRenderer.sprite = dialogueQueue[0];
+            }
+
+            if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
+            {
+                AdjustDialogueArrow();
                 dialogueMode = true;
                 playerScript.moveLock = true;
                 spriteRenderer.sprite = dialogueQueue[0];
                 curDisplay = false;
+                displayDialogue();
             }
-            
-            if (dialogueMode)
+
+            if (Input.GetButtonDown("Space") && !uiEnabler.GetCurrentUIState() && dialogueMode)
             {
                 displayDialogue();
             }
@@ -113,6 +135,7 @@ public class NPC : MonoBehaviour{
 
             if (toRead)
             {
+                //add if statement that gets boolean from specific quest "can move on" function
                 dialogueSplit = dialogue[i].Split('|');
                 curDialogue = i;
                 break;
@@ -136,21 +159,52 @@ public class NPC : MonoBehaviour{
         if(dialogueIndex < dialogueSplit.Length)
         {
             textbox.enabled = true;
-            UnityEngine.Vector3 npcPosition = transform.position;
-            dialogueTransform.position = npcPosition + new UnityEngine.Vector3(12,16,0); //Hardcoded offset
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
+            
+            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None && !playerScript.inventory.HasItemOfType(itemtype[dialogueIndex]))
+            {
+                item.itemType = itemtype[dialogueIndex];
+                playerScript.AddToInventory(item);
+            }
+
             dialogueIndex++;
         }
         else
         {
             textbox.enabled = false;
-            if (curDialogue != 0)
-            {
-                playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
-            }
             dialogueIndex = 0;
             dialogueMode = false;
             playerScript.moveLock = false;
+            firstTimeRead = false;
+            if (curDialogue != 0)
+            {
+                playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
+                imScript.monologueCheck(reqs[curDialogue].Last());
+            }
         }
+    }
+
+    void AdjustDialogueArrow()
+    {
+        UnityEngine.Vector3 npcPosition = transform.position;
+                UnityEngine.Vector3 npcScreenPosition = camera.WorldToScreenPoint(npcPosition);
+                
+                if (npcScreenPosition.x > minXBoundary && npcScreenPosition.x < maxXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(npcScreenPosition.x, Screen.height * .60f);
+
+                } else if (npcScreenPosition.x < minXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(minXBoundary, Screen.height * .60f);
+
+                }  else if (npcScreenPosition.x > maxXBoundary)
+                {
+                    arrowRectTransform.anchoredPosition = new UnityEngine.Vector2(maxXBoundary, Screen.height * .60f);
+                }
+    }
+
+    public int getCurrentDialogueIndex()
+    {
+        return curDialogue;
     }
 }

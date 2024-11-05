@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,6 +11,8 @@ public class SaveData
     
     public float[] playerPosition;
     public int[] flags;
+
+    public int[] inventoryItems;
 
     public SaveData(Player player) 
     { 
@@ -25,6 +29,17 @@ public class SaveData
         {
             flags[i] = (int)flagsEnum[i];
         }
+
+        int lenInventory = player.inventory.GetItemList().Count;
+        InventoryItem[] flagsInventoryEnum = player.inventory.GetItemList().ToArray();
+        inventoryItems = new int[lenInventory];
+
+
+        for(int i=0; i < lenInventory; i++)
+        {
+            inventoryItems[i] = (int) flagsInventoryEnum[i].itemType;
+        }
+
     }
 
     public SaveData()
@@ -35,5 +50,6 @@ public class SaveData
         playerPosition[2] = 0;
         flags = new int[1];
         flags[0] = 0;
+        inventoryItems = new int[0];
     }
 }
