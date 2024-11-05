@@ -29,6 +29,7 @@ public class NPC : MonoBehaviour{
 
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
+    [SerializeField] private InnerMonologue imScript;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
 
@@ -65,7 +66,7 @@ public class NPC : MonoBehaviour{
                 if (!Enum.TryParse<Player.flags>(tempStr[j], out reqs[i][j]))
                 {
                     reqs[i][j] = 0;
-                    Debug.Log("Error in parsing " + tempStr[j] + " for reqs " + reqsToConv[i]);
+                    Debug.Log("Error in parsing " + tempStr [j] + " for reqs " + reqsToConv[i]);
                 }
 
             }
@@ -76,34 +77,32 @@ public class NPC : MonoBehaviour{
 
     void Update()
     {
-        double dist = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
-        double height = Mathf.Abs(player.transform.position.y - transform.position.y);
-        if (dist <= 50 && height <= 20 && !curDisplay && !dialogueMode)
+        if (!imScript.dialogueMode)
         {
-            curDisplay = true;
-            dialogueCheck();
-        }
-        else if ((dist > 70 || height > 20) && curDisplay)
-        {
-            curDisplay = false;
-            spriteRenderer.sprite = dialogueQueue[0];
-        }
+            double dist = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
+            double height = Mathf.Abs(player.transform.position.y - transform.position.y);
+            if (dist <= 50 && height <= 20 && !curDisplay && !dialogueMode)
+            {
+                curDisplay = true;
+                dialogueCheck();
+            }
+            else if ((dist > 70 || height > 20) && curDisplay)
+            {
+                curDisplay = false;
+                spriteRenderer.sprite = dialogueQueue[0];
+            }
 
-        if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState())
-        {
-
-
-
-            if (curDisplay)
+            if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
             {
                 AdjustDialogueArrow();
                 dialogueMode = true;
                 playerScript.moveLock = true;
                 spriteRenderer.sprite = dialogueQueue[0];
                 curDisplay = false;
+                displayDialogue();
             }
-            
-            if (dialogueMode)
+
+            if (Input.GetButtonDown("Space") && !uiEnabler.GetCurrentUIState() && dialogueMode)
             {
                 displayDialogue();
             }
@@ -170,14 +169,15 @@ public class NPC : MonoBehaviour{
         else
         {
             textbox.enabled = false;
-            if (curDialogue != 0)
-            {
-                playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
-            }
             dialogueIndex = 0;
             dialogueMode = false;
             playerScript.moveLock = false;
             firstTimeRead = false;
+            if (curDialogue != 0)
+            {
+                playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
+                imScript.monologueCheck(reqs[curDialogue].Last());
+            }
         }
     }
 
