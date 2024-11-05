@@ -17,17 +17,18 @@ public class Player : MonoBehaviour
 
     [SerializeField] private SpriteRenderer body;
     [SerializeField] private SpriteRenderer hair;
-    [SerializeField] private SpriteRenderer eyes;
-    [SerializeField] private SpriteRenderer mouth;
-    [SerializeField] private SpriteRenderer top;
+    [SerializeField] private SpriteRenderer hairColor;
+    [SerializeField] private SpriteRenderer eye;
+    [SerializeField] private SpriteRenderer eyeColor;
 
     [SerializeField] private Sprite[] bodies;
     [SerializeField] private Sprite[] hairs;
-    [SerializeField] private Sprite[] eyePairs;
-    [SerializeField] private Sprite[] mouths;
-    [SerializeField] private Sprite[] tops;
-   
+    [SerializeField] private Sprite[] hairColors;
+    [SerializeField] private Sprite[] eyes;
+    [SerializeField] private Sprite[] eyeColors;
+    
     [SerializeField] private UI_Inventory uI_Inventory;
+
     public enum flags { defaultFlag, //flag put on all dialogue
             testFlag1, 
             testFlag2,
@@ -42,10 +43,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         body.sprite = bodies[PlayerPrefs.GetInt("bodyIndex")];
-        hair.sprite = hairs[PlayerPrefs.GetInt("hairIndex")];
-        eyes.sprite = eyePairs[PlayerPrefs.GetInt("eyeIndex")];
-        mouth.sprite = mouths[PlayerPrefs.GetInt("mouthIndex")];
-        top.sprite = tops[PlayerPrefs.GetInt("topIndex")];
+        int hairIndex = PlayerPrefs.GetInt("hairIndex");
+        hair.sprite = hairs[hairIndex];
+        hairColor.sprite = hairColors[(PlayerPrefs.GetInt("hairCIndex")) + (hairIndex * 5)];
+        int eyeIndex = PlayerPrefs.GetInt("eyeIndex");
+        eye.sprite = eyes[eyeIndex];
+        eyeColor.sprite = eyeColors[(PlayerPrefs.GetInt("eyeCIndex")) + (eyeIndex * 5)];
         inventory = new Inventory();
 
         _characterController = GetComponent<CharacterController>();
