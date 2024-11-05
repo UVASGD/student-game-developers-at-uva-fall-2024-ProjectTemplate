@@ -34,10 +34,11 @@ public class UI_Inventory : MonoBehaviour
     {
         List<InventoryItem> itemList = inventory.GetItemList();
 
-        int x = 0;
-        int y = 0;
-        float itemSlotCellSize = 100f;
+        float itemSlotCellSize = 125f;
+        int columnsCount = 3;
 
+        // Get the local position of the first item template
+        Vector2 startPosition = itemTemplate.GetComponent<RectTransform>().localPosition;
 
         for (int i = 0; i < itemList.Count; i++)
         {
@@ -45,41 +46,36 @@ public class UI_Inventory : MonoBehaviour
 
             RectTransform itemSlotRectTransform;
 
-
             if (i < instantiatedItems.Count)
             {
                 itemSlotRectTransform = instantiatedItems[i];
             }
-            
             else
             {
-                // If the slot doesn't exist, instantiate a new one
-                itemSlotRectTransform = Instantiate(itemTemplate).GetComponent<RectTransform>();
-                itemSlotRectTransform.SetParent(inventoryEnabler, false);
-                itemSlotRectTransform.gameObject.SetActive(true);
+                itemSlotRectTransform = Instantiate(itemTemplate, inventoryEnabler).GetComponent<RectTransform>();
                 instantiatedItems.Add(itemSlotRectTransform);
             }
 
-            Button button = itemSlotRectTransform.Find("Button").GetComponent<Button>();
+            itemSlotRectTransform.gameObject.SetActive(true);
 
-        // Add a listener to the button that enables the itemText when clicked
-             button.onClick.AddListener(() => ToggleItemText(itemSlotRectTransform, item));
+            Button button = itemSlotRectTransform.Find("Button").GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => ToggleItemText(itemSlotRectTransform, item));
 
             Transform itemText = itemSlotRectTransform.Find("ItemText");
             itemText.gameObject.SetActive(false);
 
-            // Set the position and image of the slot (whether new or existing)
-            itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
+            // Calculate position
+            int row = i / columnsCount;
+            int col = i % columnsCount;
+            float posX = startPosition.x + col * (itemSlotCellSize);
+            float posY = startPosition.y - row * (itemSlotCellSize);
+
+            // Set local position instead of anchored position
+            itemSlotRectTransform.localPosition = new Vector3(posX, posY, 0);
+
             UnityEngine.UI.Image image = itemSlotRectTransform.Find("image").GetComponent<UnityEngine.UI.Image>();
             image.sprite = item.GetSprite();
-
-            x++;
-            
-            if (x > 3) // Assume a 4-column grid
-            {
-                x = 0;
-                y++;
-            }
         }
     }
 
