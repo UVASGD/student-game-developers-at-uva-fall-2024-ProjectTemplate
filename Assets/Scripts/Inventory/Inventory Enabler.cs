@@ -1,18 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryEnabler : MonoBehaviour
 {
     private bool inventoryEnabledState = false;
+    private Image parentCanvasImage;
+
     void Start()
     {
-        foreach (Transform child in transform)
+        // Find the parent Canvas and get its Image component
+        Canvas parentCanvas = GetComponentInParent<Canvas>();
+        if (parentCanvas != null)
+        {
+            parentCanvasImage = parentCanvas.GetComponent<Image>();
+            if (parentCanvasImage == null)
             {
-                child.gameObject.SetActive(inventoryEnabledState);
+                Debug.LogWarning("Parent Canvas does not have an Image component.");
             }
+        }
+        else
+        {
+            Debug.LogError("No parent Canvas found.");
+        }
+
+        // Set initial state
+        SetInventoryState(inventoryEnabledState);
     }
 
     void Update()
@@ -20,11 +32,22 @@ public class InventoryEnabler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I)) 
         {
             inventoryEnabledState = !inventoryEnabledState;
+            SetInventoryState(inventoryEnabledState);
+        }
+    }
 
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(inventoryEnabledState);
-            }
+    private void SetInventoryState(bool state)
+    {
+        // Set state for all child objects
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(state);
+        }
+
+        // Set state for parent Canvas Image
+        if (parentCanvasImage != null)
+        {
+            parentCanvasImage.enabled = state;
         }
     }
 
@@ -32,5 +55,4 @@ public class InventoryEnabler : MonoBehaviour
     {
         return inventoryEnabledState;
     }
-
 }

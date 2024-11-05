@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
 public class InventoryItem
 {
     public enum ItemType
@@ -21,6 +22,8 @@ public class InventoryItem
 
     public ItemType itemType;
 
+    public string itemDescription;
+
     public Sprite GetSprite()
     {
         switch (itemType)
@@ -32,6 +35,11 @@ public class InventoryItem
             case ItemType.Pencil:           return ItemAssets.Instance.pencilSprite;
             case ItemType.None:             return null;
         }
+    }
+
+    public string GetItemDescription()
+    {
+        return itemDescription;
     }
 
 

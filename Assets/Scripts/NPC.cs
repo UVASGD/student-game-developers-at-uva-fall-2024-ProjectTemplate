@@ -19,11 +19,9 @@ public class NPC : MonoBehaviour{
 
     private bool firstTimeRead = true;
 
-    private InventoryItem item = new InventoryItem();
-
     private InventoryEnabler uiEnabler;
 
-    [SerializeField] private InventoryItem.ItemType[] itemtype;
+    [SerializeField] private InventoryItem[] inventoryItem;
 
     [SerializeField] private new Camera camera;
 
@@ -31,7 +29,7 @@ public class NPC : MonoBehaviour{
 
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
-    [SerializeField] private InnerMonologue imScript;
+    private InnerMonologue imScript;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
 
@@ -54,6 +52,7 @@ public class NPC : MonoBehaviour{
         maxXBoundary = Screen.width * 0.75f;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
+        imScript = InnerMonologue.GetImScript();
         arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
         uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
 
@@ -161,10 +160,9 @@ public class NPC : MonoBehaviour{
             textbox.enabled = true;
             textMeshPro.SetText(dialogueSplit[dialogueIndex]);
             
-            if (firstTimeRead && itemtype[dialogueIndex] != InventoryItem.ItemType.None && !playerScript.inventory.HasItemOfType(itemtype[dialogueIndex]))
+            if (firstTimeRead && inventoryItem[dialogueIndex].itemType != InventoryItem.ItemType.None)
             {
-                item.itemType = itemtype[dialogueIndex];
-                playerScript.AddToInventory(item);
+                playerScript.AddToInventory(inventoryItem[dialogueIndex]);
             }
 
             dialogueIndex++;

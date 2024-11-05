@@ -13,11 +13,12 @@ public class Item : MonoBehaviour
     [SerializeField] private InventoryItem.ItemType type = InventoryItem.ItemType.None;
     [SerializeField] private Player.flags flag;
     [SerializeField] private GameObject self;
-    [SerializeField] private InnerMonologue imScript;
+    private InnerMonologue imScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        imScript = InnerMonologue.GetImScript();
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
 
