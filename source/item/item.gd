@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Item
+#class_name Item
 
 @export var item_res : Item_Res
 

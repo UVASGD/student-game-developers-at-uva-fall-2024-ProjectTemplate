@@ -7,15 +7,18 @@
 script = ExtResource("1_12rx8")
 sprite = ExtResource("2_ibfa5")
 name = "Yo-Yo"
-description = "Slightly increases speed and reduces cooldown"
-rarity = 0
+description = "+++++ Health
++ Speed
+Passive: After hitting an enemy, gain + Attack Damage for 3 seconds, stacking up to 5 times.
+"
+rarity = 2
 cost = 0
 attackDamage = 0.0
 attackSpeed = 0.0
-maxHealth = 0.0
+maxHealth = 5.0
 speed = 1.0
-cooldownReduction = 1.0
+cooldownReduction = 0.0
 tenacity = 0.0
 luck = 0.0
-functionTypes = Array[int]([])
-functionNames = Array[String]([])
+functionTypes = Array[int]([0, 2])
+functionNames = Array[String](["yoyo_onStart", "yoyo_onHit"])

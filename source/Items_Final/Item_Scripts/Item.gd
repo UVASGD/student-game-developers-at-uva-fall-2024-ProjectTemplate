@@ -11,9 +11,11 @@ enum Rarity {
 enum FunctionTypes
 {
 	OnStart,
-	OnFire,
+	OnAttack,
 	OnHit,
-	OnGetHit
+	OnGetHit,
+	OnSwitchCharacter,
+	OnRoundStart
 }
 
 #Info

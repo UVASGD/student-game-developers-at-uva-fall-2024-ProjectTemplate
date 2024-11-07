@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c0ncs4647o12e"]
+
+[ext_resource type="Script" path="res://source/Items_Final/Item_Scripts/Item.gd" id="1_vuubg"]
+[ext_resource type="Texture2D" uid="uid://c7rhwxuk6ncld" path="res://source/Items_Final/Item_Sprites/rubberduck.png" id="2_ru6es"]
+
+[resource]
+script = ExtResource("1_vuubg")
+sprite = ExtResource("2_ru6es")
+name = "Rubber Ducky"
+description = "+++++ Attack Damage 
+Passive: Gains + Health whenever you die (starting from when you bought this item)"
+rarity = 2
+cost = 0
+attackDamage = 5.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([5])
+functionNames = Array[String](["rubberDuck_onRoundStart"])

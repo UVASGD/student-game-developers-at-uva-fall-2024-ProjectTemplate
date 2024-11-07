@@ -7,22 +7,22 @@ var statusFunctionsEnd : Dictionary#[String,Array[Callable]]
 
 var timers : Dictionary#[Timer, String]
 #might need to be list of statuses for status effect stacking
-@onready var player : Player_Test = get_parent()
 enum OverLapBehavior{
 	IGNORE,
 	REFRESH,
 	STACK
 }
 
-func _ready() -> void:
-	setStartingStatusFunctions(player)
-
 func setStartingStatusFunctions(ps : Player_Test):
 	#Temperary. StatusEffect behavior should be stored elsewhere
-	addStatusStartFunction("Fire", Callable(Item,"fire_start").bind(ps))
-	addStatusEndFunction("FireTick", Callable(Item_Functions,"fire_tick_end").bind(ps))
-	addStatusStartFunction("Damage Buff 2", (func(x : Player_Test): x.damage += 3).bind(ps))
-	addStatusEndFunction("Damage Buff 2", (func(x : Player_Test): x.damage -= 3).bind(ps))
+	addStatusStartFunction("Fire", Callable(ItemFunctions,"fire_start").bind(ps))
+	addStatusEndFunction("FireTick", Callable(ItemFunctions,"fire_tick_end").bind(ps))
+	addStatusStartFunction("Poison", Callable(ItemFunctions, "poison_start").bind(ps))
+	addStatusEndFunction("PoisonTick", Callable(ItemFunctions,"poison_tick_end").bind(ps))
+	addStatusStartFunction("Stun", Callable(ItemFunctions, "stun_start").bind(ps))
+	addStatusEndFunction("Stun", Callable(ItemFunctions,"stun_end").bind(ps))
+	addStatusStartFunction("Spook", Callable(ItemFunctions, "spook_start").bind(ps))
+	addStatusEndFunction("Spook", Callable(ItemFunctions,"spook_end").bind(ps))
 
 func giveStatus(status : String, overlapBehavior : OverLapBehavior = OverLapBehavior.IGNORE) -> void:
 	if(statusFunctionsStart.has(status)):
@@ -97,7 +97,9 @@ func addStatusEndFunction(statusName : String, function : Callable):
 		var newFunctions : Array[Callable]
 		statusFunctionsEnd[statusName] = newFunctions
 	statusFunctionsEnd[statusName].append(function)
-	
+func addStatusStartAndEndFunction(statusName : String, startFunction : Callable, endFunction : Callable):
+	addStatusStartFunction(statusName, startFunction)
+	addStatusStartFunction(statusName, endFunction)
 func call_start_functions(status : String) -> void:
 	for c in statusFunctionsStart[status]:
 		c.call()
