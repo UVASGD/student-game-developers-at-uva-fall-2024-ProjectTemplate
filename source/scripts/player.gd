@@ -8,47 +8,23 @@ var movement := Vector2.ZERO
 var TOP_SPEED_FACTOR := 15.0
 var ACCELERATION := 15.0
 var DECELERATION := 15.0
-var dash_timer := Timer.new()
-var dash_cooldown := Timer.new()
 var dash: bool
 
 func _ready() -> void:
 	pass
 
-func _process(delta) -> void:
-	var movement2 = Vector2.ZERO
-	if Input.is_action_pressed('Left'):
-		movement2.x -= 1
-		print("Moving left")
-	if Input.is_action_pressed('Right'):
-		movement2.x += 1
-		print("Moving right")
-	if Input.is_action_pressed('Up'):
-		movement2.y -= 1
-		print("Moving up")
-	if Input.is_action_pressed('Down'):
-		movement2.y += 1
-		print("Moving down")
-	if Input.is_action_just_pressed('Dash') and dash_cooldown.time_left == 0:
-		#dash time
-		Speed = 500
-		dash_timer.wait_time = 0.5
-		dash_timer.start()
-		dash_cooldown.wait_time = 1
-		dash_cooldown.start()
-		print("Dashing")
-	movement = movement2.normalized()
-	print("Movement vector:", movement2)
-	# Apply movement logic here
+func _process(delta: float) -> void:
 	handle_move()
 
 func handle_move() -> void:
-	var player_num = str(get_meta("player_num"))
-	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
-	
-	if movement.length():
-		Speed = move_toward(Speed, stats.topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
-	
+	#var player_num = str(get_meta("player_num"))
+	movement = Vector2(Input.get_axis("Left1", "Right1"), Input.get_axis("Up1", "Down1")).normalized()
+	TOP_SPEED_FACTOR = 15
+	ACCELERATION = 15
+	DECELERATION = 15
+	if not dash and Input.is_action_just_pressed("Dash"):
+		print("ENTERING DASH")
+		dashing()
 	if movement.length(): # stats.topSpeed = 10
 		Speed = move_toward(Speed, 10 * TOP_SPEED_FACTOR, ACCELERATION)
 	else:
@@ -112,3 +88,10 @@ func attack():
 	#add this in child Classes
 	print("Player Attacked!")
 	pass
+func dashing():
+	# dash values, please
+	dash = true
+	Speed = 750
+	await get_tree().create_timer(2).timeout
+	dash = false
+	#Speed = move_toward(Speed, 0, DECELERATION)
