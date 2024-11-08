@@ -17,38 +17,33 @@ public class Player : MonoBehaviour
 
     [SerializeField] private SpriteRenderer body;
     [SerializeField] private SpriteRenderer hair;
-    [SerializeField] private SpriteRenderer hairColor;
-    [SerializeField] private SpriteRenderer eye;
-    [SerializeField] private SpriteRenderer eyeColor;
+    [SerializeField] private SpriteRenderer eyes;
+    [SerializeField] private SpriteRenderer mouth;
+    [SerializeField] private SpriteRenderer top;
 
     [SerializeField] private Sprite[] bodies;
     [SerializeField] private Sprite[] hairs;
-    [SerializeField] private Sprite[] hairColors;
-    [SerializeField] private Sprite[] eyes;
-    [SerializeField] private Sprite[] eyeColors;
-    
-    [SerializeField] private UI_Inventory uI_Inventory;
+    [SerializeField] private Sprite[] eyePairs;
+    [SerializeField] private Sprite[] mouths;
+    [SerializeField] private Sprite[] tops;
 
+    [SerializeField] private UI_Inventory uI_Inventory;
     public enum flags { defaultFlag, //flag put on all dialogue
             testFlag1, 
             testFlag2,
             testFlag3,
             testFlag4,
-            testItemFlag,
-            monologueFlag1,
-            monologueFlag2//demo test flags
+            testItemFlag//demo test flags
     };
     public HashSet<flags> dialogueFlags = new HashSet<flags>();
 
     private void Start()
     {
         body.sprite = bodies[PlayerPrefs.GetInt("bodyIndex")];
-        int hairIndex = PlayerPrefs.GetInt("hairIndex");
-        hair.sprite = hairs[hairIndex];
-        hairColor.sprite = hairColors[(PlayerPrefs.GetInt("hairCIndex")) + (hairIndex * 5)];
-        int eyeIndex = PlayerPrefs.GetInt("eyeIndex");
-        eye.sprite = eyes[eyeIndex];
-        eyeColor.sprite = eyeColors[(PlayerPrefs.GetInt("eyeCIndex")) + (eyeIndex * 5)];
+        hair.sprite = hairs[PlayerPrefs.GetInt("hairIndex")];
+        eyes.sprite = eyePairs[PlayerPrefs.GetInt("eyeIndex")];
+        mouth.sprite = mouths[PlayerPrefs.GetInt("mouthIndex")];
+        top.sprite = tops[PlayerPrefs.GetInt("topIndex")];
         inventory = new Inventory();
 
         _characterController = GetComponent<CharacterController>();
@@ -114,14 +109,5 @@ public class Player : MonoBehaviour
     public void AddToInventory(InventoryItem inventoryItem)
     {
         inventory.AddInventoryItem(inventoryItem);
-    }
-
-    public void InnerMonologueCheck(flags f)
-    {
-        //proof of concept function
-        if(f == flags.testFlag2 && dialogueFlags.Contains(flags.testFlag3) || f == flags.testFlag3 && dialogueFlags.Contains(flags.testFlag2))
-        {
-
-        }
     }
 }

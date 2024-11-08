@@ -46,7 +46,7 @@ public class SaveData
     {
         playerPosition = new float[3];
         playerPosition[0] = 0;
-        playerPosition[1] = 19;
+        playerPosition[1] = 18;
         playerPosition[2] = 0;
         flags = new int[1];
         flags[0] = 0;
