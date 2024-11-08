@@ -76,16 +76,28 @@ public class InnerMonologue : MonoBehaviour
     public void monologueCheck(Player.flags f)
     {
         //test conditions
-        if (f == Player.flags.testFlag2 && playerScript.dialogueFlags.Contains(Player.flags.testFlag1))
+        //needed both to test, but both can't be active at once
+        /*if (f == Player.flags.testFlag2 && playerScript.dialogueFlags.Contains(Player.flags.testFlag1))
         {
-            monologueStart(0);
+            monologueStart(0, true);
         }
         else if (f == Player.flags.testFlag1 && playerScript.dialogueFlags.Contains(Player.flags.testFlag2))
         {
-            monologueStart(1);
+            monologueStart(0, true);
+        }*/
+
+        if (f == Player.flags.testFlag2 && playerScript.dialogueFlags.Contains(Player.flags.testItemFlag))
+        {
+            monologueStart(1, true);
+        }
+        else if (f == Player.flags.testItemFlag && playerScript.dialogueFlags.Contains(Player.flags.testFlag2))
+        {
+            monologueStart(1, false);
         }
     }
-    void monologueStart(int index)
+
+    //If monologueStart is activated by picking up an item isDialogue=false, if it is activated by talking to an NPC isDialogue=true
+    void monologueStart(int index, bool isDialogue)
     {
         monologueIndex = index;
         dialogueSplit = dialogue[monologueIndex].Split('|');
@@ -93,7 +105,10 @@ public class InnerMonologue : MonoBehaviour
         textbox.enabled = true;
         playerScript.moveLock = true;
         dialogueIndex = 0;
-        displayDialogue();
+        if (!isDialogue)
+        {
+            displayDialogue();
+        }
     }
 
     void displayDialogue()
