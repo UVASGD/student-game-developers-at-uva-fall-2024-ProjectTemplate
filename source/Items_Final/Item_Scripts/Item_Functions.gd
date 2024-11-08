@@ -23,7 +23,7 @@ func stun_end(ps : Player_Test):
 func spook_start(ps : Player_Test):
 	ps.damage -= 4
 func spook_end(ps : Player_Test):
-	ps.damage +=4
+	ps.damage += 4
 
 func yoyo_onStart(ps: Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("yoyo_speedBuff", Callable(self,"yoyo_speedBuff_start").bind(ps), Callable(self,"yoyo_speedBuff_end").bind(ps))	
@@ -35,26 +35,29 @@ func yoyo_speedBuff_end(ps: Player_Test):
 	ps.speed -= 2
 
 func propellerHat_onStart(ps: Player_Test):
-	ps.statusEffects.addStatusStartAndEndFunction("Fire", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"prowpellerHat_speedBuff_end").bind(ps))
-	ps.statusEffects.addStatusStartAndEndFunction("Poison", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"prowpellerHat_speedBuff_end").bind(ps))
-	ps.statusEffects.addStatusStartAndEndFunction("Stun", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"prowpellerHat_speedBuff_end").bind(ps))
-	ps.statusEffects.addStatusStartAndEndFunction("Spook", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"prowpellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Fire", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Poison", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Stun", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Spook", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
 func propellerHat_speedBuff_start(ps : Player_Test):
 	if not(ps.statusEffects.hasStatus("propellerHat_speedBuff")):
+		print("gib")
 		ps.speed += 2
 		ps.statusEffects.giveStatus("propellerHat_speedBuff")
 func propellerHat_speedBuff_end(ps : Player_Test):
 	if not(ps.statusEffects.hasStatus("Fire") or ps.statusEffects.hasStatus("Poison") or ps.statusEffects.hasStatus("Stun") or ps.statusEffects.hasStatus("Spook")):
+		print("kil")
 		ps.speed -= 2
+		ps.statusEffects.removeStatus("propellerHat_speedBuff")
 
 func topHat_onStart(ps: Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("topHat_speedBuff", Callable(self,"topHat_speedBuff_start").bind(ps), Callable(self,"topHat_speedBuff_end").bind(ps))
 func topHat_onAttack(ps : Player_Test):
 	ps.statusEffects.giveStatusTimed("topHat_speedBuff", 0.1, StatusEffectManager.OverLapBehavior.REFRESH)
 func topHat_speedBuff_start(ps : Player_Test):
-	ps.speed += 2
+	ps.speed += 1
 func topHat_speedBuff_end(ps : Player_Test):
-	ps.speed -= 2
+	ps.speed -= 1
 
 func winterHat_onStart(ps : Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("winterHat_damageBuff", Callable(self,"winterHat_damageBuff_start").bind(ps), Callable(self,"winterHat_damageBuff_end").bind(ps))

@@ -99,7 +99,7 @@ func addStatusEndFunction(statusName : String, function : Callable):
 	statusFunctionsEnd[statusName].append(function)
 func addStatusStartAndEndFunction(statusName : String, startFunction : Callable, endFunction : Callable):
 	addStatusStartFunction(statusName, startFunction)
-	addStatusStartFunction(statusName, endFunction)
+	addStatusEndFunction(statusName, endFunction)
 func call_start_functions(status : String) -> void:
 	for c in statusFunctionsStart[status]:
 		c.call()
