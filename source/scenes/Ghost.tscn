@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://0k0waj14uda1"]
+
+[ext_resource type="Script" path="res://source/scripts/Characters/Ghost/Ghost.gd" id="1_1wort"]
+[ext_resource type="Script" path="res://source/item/stats_and_item_handler.gd" id="2_es7fm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k7oto"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_un2vp"]
+
+[node name="Ghost" type="Node2D"]
+
+[node name="Ghost" type="CharacterBody2D" parent="."]
+script = ExtResource("1_1wort")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost"]
+shape = SubResource("CapsuleShape2D_k7oto")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ghost"]
+position = Vector2(1.07288e-06, 1.90735e-06)
+scale = Vector2(20, 15)
+mesh = SubResource("CapsuleMesh_un2vp")
+
+[node name="StatsAndItemHandler" type="Node2D" parent="Ghost"]
+script = ExtResource("2_es7fm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ghost"]
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="DeathAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="AttackAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="RunAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="IdleAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="DashAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ghost"]

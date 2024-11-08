@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://csilpu7igk7nd"]
+
+[ext_resource type="Script" path="res://source/scripts/Characters/witch/witch.gd" id="1_r2060"]
+[ext_resource type="Script" path="res://source/item/stats_and_item_handler.gd" id="2_g1yy8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cxp2e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0kinu"]
+
+[node name="Witch" type="Node2D"]
+
+[node name="Witch" type="CharacterBody2D" parent="."]
+script = ExtResource("1_r2060")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Witch"]
+shape = SubResource("CapsuleShape2D_cxp2e")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Witch"]
+position = Vector2(1.07288e-06, 1.90735e-06)
+scale = Vector2(20, 15)
+mesh = SubResource("CapsuleMesh_0kinu")
+
+[node name="StatsAndItemHandler" type="Node2D" parent="Witch"]
+script = ExtResource("2_g1yy8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Witch"]
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="DeathAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="AttackAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="RunAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="IdleAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="DashAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Witch"]

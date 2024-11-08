@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqo0muvuvfr3a"]
+
+[ext_resource type="Script" path="res://source/scripts/Characters/Frankenstein/frankenstein.gd" id="1_yofpo"]
+[ext_resource type="Script" path="res://source/item/stats_and_item_handler.gd" id="2_nu6ev"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cjxe8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l8mj1"]
+
+[node name="Frankenstein" type="Node2D"]
+
+[node name="Frankenstein" type="CharacterBody2D" parent="."]
+script = ExtResource("1_yofpo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frankenstein"]
+shape = SubResource("CapsuleShape2D_cjxe8")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Frankenstein"]
+position = Vector2(1.07288e-06, 1.90735e-06)
+scale = Vector2(20, 15)
+mesh = SubResource("CapsuleMesh_l8mj1")
+
+[node name="StatsAndItemHandler" type="Node2D" parent="Frankenstein"]
+script = ExtResource("2_nu6ev")
+
+[node name="Sprite2D" type="Sprite2D" parent="Frankenstein"]
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="Frankenstein"]
+
+[node name="DeathAnimation" type="AnimatedSprite2D" parent="Frankenstein"]
+
+[node name="AttackAnimation" type="AnimatedSprite2D" parent="Frankenstein"]
+
+[node name="RunAnimation" type="AnimatedSprite2D" parent="Frankenstein"]
+
+[node name="IdleAnimation" type="AnimatedSprite2D" parent="Frankenstein"]
+
+[node name="DashAnimation" type="AnimatedSprite2D" parent="Frankenstein"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Frankenstein"]

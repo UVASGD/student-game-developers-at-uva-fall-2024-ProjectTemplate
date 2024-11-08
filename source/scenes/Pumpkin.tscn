@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://djgr3k2dw0dii"]
+
+[ext_resource type="Script" path="res://source/scripts/Characters/Pumpkin/Pumpkin.gd" id="1_bhd0q"]
+[ext_resource type="Script" path="res://source/item/stats_and_item_handler.gd" id="2_06xgp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1i1nm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xfdqp"]
+
+[node name="Pumpkin" type="Node2D"]
+
+[node name="Pumpkin" type="CharacterBody2D" parent="."]
+script = ExtResource("1_bhd0q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pumpkin"]
+shape = SubResource("CapsuleShape2D_1i1nm")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Pumpkin"]
+position = Vector2(1.07288e-06, 1.90735e-06)
+scale = Vector2(20, 15)
+mesh = SubResource("CapsuleMesh_xfdqp")
+
+[node name="StatsAndItemHandler" type="Node2D" parent="Pumpkin"]
+script = ExtResource("2_06xgp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pumpkin"]
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="Pumpkin"]
+
+[node name="DeathAnimation" type="AnimatedSprite2D" parent="Pumpkin"]
+
+[node name="AttackAnimation" type="AnimatedSprite2D" parent="Pumpkin"]
+
+[node name="RunAnimation" type="AnimatedSprite2D" parent="Pumpkin"]
+
+[node name="IdleAnimation" type="AnimatedSprite2D" parent="Pumpkin"]
+
+[node name="DashAnimation" type="AnimatedSprite2D" parent="Pumpkin"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pumpkin"]

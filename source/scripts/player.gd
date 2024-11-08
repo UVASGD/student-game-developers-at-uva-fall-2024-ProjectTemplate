@@ -10,6 +10,14 @@ var ACCELERATION := 15.0
 var DECELERATION := 15.0
 var dash: bool
 
+#These are placeholder sprites for each character
+var sprite_list: Array = [preload("res://source/Items_Final/Item_Resources/BakingSoda.tres"), preload("res://source/Items_Final/Item_Resources/BaseballBat.tres"), 
+preload("res://source/Items_Final/Item_Resources/BaseballCap.tres"), preload("res://source/Items_Final/Item_Resources/BoxingGloves.tres")]
+
+#keep doing for each type of animation
+var run_animations: Array = [null, null, null, null]
+var hit_animations: Array = [null, null, null, null]
+
 func _ready() -> void:
 	pass
 
