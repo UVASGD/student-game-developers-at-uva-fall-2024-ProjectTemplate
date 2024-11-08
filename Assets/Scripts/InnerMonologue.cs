@@ -19,13 +19,14 @@ public class InnerMonologue : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMeshPro;
 
     private string[] dialogueSplit;
+    private int monologueIndex = 0;
     private int dialogueIndex = 0;
     private int curDialogue;
     
     private static InnerMonologue _singleton;
 
     private string[] dialogue = {
-        "test dialogue", 
+        "test dialogue|test|test2", 
         "yo baby. I have 7 cds|And three jam boxes"
     };
     private Player.flags[] flags = {
@@ -56,9 +57,9 @@ public class InnerMonologue : MonoBehaviour
             Destroy(this);
             return;
         }
-
+        player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
-        textbox = GameObject.Find("Dialogue - Canvas").GetComponent<Canvas>();
+        textbox = GameObject.Find("Inner Monologue").GetComponent<Canvas>();
         textMeshPro = textbox.GetComponentInChildren<TextMeshProUGUI>();
         uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
         textbox.enabled = false;
@@ -81,15 +82,17 @@ public class InnerMonologue : MonoBehaviour
         }
         else if (f == Player.flags.testFlag1 && playerScript.dialogueFlags.Contains(Player.flags.testFlag2))
         {
-            monologueStart(0);
+            monologueStart(1);
         }
     }
     void monologueStart(int index)
     {
-        dialogueSplit = dialogue[index].Split('|');
+        monologueIndex = index;
+        dialogueSplit = dialogue[monologueIndex].Split('|');
         dialogueMode = true;
         textbox.enabled = true;
         playerScript.moveLock = true;
+        dialogueIndex = 0;
         displayDialogue();
     }
 
@@ -103,11 +106,10 @@ public class InnerMonologue : MonoBehaviour
         else
         {
             textbox.enabled = false;
-            playerScript.dialogueFlags.Add(flags[dialogueIndex]);
+            playerScript.dialogueFlags.Add(flags[monologueIndex]);
             playerScript.moveLock = false;
             dialogueIndex = 0;
-
-            dialogueMode = true;
+            dialogueMode = false;
         }
     }
 }
