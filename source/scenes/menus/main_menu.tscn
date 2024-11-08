@@ -6,40 +6,40 @@
 script = ExtResource("1_y2x06")
 
 [node name="MainMenuLabel" type="Label" parent="."]
-offset_left = 314.0
-offset_top = 80.0
-offset_right = 779.0
-offset_bottom = 169.0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 500.0
+offset_bottom = 101.0
 theme_override_font_sizes/font_size = 75
 text = "Hallow's Thief"
 horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="."]
-offset_left = 513.0
-offset_top = 182.0
-offset_right = 554.0
-offset_bottom = 213.0
+offset_left = 143.0
+offset_top = 124.0
+offset_right = 184.0
+offset_bottom = 155.0
 text = "Play"
 
 [node name="CreditsButton" type="Button" parent="."]
-offset_left = 506.0
-offset_top = 280.0
-offset_right = 569.0
-offset_bottom = 311.0
+offset_left = 132.0
+offset_top = 191.0
+offset_right = 200.0
+offset_bottom = 222.0
 text = "Credits"
 
 [node name="InstructionsButton" type="Button" parent="."]
-offset_left = 482.0
-offset_top = 225.0
-offset_right = 583.0
-offset_bottom = 256.0
+offset_left = 268.0
+offset_top = 129.0
+offset_right = 380.0
+offset_bottom = 160.0
 text = "Instructions"
 
 [node name="QuitButton" type="Button" parent="."]
-offset_left = 488.0
-offset_top = 336.0
-offset_right = 589.0
-offset_bottom = 367.0
+offset_left = 275.0
+offset_top = 196.0
+offset_right = 376.0
+offset_bottom = 227.0
 text = "Quit"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

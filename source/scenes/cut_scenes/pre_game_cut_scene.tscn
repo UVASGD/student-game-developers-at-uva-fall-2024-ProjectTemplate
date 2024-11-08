@@ -1,23 +1,26 @@
 [gd_scene load_steps=2 format=3 uid="uid://bn5ejiljdkkwe"]
 
-[ext_resource type="Script" path="res://source/scenes/game_container/switch_to_scene.gd" id="1_dulpl"]
+[ext_resource type="Script" path="res://source/scenes/cut_scenes/pre_game_cut_scene.gd" id="1_cs6en"]
 
 [node name="PreGameCutScene" type="Node2D"]
+script = ExtResource("1_cs6en")
 
-[node name="CutSceneOverButton" type="Button" parent="."]
-offset_right = 128.0
-offset_bottom = 31.0
-text = "[CutSceneOver]"
-script = ExtResource("1_dulpl")
-switch_to = 11
+[node name="ContinueButton" type="Button" parent="."]
+offset_left = 202.0
+offset_top = 191.0
+offset_right = 330.0
+offset_bottom = 222.0
+text = "Continue"
 
-[node name="THIS SCENE IS TEMP" type="Label" parent="."]
-offset_left = 142.0
-offset_top = 130.0
-offset_right = 1088.0
-offset_bottom = 231.0
-text = "Pre Game Cut Scene
-THIS SCENE IS TEMP
-delete the button and trigger the next scene at the end of the cutscene animation
-(use GameContainer.GAME_CONTAINER.switch_to_scene(GameContainer.Scene.RANDOM_STAGE)
-(you can call it from any script)"
+[node name="CutSceneLabel" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 27.0
+offset_right = 544.0
+offset_bottom = 139.0
+text = "4 kids enter a spooky, haunted mansion on halloween night, looking for fun
+
+But they find a cursed amulet that transforms them into monsters!
+
+Now they must fight amongst themselves for the powerful amulet!"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

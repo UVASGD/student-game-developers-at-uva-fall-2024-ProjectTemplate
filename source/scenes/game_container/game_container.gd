@@ -20,10 +20,7 @@ static var GAME_CONTAINER : GameContainer
 @onready var pre_game_cut_scene : PackedScene = preload("res://source/scenes/cut_scenes/pre_game_cut_scene.tscn")
 @onready var shop : PackedScene = preload("res://source/scenes/stages/shop.tscn")
 @onready var game_over : PackedScene = preload("res://source/scenes/menus/game_over.tscn")
-@onready var stage1 : PackedScene = preload("res://source/scenes/stages/stage1.tscn")
-@onready var stage2 : PackedScene = preload("res://source/scenes/stages/stage2.tscn")
-@onready var stage3 : PackedScene = preload("res://source/scenes/stages/stage3.tscn")
-@onready var stage4 : PackedScene = preload("res://source/scenes/stages/stage4.tscn")
+@onready var stage1 : PackedScene = preload("res://source/stages/stage_template.tscn")
 
 @onready var scene_dict = {
 	"MainMenu" : main_menu,
@@ -34,10 +31,7 @@ static var GAME_CONTAINER : GameContainer
 	"PreGameCutScene" : pre_game_cut_scene,
 	"Shop" : shop,
 	"GameOver" : game_over,
-	"Stage1" : stage1,
-	"Stage2" : stage2,
-	"Stage3" : stage3,
-	"Stage4" : stage4
+	"Stage1" : stage1
 }
 
 #Scoring
@@ -70,17 +64,17 @@ func switch_to_scene(scene_name : String):
 		#switch_active_scene(scene)
 
 func switch_active_scene(scene : PackedScene) :
-	if ActiveSceneHolder.get_child(0):
+	if ActiveSceneHolder.get_child_count() > 0:
 		ActiveSceneHolder.get_child(0).queue_free()
 	var s = scene.instantiate()
 	ActiveSceneHolder.add_child(s)
 
-func get_random_stage() -> PackedScene:
-	var r = int(randf() * 4)
-	if r == 0 : return stage1
-	if r == 1 : return stage2
-	if r == 2 : return stage3
-	else : return stage4
+#func get_random_stage() -> PackedScene:
+	#var r = int(randf() * 4)
+	#if r == 0 : return stage1
+	#if r == 1 : return stage2
+	#if r == 2 : return stage3
+	#else : return stage4
 
 func award_point_to_player(player : int) :
 	player_scores[player-1] += 1

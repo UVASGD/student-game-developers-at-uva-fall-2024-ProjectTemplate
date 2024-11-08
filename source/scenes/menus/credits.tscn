@@ -6,19 +6,19 @@
 script = ExtResource("1_y2hqy")
 
 [node name="CreditsLabel" type="Label" parent="."]
-offset_left = 295.0
-offset_top = 83.0
-offset_right = 823.0
-offset_bottom = 278.0
-theme_override_font_sizes/font_size = 166
+offset_left = 119.0
+offset_top = 15.0
+offset_right = 387.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 50
 text = "Credits"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
-offset_left = 266.0
-offset_top = 276.0
-offset_right = 831.0
-offset_bottom = 434.0
+offset_left = 27.0
+offset_top = 109.0
+offset_right = 644.0
+offset_bottom = 267.0
 text = "Kedrick Fudala - Lead Designer, Part-time programmer
 Luke Webb - Lead Programmer, part-time networks and cloud computing person
 Joey Giordano - Personality Hire, did some stuff

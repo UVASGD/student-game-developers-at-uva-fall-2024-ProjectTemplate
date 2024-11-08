@@ -6,19 +6,19 @@
 script = ExtResource("1_g7wwq")
 
 [node name="InstructionsLabel" type="Label" parent="."]
-offset_left = 283.0
-offset_top = 105.0
-offset_right = 796.0
-offset_bottom = 223.0
-theme_override_font_sizes/font_size = 101
+offset_left = 7.0
+offset_top = 16.0
+offset_right = 520.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 50
 text = "Instructions"
 horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="."]
-offset_left = 516.0
-offset_top = 328.0
-offset_right = 558.0
-offset_bottom = 356.0
+offset_left = 225.0
+offset_top = 190.0
+offset_right = 267.0
+offset_bottom = 218.0
 text = "Back"
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
