@@ -5253,6 +5253,14 @@ PrefabInstance:
       propertyPath: dialogue.Array.data[2]
       value: Whoah, cool Icon.SVG dude
       objectReference: {fileID: 0}
+    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
+      propertyPath: reqsToConv.Array.data[1]
+      value: 'defaultFlag,testFlag1,testFlag2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
+      propertyPath: reqsToConv.Array.data[2]
+      value: defaultFlag,testItemFlag,testFlag4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9003,7 +9011,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2130668571114083045, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130668571114083045, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9073,6 +9081,14 @@ PrefabInstance:
     - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: dialogue.Array.data[2]
       value: ME????|I don't know ANYTHING
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
+      propertyPath: reqsToConv.Array.data[1]
+      value: 'defaultFlag,testFlag1 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
+      propertyPath: reqsToConv.Array.data[2]
+      value: 'defaultFlag,testFlag2,testFlag3 '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
