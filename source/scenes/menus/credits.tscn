@@ -15,10 +15,11 @@ text = "Credits"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
-offset_left = 27.0
-offset_top = 109.0
-offset_right = 644.0
-offset_bottom = 267.0
+offset_left = 43.0
+offset_top = 96.0
+offset_right = 660.0
+offset_bottom = 254.0
+theme_override_font_sizes/font_size = 10
 text = "Kedrick Fudala - Lead Designer, Part-time programmer
 Luke Webb - Lead Programmer, part-time networks and cloud computing person
 Joey Giordano - Personality Hire, did some stuff
@@ -28,10 +29,10 @@ Vincent
 Haseeb"
 
 [node name="BackButton" type="Button" parent="."]
-offset_left = 533.0
-offset_top = 473.0
-offset_right = 575.0
-offset_bottom = 501.0
+offset_left = 236.0
+offset_top = 245.0
+offset_right = 282.0
+offset_bottom = 273.0
 text = "Back"
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

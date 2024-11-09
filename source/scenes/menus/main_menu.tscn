@@ -7,10 +7,10 @@ script = ExtResource("1_y2x06")
 
 [node name="MainMenuLabel" type="Label" parent="."]
 offset_left = 8.0
-offset_top = 11.0
+offset_top = 26.0
 offset_right = 500.0
-offset_bottom = 101.0
-theme_override_font_sizes/font_size = 75
+offset_bottom = 116.0
+theme_override_font_sizes/font_size = 60
 text = "Hallow's Thief"
 horizontal_alignment = 1
 

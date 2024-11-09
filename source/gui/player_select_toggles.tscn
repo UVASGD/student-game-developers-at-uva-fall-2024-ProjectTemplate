@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc203puiqpnsq"]
+
+[ext_resource type="Script" path="res://source/gui/player_select_toggles.gd" id="1_8og8h"]
+
+[node name="PlayerSelectToggles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8og8h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="LeftButton" type="Button" parent="."]
+offset_left = 43.0
+offset_top = 215.0
+offset_right = 68.0
+offset_bottom = 243.0
+text = "<"
+
+[node name="RightButton" type="Button" parent="."]
+offset_left = 88.0
+offset_top = 215.0
+offset_right = 113.0
+offset_bottom = 243.0
+text = ">"
