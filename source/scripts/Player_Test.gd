@@ -51,7 +51,6 @@ func manage_test_input():
 		#statusEffects.giveStatusTimed("Spook",3, StatusEffectManager.OverLapBehavior.REFRESH)
 		#call_functions(onRoundStart)
 		pass
-		
 
 	##press right mouse to check damage stat
 	if Input.is_action_just_pressed("mouse0_Test"):

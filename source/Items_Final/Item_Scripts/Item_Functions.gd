@@ -41,12 +41,10 @@ func propellerHat_onStart(ps: Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("Spook", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
 func propellerHat_speedBuff_start(ps : Player_Test):
 	if not(ps.statusEffects.hasStatus("propellerHat_speedBuff")):
-		print("gib")
 		ps.speed += 2
 		ps.statusEffects.giveStatus("propellerHat_speedBuff")
 func propellerHat_speedBuff_end(ps : Player_Test):
 	if not(ps.statusEffects.hasStatus("Fire") or ps.statusEffects.hasStatus("Poison") or ps.statusEffects.hasStatus("Stun") or ps.statusEffects.hasStatus("Spook")):
-		print("kil")
 		ps.speed -= 2
 		ps.statusEffects.removeStatus("propellerHat_speedBuff")
 
@@ -103,3 +101,36 @@ func sprayPaint_attackBuff_start(ps : Player_Test):
 	ps.speed += 2
 func sprayPaint_attackBuff_end(ps : Player_Test):
 	ps.speed -= 2
+
+func deckOfCards_onStart(ps : Player_Test):
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_attackBuff", Callable(self, "deckOfCards_attackBuff_start").bind(ps), Callable(self, "deckOfCards_attackBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_speedBuff", Callable(self, "deckOfCards_speedBuff_start").bind(ps), Callable(self, "deckOfCards_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_healthBuff", Callable(self, "deckOfCards_healthBuff_start").bind(ps), Callable(self, "deckOfCards_healthBuff_end").bind(ps))
+func deckOfCards_onRoundStart(ps : Player_Test):
+	if(ps.statusEffects.hasStatus("deckOfCards_attackBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_attackBuff")
+	if(ps.statusEffects.hasStatus("deckOfCards_speedBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_speedBuff")
+	if(ps.statusEffects.hasStatus("deckOfCards_healthBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_healthBuff")
+	var rand = RandomNumberGenerator.new()
+	var randomNum = rand.randi_range(0, 2)
+	match(randomNum):
+		0:
+			ps.statusEffects.giveStatus("deckOfCards_attackBuff")
+		1:
+			ps.statusEffects.giveStatus("deckOfCards_speedBuff")
+		2:
+			ps.statusEffects.giveStatus("deckOfCards_healthBuff")
+func deckOfCards_attackBuff_start(ps : Player_Test):
+	ps.attack += 10
+func deckOfCards_attackBuff_end(ps : Player_Test):
+	ps.attack -= 10
+func deckOfCards_speedBuff_start(ps : Player_Test):
+	ps.speed += 10
+func deckOfCards_speedBuff_end(ps : Player_Test):
+	ps.speed -= 10
+func deckOfCards_healthBuff_start(ps : Player_Test):
+	ps.maxHealth += 10
+func deckOfCards_healthBuff_end(ps : Player_Test):
+	ps.maxHealth -= 10
