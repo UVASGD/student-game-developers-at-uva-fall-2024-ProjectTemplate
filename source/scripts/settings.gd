@@ -14,8 +14,16 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("esc"):
-		if visible: visible = false
-		else: visible = true
+		if visible:
+			visible = false
+			get_tree().paused = false
+			if(get_node("..").has_node("ItemSelector")):
+				get_node("../ItemSelector").visible = true
+		else:
+			visible = true
+			get_tree().paused = true
+			if(get_node("..").has_node("ItemSelector")):
+				get_node("../ItemSelector").visible = false
 	
 	for node in vbox.get_children():
 		if node.has_meta("player_num"):

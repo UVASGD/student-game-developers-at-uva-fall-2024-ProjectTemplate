@@ -41,6 +41,7 @@ script = ExtResource("2_c3313")
 
 [node name="Settings" parent="." instance=ExtResource("3_c83ju")]
 visible = false
+z_index = 1
 offset_left = -508.0
 offset_top = -258.0
 offset_right = 516.0
