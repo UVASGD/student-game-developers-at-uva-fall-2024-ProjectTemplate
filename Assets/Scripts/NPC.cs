@@ -29,6 +29,7 @@ public class NPC : MonoBehaviour{
 
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
+    private InnerMonologue imScript;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
 
@@ -51,6 +52,7 @@ public class NPC : MonoBehaviour{
         maxXBoundary = Screen.width * 0.75f;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
+        imScript = InnerMonologue.GetImScript();
         arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
         uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
 
