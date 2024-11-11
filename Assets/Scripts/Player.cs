@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] hairColors;
     [SerializeField] private Sprite[] eyes;
     [SerializeField] private Sprite[] eyeColors;
-
+    
     [SerializeField] private UI_Inventory uI_Inventory;
     public enum flags { defaultFlag, //flag put on all dialogue
             testFlag1, 
@@ -110,14 +110,5 @@ public class Player : MonoBehaviour
     public void AddToInventory(InventoryItem inventoryItem)
     {
         inventory.AddInventoryItem(inventoryItem);
-    }
-
-    public void InnerMonologueCheck(flags f)
-    {
-        //proof of concept function
-        if(f == flags.testFlag2 && dialogueFlags.Contains(flags.testFlag3) || f == flags.testFlag3 && dialogueFlags.Contains(flags.testFlag2))
-        {
-
-        }
     }
 }
