@@ -39,7 +39,6 @@ public class Item : MonoBehaviour
         {
             playerScript.dialogueFlags.Add(flag);
             playerScript.AddToInventory(item);
-            imScript.monologueCheck(flag);
             Destroy(self);
         }
     }
