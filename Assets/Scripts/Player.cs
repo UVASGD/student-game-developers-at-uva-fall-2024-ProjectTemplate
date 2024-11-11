@@ -33,7 +33,9 @@ public class Player : MonoBehaviour
             testFlag2,
             testFlag3,
             testFlag4,
-            testItemFlag//demo test flags
+            testItemFlag,
+            monologueFlag1,
+            monologueFlag2//demo test flags
     };
     public HashSet<flags> dialogueFlags = new HashSet<flags>();
 

@@ -91,24 +91,19 @@ public class NPC : MonoBehaviour{
             spriteRenderer.sprite = dialogueQueue[0];
         }
 
-        if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState())
+        if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
         {
+            AdjustDialogueArrow();
+            dialogueMode = true;
+            playerScript.moveLock = true;
+            spriteRenderer.sprite = dialogueQueue[0];
+            curDisplay = false;
+            displayDialogue();
+        }
 
-
-
-            if (curDisplay)
-            {
-                AdjustDialogueArrow();
-                dialogueMode = true;
-                playerScript.moveLock = true;
-                spriteRenderer.sprite = dialogueQueue[0];
-                curDisplay = false;
-            }
-            
-            if (dialogueMode)
-            {
-                displayDialogue();
-            }
+        if (Input.GetButtonDown("Space") && !uiEnabler.GetCurrentUIState() && dialogueMode)
+        {
+            displayDialogue();
         }
     }
 
@@ -180,6 +175,11 @@ public class NPC : MonoBehaviour{
             dialogueMode = false;
             playerScript.moveLock = false;
             firstTimeRead = false;
+            if (curDialogue != 0)
+            {
+                playerScript.dialogueFlags.Add(reqs[curDialogue].Last());
+                imScript.monologueCheck(reqs[curDialogue].Last());
+            }
         }
     }
 
