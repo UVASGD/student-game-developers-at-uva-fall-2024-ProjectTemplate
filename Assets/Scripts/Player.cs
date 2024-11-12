@@ -28,16 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] eyeColors;
     
     [SerializeField] private UI_Inventory uI_Inventory;
-    public enum flags { defaultFlag, //flag put on all dialogue
-            testFlag1, 
-            testFlag2,
-            testFlag3,
-            testFlag4,
-            testItemFlag,
-            monologueFlag1,
-            monologueFlag2//demo test flags
-    };
-    public HashSet<flags> dialogueFlags = new HashSet<flags>();
+    
+    public HashSet<DialogueInventory.flags> dialogueFlags = new HashSet<DialogueInventory.flags>();
 
     private void Start()
     {
@@ -56,7 +48,7 @@ public class Player : MonoBehaviour
 
         for(int i=0; i < data.flags.Length; i++)
         {
-            dialogueFlags.Add((flags)data.flags[i]);
+            dialogueFlags.Add((DialogueInventory.flags)data.flags[i]);
         }
 
         for(int i=0; i < data.inventoryItems.Length; i++)
@@ -99,7 +91,7 @@ public class Player : MonoBehaviour
     //testing purposes
     public void printFlags()
     {
-        flags[] flagsEnum = new Player.flags[dialogueFlags.Count];
+        DialogueInventory.flags[] flagsEnum = new DialogueInventory.flags[dialogueFlags.Count];
         dialogueFlags.CopyTo(flagsEnum);
         string output = "";
         for (int i = 0; i < flagsEnum.Length; i++)

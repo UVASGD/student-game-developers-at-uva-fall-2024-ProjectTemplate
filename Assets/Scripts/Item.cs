@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
     private InventoryItem item = new InventoryItem();
 
     [SerializeField] private InventoryItem.ItemType type = InventoryItem.ItemType.None;
-    [SerializeField] private Player.flags flag;
+    [SerializeField] private DialogueInventory.flags flag;
     [SerializeField] private GameObject self;
     private InnerMonologue imScript;
 

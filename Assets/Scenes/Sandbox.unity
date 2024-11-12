@@ -5229,6 +5229,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1570264585}
     - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
+      propertyPath: NPCname
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: textbox
       value: 
       objectReference: {fileID: 2024628938}
@@ -9233,6 +9237,10 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1570264585}
+    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
+      propertyPath: NPCname
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: textbox
       value: 

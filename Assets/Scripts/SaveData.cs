@@ -22,7 +22,7 @@ public class SaveData
         playerPosition[2] = player.transform.position.z;
 
         int len = player.dialogueFlags.Count;
-        Player.flags[] flagsEnum = new Player.flags[len];
+        DialogueInventory.flags[] flagsEnum = new DialogueInventory.flags[len];
         player.dialogueFlags.CopyTo(flagsEnum);
         flags = new int[len];
         for(int i=0; i < len; i++)

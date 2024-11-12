@@ -29,9 +29,9 @@ public class InnerMonologue : MonoBehaviour
         "test dialogue|test|test2", 
         "yo baby. I have 7 cds|And three jam boxes"
     };
-    private Player.flags[] flags = {
-        Player.flags.monologueFlag1,
-        Player.flags.monologueFlag2
+    private DialogueInventory.flags[] flags = {
+        DialogueInventory.flags.monologueFlag1,
+        DialogueInventory.flags.monologueFlag2
     };
 
     public static InnerMonologue GetImScript()
@@ -73,24 +73,24 @@ public class InnerMonologue : MonoBehaviour
         }
     }
 
-    public void monologueCheck(Player.flags f)
+    public void monologueCheck(DialogueInventory.flags f)
     {
         //test conditions
         //needed both to test, but both can't be active at once
-        /*if (f == Player.flags.testFlag2 && playerScript.dialogueFlags.Contains(Player.flags.testFlag1))
+        /*if (f == DialogueInventory.flags.testFlag2 && playerScript.dialogueFlags.Contains(DialogueInventory.flags.testFlag1))
         {
             monologueStart(0, true);
         }
-        else if (f == Player.flags.testFlag1 && playerScript.dialogueFlags.Contains(Player.flags.testFlag2))
+        else if (f == DialogueInventory.flags.testFlag1 && playerScript.dialogueFlags.Contains(DialogueInventory.flags.testFlag2))
         {
             monologueStart(0, true);
         }*/
 
-        if (f == Player.flags.testFlag2 && playerScript.dialogueFlags.Contains(Player.flags.testItemFlag))
+        if (f == DialogueInventory.flags.testFlag2 && playerScript.dialogueFlags.Contains(DialogueInventory.flags.testItemFlag))
         {
             monologueStart(1, true);
         }
-        else if (f == Player.flags.testItemFlag && playerScript.dialogueFlags.Contains(Player.flags.testFlag2))
+        else if (f == DialogueInventory.flags.testItemFlag && playerScript.dialogueFlags.Contains(DialogueInventory.flags.testFlag2))
         {
             monologueStart(1, false);
         }
