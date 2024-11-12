@@ -126,7 +126,7 @@ public class DialogueInventory : MonoBehaviour
     
     // turns loaded tuple array into string array
     // stores loaded tuple array as metadata
-    public static void LoadData(Player player, ref List<SerializableTuple<name, int>> data)
+    public static void LoadData(Player player, in List<SerializableTuple<name, int>> data)
     {
         SetupSingleton(player);
         _singleton.learnedDialogueStrings.Clear();

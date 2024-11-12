@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         }
 
         knownDialoguesSaveLocation = data.learnedDialogues;
-        DialogueInventory.LoadData(this, ref knownDialoguesSaveLocation);
+        DialogueInventory.LoadData(this, in knownDialoguesSaveLocation);
         
         transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
         moveLock = true;
