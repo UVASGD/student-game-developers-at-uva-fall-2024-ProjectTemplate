@@ -10,7 +10,7 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter ();
         string path = Application.persistentDataPath + "/player.data";
         FileStream stream = new FileStream(path, FileMode.Create);
-
+        DialogueInventory.SaveData();
         SaveData data = new SaveData(player);
 
         formatter.Serialize(stream, data);
@@ -39,7 +39,7 @@ public static class SaveSystem
 
             SaveData data = formatter.Deserialize(stream) as SaveData;
             stream.Close();
-
+            
             return data;
         }
         else

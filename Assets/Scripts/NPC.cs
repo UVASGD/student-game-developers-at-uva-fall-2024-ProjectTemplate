@@ -43,8 +43,8 @@ public class NPC : MonoBehaviour{
     private int curDialogue;
 
 
-    private Tuple<String[], DialogueInventory.flags[]>[] dialogueTuples;
-    private Tuple<String[], DialogueInventory.flags[]> curTuple;
+    private Tuple<String[], DialogueInventory.flag[]>[] dialogueTuples;
+    private Tuple<String[], DialogueInventory.flag[]> curTuple;
 
     void Start()
     {
@@ -55,11 +55,11 @@ public class NPC : MonoBehaviour{
         imScript = InnerMonologue.GetImScript();
         arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
         uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
-
-        if (!DialogueInventory.dialogues.TryGetValue(NPCname, out dialogueTuples))
+        if (!DialogueInventory.GetDialogues(NPCname, out dialogueTuples))
         {
             Debug.LogError("NPC name '" + NPCname + "' not found");
         }
+        
 
         textbox.enabled = false;
     }
@@ -81,7 +81,7 @@ public class NPC : MonoBehaviour{
 
         if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
         {
-            dialogueManager.StartDialogue(curTuple); //Seb's function
+           // dialogueManager.StartDialogue(curTuple); //Seb's function
 
             /*AdjustDialogueArrow();
             dialogueMode = true;
@@ -180,6 +180,8 @@ public class NPC : MonoBehaviour{
                 }
     }
 
+    
+    
     public int getCurrentDialogueIndex()
     {
         return curDialogue;

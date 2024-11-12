@@ -29,9 +29,9 @@ public class InnerMonologue : MonoBehaviour
         "test dialogue|test|test2", 
         "yo baby. I have 7 cds|And three jam boxes"
     };
-    private DialogueInventory.flags[] flags = {
-        DialogueInventory.flags.monologueFlag1,
-        DialogueInventory.flags.monologueFlag2
+    private DialogueInventory.flag[] flags = {
+        DialogueInventory.flag.monologueFlag1,
+        DialogueInventory.flag.monologueFlag2
     };
 
     public static InnerMonologue GetImScript()
@@ -73,7 +73,7 @@ public class InnerMonologue : MonoBehaviour
         }
     }
 
-    public void monologueCheck(DialogueInventory.flags f)
+    public void monologueCheck(DialogueInventory.flag f)
     {
         //test conditions
         //needed both to test, but both can't be active at once
@@ -86,11 +86,11 @@ public class InnerMonologue : MonoBehaviour
             monologueStart(0, true);
         }*/
 
-        if (f == DialogueInventory.flags.testFlag2 && playerScript.dialogueFlags.Contains(DialogueInventory.flags.testItemFlag))
+        if (f == DialogueInventory.flag.testFlag2 && playerScript.dialogueFlags.Contains(DialogueInventory.flag.testItemFlag))
         {
             monologueStart(1, true);
         }
-        else if (f == DialogueInventory.flags.testItemFlag && playerScript.dialogueFlags.Contains(DialogueInventory.flags.testFlag2))
+        else if (f == DialogueInventory.flag.testItemFlag && playerScript.dialogueFlags.Contains(DialogueInventory.flag.testFlag2))
         {
             monologueStart(1, false);
         }

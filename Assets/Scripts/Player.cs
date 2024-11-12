@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,8 +30,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] eyeColors;
     
     [SerializeField] private UI_Inventory uI_Inventory;
+    [SerializeField] private List<SerializableTuple<DialogueInventory.name, int>> knownDialoguesSaveLocation;
     
-    public HashSet<DialogueInventory.flags> dialogueFlags = new HashSet<DialogueInventory.flags>();
+    public HashSet<DialogueInventory.flag> dialogueFlags = new HashSet<DialogueInventory.flag>();
 
     private void Start()
     {
@@ -48,7 +51,7 @@ public class Player : MonoBehaviour
 
         for(int i=0; i < data.flags.Length; i++)
         {
-            dialogueFlags.Add((DialogueInventory.flags)data.flags[i]);
+            dialogueFlags.Add((DialogueInventory.flag)data.flags[i]);
         }
 
         for(int i=0; i < data.inventoryItems.Length; i++)
@@ -57,6 +60,9 @@ public class Player : MonoBehaviour
             inventoryItemData.itemType = (InventoryItem.ItemType) data.inventoryItems[i];
             inventory.AddInventoryItem(inventoryItemData);
         }
+
+        knownDialoguesSaveLocation = data.learnedDialogues;
+        DialogueInventory.LoadData(this, ref knownDialoguesSaveLocation);
         
         transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
         moveLock = true;
@@ -91,7 +97,7 @@ public class Player : MonoBehaviour
     //testing purposes
     public void printFlags()
     {
-        DialogueInventory.flags[] flagsEnum = new DialogueInventory.flags[dialogueFlags.Count];
+        DialogueInventory.flag[] flagsEnum = new DialogueInventory.flag[dialogueFlags.Count];
         dialogueFlags.CopyTo(flagsEnum);
         string output = "";
         for (int i = 0; i < flagsEnum.Length; i++)
@@ -105,5 +111,10 @@ public class Player : MonoBehaviour
     public void AddToInventory(InventoryItem inventoryItem)
     {
         inventory.AddInventoryItem(inventoryItem);
+    }
+
+    public void SaveLearnedDialogues(in List<SerializableTuple<DialogueInventory.name, int>> inList)
+    {
+        knownDialoguesSaveLocation = inList;
     }
 }

@@ -1,8 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+
+[Serializable]
+public class SerializableTuple<T1, T2>
+{
+    public SerializableTuple(T1 term1In, T2 term2In)
+    {
+        term1 = term1In;
+        term2 = term2In;
+    }
+
+    public T1 term1;
+    public T2 term2;
+}
 
 [System.Serializable]
 public class SaveData
@@ -11,9 +27,9 @@ public class SaveData
     
     public float[] playerPosition;
     public int[] flags;
-
     public int[] inventoryItems;
-
+    public List<SerializableTuple<DialogueInventory.name, int>> learnedDialogues;
+    
     public SaveData(Player player) 
     { 
         playerPosition = new float[3];
@@ -22,7 +38,7 @@ public class SaveData
         playerPosition[2] = player.transform.position.z;
 
         int len = player.dialogueFlags.Count;
-        DialogueInventory.flags[] flagsEnum = new DialogueInventory.flags[len];
+        DialogueInventory.flag[] flagsEnum = new DialogueInventory.flag[len];
         player.dialogueFlags.CopyTo(flagsEnum);
         flags = new int[len];
         for(int i=0; i < len; i++)
