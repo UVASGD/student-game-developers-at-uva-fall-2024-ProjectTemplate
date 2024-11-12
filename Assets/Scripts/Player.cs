@@ -42,10 +42,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         body.sprite = bodies[PlayerPrefs.GetInt("bodyIndex")];
-        hair.sprite = hairs[PlayerPrefs.GetInt("hairIndex")];
-        hairColor.sprite = hairs[PlayerPrefs.GetInt("hairCIndex")];
-        eye.sprite = eyes[PlayerPrefs.GetInt("eyeIndex")];
-        eyeColor.sprite = eyes[PlayerPrefs.GetInt("eyeCIndex")];
+        int hairIndex = PlayerPrefs.GetInt("hairIndex");
+        hair.sprite = hairs[hairIndex];
+        hairColor.sprite = hairColors[PlayerPrefs.GetInt("hairCIndex") + hairIndex*5];
+        int eyeIndex = PlayerPrefs.GetInt("eyeIndex");
+        eye.sprite = eyes[eyeIndex];
+        eyeColor.sprite = eyeColors[PlayerPrefs.GetInt("eyeCIndex") + eyeIndex*5];
         inventory = new Inventory();
 
         _characterController = GetComponent<CharacterController>();
