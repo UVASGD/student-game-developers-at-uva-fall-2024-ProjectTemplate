@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=56 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
 [ext_resource type="Texture2D" uid="uid://bqrdval02y5ee" path="res://source/anims/ghost_kid_idle/idle_down_1.png" id="2_3e32p"]
@@ -37,6 +37,22 @@
 [ext_resource type="Texture2D" uid="uid://70xla3ginu86" path="res://source/anims/ghost_monster_walk+idle/float_up_2.PNG" id="35_d1kxc"]
 [ext_resource type="Texture2D" uid="uid://cvxeuqlint1b8" path="res://source/anims/ghost_monster_walk+idle/float_up_3.PNG" id="36_m37rc"]
 [ext_resource type="Texture2D" uid="uid://c14jjha6du28t" path="res://source/anims/ghost_monster_walk+idle/float_up_4.PNG" id="37_62mol"]
+[ext_resource type="Texture2D" uid="uid://d316efmvuas7u" path="res://source/anims/pumpkin_kid_idle/IMG_4654.PNG" id="38_pfkgl"]
+[ext_resource type="Texture2D" uid="uid://cjcfxp6u0po3i" path="res://source/anims/pumpkin_kid_idle/IMG_4655.PNG" id="39_4mq0d"]
+[ext_resource type="Texture2D" uid="uid://cnvhhsvu13aws" path="res://source/anims/pumpkin_kid_idle/IMG_4656.PNG" id="40_dhmis"]
+[ext_resource type="Texture2D" uid="uid://clhia0q8hyhqo" path="res://source/anims/pumpkin_kid_idle/IMG_4657.PNG" id="41_aehjy"]
+[ext_resource type="Texture2D" uid="uid://dg3d8utyfj30x" path="res://source/anims/pumpkin_kid_idle/IMG_4658.PNG" id="42_r2hxm"]
+[ext_resource type="Texture2D" uid="uid://ba4gck47lgab2" path="res://source/anims/pumpkin_kid_idle/IMG_4659.PNG" id="43_4vste"]
+[ext_resource type="Texture2D" uid="uid://lwolivqyk7po" path="res://source/anims/pumpkin_kid_idle/IMG_4660.PNG" id="44_eohrl"]
+[ext_resource type="Texture2D" uid="uid://cuwo0yh8l0tot" path="res://source/anims/pumpkin_kid_idle/IMG_4661.PNG" id="45_pbfcj"]
+[ext_resource type="Texture2D" uid="uid://us4hj7kyd5py" path="res://source/anims/pumpkin_kid_walk/down1.png" id="46_j5o2x"]
+[ext_resource type="Texture2D" uid="uid://dg4nh3x3yoy30" path="res://source/anims/pumpkin_kid_walk/down2.png" id="47_48yp3"]
+[ext_resource type="Texture2D" uid="uid://oojl4yno5cwh" path="res://source/anims/pumpkin_kid_walk/left1.png" id="48_k30tv"]
+[ext_resource type="Texture2D" uid="uid://dbp2j7m6xqfp" path="res://source/anims/pumpkin_kid_walk/left2.png" id="49_5debl"]
+[ext_resource type="Texture2D" uid="uid://66ch50cs5ixo" path="res://source/anims/pumpkin_kid_walk/right1.png" id="50_j3sls"]
+[ext_resource type="Texture2D" uid="uid://b30mv2tm73bmh" path="res://source/anims/pumpkin_kid_walk/right2.png" id="51_k13c4"]
+[ext_resource type="Texture2D" uid="uid://bk4ai1rlykip1" path="res://source/anims/pumpkin_kid_walk/up1.PNG" id="52_7geue"]
+[ext_resource type="Texture2D" uid="uid://casy5j3h566t6" path="res://source/anims/pumpkin_kid_walk/up2.PNG" id="53_ynnor"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1n7tg"]
 animations = [{
@@ -275,6 +291,94 @@ animations = [{
 "loop": true,
 "name": &"ghost_monster_walk_up",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_pfkgl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_4mq0d")
+}],
+"loop": true,
+"name": &"pumpkin_kid_idle_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_dhmis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_aehjy")
+}],
+"loop": true,
+"name": &"pumpkin_kid_idle_left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("42_r2hxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_4vste")
+}],
+"loop": true,
+"name": &"pumpkin_kid_idle_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_eohrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_pbfcj")
+}],
+"loop": true,
+"name": &"pumpkin_kid_idle_up",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_j5o2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_48yp3")
+}],
+"loop": true,
+"name": &"pumpkin_kid_walk_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_k30tv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_5debl")
+}],
+"loop": true,
+"name": &"pumpkin_kid_walk_left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_j3sls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_k13c4")
+}],
+"loop": true,
+"name": &"pumpkin_kid_walk_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("52_7geue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_ynnor")
+}],
+"loop": true,
+"name": &"pumpkin_kid_walk_up",
+"speed": 3.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1d7hi"]
@@ -286,7 +390,7 @@ script = ExtResource("1_ws1a7")
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-animation = &"ghost_kid_walk_up"
+animation = &"pumpkin_kid_walk_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1d7hi")
