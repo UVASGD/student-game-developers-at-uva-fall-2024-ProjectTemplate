@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=40 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
 [ext_resource type="Texture2D" uid="uid://bqrdval02y5ee" path="res://source/anims/ghost_kid_idle/idle_down_1.png" id="2_3e32p"]
@@ -21,6 +21,22 @@
 [ext_resource type="Texture2D" uid="uid://cipjdt3k1fsm4" path="res://source/anims/ghost_kid_walk/walk_right_4.png" id="11_6joxg"]
 [ext_resource type="Texture2D" uid="uid://dankfq2k2k0n3" path="res://source/anims/ghost_kid_walk/walk_up_1.png" id="12_gv1ak"]
 [ext_resource type="Texture2D" uid="uid://dm4n0w3fb8tsw" path="res://source/anims/ghost_kid_walk/walk_up_2.png" id="13_s1ym5"]
+[ext_resource type="Texture2D" uid="uid://cxt482dj3g0fc" path="res://source/anims/ghost_monster_walk+idle/float_down_1.PNG" id="22_j1tkh"]
+[ext_resource type="Texture2D" uid="uid://ctcxuwikon7cy" path="res://source/anims/ghost_monster_walk+idle/float_down_2.PNG" id="23_qei8t"]
+[ext_resource type="Texture2D" uid="uid://16cnh38gai3w" path="res://source/anims/ghost_monster_walk+idle/float_down_3.PNG" id="24_unuhm"]
+[ext_resource type="Texture2D" uid="uid://bh87hucbfvq82" path="res://source/anims/ghost_monster_walk+idle/float_down_4.PNG" id="25_0wy31"]
+[ext_resource type="Texture2D" uid="uid://bnmv2t3kh22vh" path="res://source/anims/ghost_monster_walk+idle/float_left_1.PNG" id="26_nuk37"]
+[ext_resource type="Texture2D" uid="uid://l605db384sjc" path="res://source/anims/ghost_monster_walk+idle/float_left_2.png" id="27_u3f4d"]
+[ext_resource type="Texture2D" uid="uid://edm354l2g766" path="res://source/anims/ghost_monster_walk+idle/float_left_3.PNG" id="28_d1udg"]
+[ext_resource type="Texture2D" uid="uid://b7xew2vc0fk63" path="res://source/anims/ghost_monster_walk+idle/float_left_4.PNG" id="29_i4guu"]
+[ext_resource type="Texture2D" uid="uid://duhh3p0w3n2us" path="res://source/anims/ghost_monster_walk+idle/float_right_1.PNG" id="30_li174"]
+[ext_resource type="Texture2D" uid="uid://bqgyxecu8burf" path="res://source/anims/ghost_monster_walk+idle/float_right_2.png" id="31_rxtvl"]
+[ext_resource type="Texture2D" uid="uid://dckgn3crus6vt" path="res://source/anims/ghost_monster_walk+idle/float_right_3.PNG" id="32_1cs5m"]
+[ext_resource type="Texture2D" uid="uid://di8sx2worp3pl" path="res://source/anims/ghost_monster_walk+idle/float_right_4.PNG" id="33_5ofd6"]
+[ext_resource type="Texture2D" uid="uid://d2t58n0qvanfr" path="res://source/anims/ghost_monster_walk+idle/float_up_1.PNG" id="34_op8n7"]
+[ext_resource type="Texture2D" uid="uid://70xla3ginu86" path="res://source/anims/ghost_monster_walk+idle/float_up_2.PNG" id="35_d1kxc"]
+[ext_resource type="Texture2D" uid="uid://cvxeuqlint1b8" path="res://source/anims/ghost_monster_walk+idle/float_up_3.PNG" id="36_m37rc"]
+[ext_resource type="Texture2D" uid="uid://c14jjha6du28t" path="res://source/anims/ghost_monster_walk+idle/float_up_4.PNG" id="37_62mol"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1n7tg"]
 animations = [{
@@ -123,6 +139,142 @@ animations = [{
 "loop": true,
 "name": &"ghost_kid_walk_up",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_j1tkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_qei8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_unuhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_0wy31")
+}],
+"loop": true,
+"name": &"ghost_monster_idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_nuk37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_u3f4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_d1udg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_i4guu")
+}],
+"loop": true,
+"name": &"ghost_monster_idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_li174")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rxtvl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_1cs5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5ofd6")
+}],
+"loop": true,
+"name": &"ghost_monster_idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_op8n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_d1kxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_m37rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_62mol")
+}],
+"loop": true,
+"name": &"ghost_monster_idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_j1tkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_qei8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_unuhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_0wy31")
+}],
+"loop": true,
+"name": &"ghost_monster_walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_nuk37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_u3f4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_d1udg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_i4guu")
+}],
+"loop": true,
+"name": &"ghost_monster_walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_li174")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rxtvl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_1cs5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_5ofd6")
+}],
+"loop": true,
+"name": &"ghost_monster_walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_op8n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_d1kxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_m37rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_62mol")
+}],
+"loop": true,
+"name": &"ghost_monster_walk_up",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1d7hi"]
@@ -134,7 +286,7 @@ script = ExtResource("1_ws1a7")
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-animation = &"ghost_kid_idle_down"
+animation = &"ghost_kid_walk_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1d7hi")
