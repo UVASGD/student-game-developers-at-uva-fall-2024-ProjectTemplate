@@ -26,7 +26,10 @@ var onFireFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
 var onGetHitFunctions : Array[Callable]#When this one is called. should also call with the object hit as a parameter
 
+var direction: Vector2 = Vector2(0, 1)
+var model: String = "ghost_kid"
 #@onready var statusEffects : StatusEffectManager = $StatusEffectManager
+@onready var sprite : AnimatedSprite2D = $PlayerSprite/Body
 
 func _ready() -> void:
 	pass
@@ -37,6 +40,9 @@ func _process(delta) -> void:
 func handle_move() -> void:
 	var player_num = str(get_meta("player_num"))
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
+	
+	playAnimation(velocity)
+	if not velocity.is_zero_approx(): direction = velocity
 	
 	if movement.length() :
 		Speed = move_toward(Speed, topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
@@ -82,3 +88,22 @@ func change_health(deltaHealth : float):
 func call_functions(arr : Array[Callable]):
 	for i in arr:
 		i.call()
+		
+func playAnimation(velocity: Vector2):
+	if velocity.is_zero_approx():
+		sprite.play(model + "_idle_" + getDirectionWord(direction))
+	else:
+		sprite.play(model + "_walk_" + getDirectionWord(velocity))
+		
+func getDirectionWord(direction: Vector2):
+	if direction.is_zero_approx(): return "down"
+	if abs(direction.x) >= abs(direction.y):
+		if direction.x > 0: return "right"
+		elif direction.x < 0: return "left"
+	else:
+		if direction.y > 0: return "down"
+		elif direction.y < 0: return "up"
+
+func changeModel(newModel: String):
+	model = newModel
+	
