@@ -41,7 +41,7 @@ func handle_move() -> void:
 	var player_num = str(get_meta("player_num"))
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	
-	playAnimation(velocity)
+	playWalkOrIdleAnimation(velocity)
 	if not velocity.is_zero_approx(): direction = velocity
 	
 	if movement.length() :
@@ -89,7 +89,7 @@ func call_functions(arr : Array[Callable]):
 	for i in arr:
 		i.call()
 		
-func playAnimation(velocity: Vector2):
+func playWalkOrIdleAnimation(velocity: Vector2):
 	if velocity.is_zero_approx():
 		sprite.play(model + "_idle_" + getDirectionWord(direction))
 	else:
