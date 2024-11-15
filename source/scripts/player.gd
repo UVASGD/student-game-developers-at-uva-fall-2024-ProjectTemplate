@@ -15,6 +15,13 @@ var maxHealth : int = 12
 var damage : int = 0
 var topSpeed : int = 10
 
+enum Character {
+	WITCH,
+	FRANKENSTEIN,
+	GHOST,
+	PUMPKIN
+}
+var character = Character.PUMPKIN
 
 var health :int = 0
 #signal onAttack(player)#This signals will emit every attack
