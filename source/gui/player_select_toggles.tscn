@@ -14,15 +14,20 @@ script = ExtResource("1_8og8h")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="LeftButton" type="Button" parent="."]
-offset_left = 43.0
-offset_top = 215.0
-offset_right = 68.0
-offset_bottom = 243.0
+layout_mode = 0
+offset_left = -36.0
+offset_top = 210.0
+offset_right = -11.0
+offset_bottom = 238.0
 text = "<"
 
 [node name="RightButton" type="Button" parent="."]
-offset_left = 88.0
-offset_top = 215.0
-offset_right = 113.0
-offset_bottom = 243.0
+layout_mode = 0
+offset_left = 13.0
+offset_top = 210.0
+offset_right = 38.0
+offset_bottom = 238.0
 text = ">"
+
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]

@@ -15,8 +15,9 @@ text = "Continue"
 [node name="CutSceneLabel" type="Label" parent="."]
 offset_left = 19.0
 offset_top = 27.0
-offset_right = 544.0
+offset_right = 494.0
 offset_bottom = 139.0
+theme_override_font_sizes/font_size = 13
 text = "4 kids enter a spooky, haunted mansion on halloween night, looking for fun
 
 But they find a cursed amulet that transforms them into monsters!
