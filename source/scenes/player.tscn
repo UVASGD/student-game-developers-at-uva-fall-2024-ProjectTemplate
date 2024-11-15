@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=5 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
+[ext_resource type="Script" path="res://source/scripts/Hurtbox.gd" id="2_lav1o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1d7hi"]
 
@@ -16,3 +17,6 @@ shape = SubResource("CapsuleShape2D_1d7hi")
 position = Vector2(1.07288e-06, 1.90735e-06)
 scale = Vector2(20, 15)
 mesh = SubResource("CapsuleMesh_tx0kn")
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+script = ExtResource("2_lav1o")
