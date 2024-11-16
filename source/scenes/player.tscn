@@ -1,8 +1,9 @@
-[gd_scene load_steps=104 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=106 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
 [ext_resource type="Texture2D" uid="uid://balmtbxy73uxl" path="res://source/anims/ghost_kid_attack/down/attack_down_1.PNG" id="2_2aqtn"]
 [ext_resource type="Texture2D" uid="uid://bqrdval02y5ee" path="res://source/anims/ghost_kid_idle/idle_down_1.png" id="2_3e32p"]
+[ext_resource type="Script" path="res://source/scripts/Hurtbox.gd" id="2_lav1o"]
 [ext_resource type="Texture2D" uid="uid://c3v52b8sjthq2" path="res://source/anims/ghost_kid_walk/walk_down_1.png" id="2_nbe6p"]
 [ext_resource type="Texture2D" uid="uid://cv32xw3j2e5ue" path="res://source/anims/ghost_kid_attack/down/attack_down_2.png" id="3_6h27e"]
 [ext_resource type="Texture2D" uid="uid://bf1iqsldq4n2i" path="res://source/anims/ghost_kid_walk/walk_down_2.png" id="3_r22th"]
@@ -655,6 +656,10 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1d7hi"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlfgb"]
+radius = 9.0
+height = 28.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ws1a7")
 
@@ -668,3 +673,9 @@ frame_progress = 0.392947
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1d7hi")
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+script = ExtResource("2_lav1o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CapsuleShape2D_vlfgb")

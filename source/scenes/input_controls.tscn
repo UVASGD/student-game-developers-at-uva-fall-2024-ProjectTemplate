@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://caum2ucqak0ro" path="res://source/scenes/input_button.tscn" id="1_ygp52"]
 
 [node name="Input Controls" type="Control"]
-custom_minimum_size = Vector2(0, 256)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,5 +56,9 @@ metadata/input_name = "Down"
 [node name="Input Button4" parent="VBoxContainer" instance=ExtResource("1_ygp52")]
 layout_mode = 2
 metadata/input_name = "Right"
+
+[node name="Input Button5" parent="VBoxContainer" instance=ExtResource("1_ygp52")]
+layout_mode = 2
+metadata/input_name = "Attack"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
