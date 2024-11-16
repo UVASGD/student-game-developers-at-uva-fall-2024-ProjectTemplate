@@ -52,6 +52,7 @@ func manage_test_input():
 		#call_functions(onRoundStart)
 		pass
 	if Input.is_action_just_pressed("Right1"):
+		print(onRoundStart)
 		call_functions(onRoundStart)
 		print("round start")
 
