@@ -13,7 +13,7 @@ func _ready():
 	add_player()
 	add_player()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	test.text = str("Player Count: ") + str(player_count) + str(" ") + str(player_classes)
 	match(len(player_insts) - 1):
 		1:

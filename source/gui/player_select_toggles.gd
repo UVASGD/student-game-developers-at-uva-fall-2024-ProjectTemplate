@@ -9,7 +9,7 @@ class_name PlayerSelectToggles
 @onready var ghost_texture = null
 @onready var sprite_textures = [pumpkin_texture, frankenstein_texture, witch_texture, ghost_texture]
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#sprite.texture = sprite_textures[value]
 	pass
 
