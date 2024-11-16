@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c2744yegswje4"]
+
+[ext_resource type="Script" path="res://source/Items_Final/Item_Scripts/Item.gd" id="1_cc70q"]
+[ext_resource type="Texture2D" uid="uid://udp7gbdphe8o" path="res://source/Items_Final/Item_Sprites/rainbowlollipop.png" id="2_hs8wu"]
+
+[resource]
+script = ExtResource("1_cc70q")
+sprite = ExtResource("2_hs8wu")
+name = "Rainbow Lolipop"
+description = "++++++ Attack Damage
+Passive: When you drop to below 40% HP, gain ++ Attack Damage and ++ Speed for 8 seconds 
+Passive: On getting hit: ++ Tenacity for 3 seconds
+"
+rarity = 3
+cost = 0
+attackDamage = 6.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([0, 2])
+functionNames = Array[String](["rainbowLolipop_onStart", "rainbowLolipop_onHit"])

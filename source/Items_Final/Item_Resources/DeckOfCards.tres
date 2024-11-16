@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://d0vcqcj28ywa2"]
+
+[ext_resource type="Script" path="res://source/Items_Final/Item_Scripts/Item.gd" id="1_de2oy"]
+[ext_resource type="Texture2D" uid="uid://rdfoxey27gip" path="res://source/Items_Final/Item_Sprites/Magic Deck of Cards.png" id="2_22cq1"]
+
+[resource]
+script = ExtResource("1_de2oy")
+sprite = ExtResource("2_22cq1")
+name = "Deck of Cards"
+description = "++++++++++ (Attack Damage or Health or Speed), switches every round
+On 10% hp: +++++ damage
+"
+rarity = 3
+cost = 0
+attackDamage = 0.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([0, 5])
+functionNames = Array[String](["deckOfCards_onStart", "deckOfCards_onRoundStart"])

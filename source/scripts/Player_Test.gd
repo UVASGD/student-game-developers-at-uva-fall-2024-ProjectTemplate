@@ -45,8 +45,8 @@ func manage_test_input():
 		print("Gave Item " + str(items[0].resource_path))
 		get_item(items[0])
 	if Input.is_action_just_pressed("Up1"):
-		#statusEffects.giveStatusTimed("Fire",3, StatusEffectManager.OverLapBehavior.REFRESH)
-		statusEffects.giveStatusTimed("Poison",3, StatusEffectManager.OverLapBehavior.STACK)
+		statusEffects.giveStatusTimed("Fire",3, StatusEffectManager.OverLapBehavior.REFRESH)
+		#statusEffects.giveStatusTimed("Poison",3, StatusEffectManager.OverLapBehavior.STACK)
 		#statusEffects.giveStatusTimed("Stun",3, StatusEffectManager.OverLapBehavior.REFRESH)
 		#statusEffects.giveStatusTimed("Spook",3, StatusEffectManager.OverLapBehavior.REFRESH)
 		#call_functions(onRoundStart)

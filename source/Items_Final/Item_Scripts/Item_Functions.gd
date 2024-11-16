@@ -103,12 +103,13 @@ func sprayPaint_attackBuff_end(ps : Player_Test):
 	ps.speed -= 2
 
 func deckOfCards_onStart(ps : Player_Test):
-	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_attackBuff", Callable(self, "deckOfCards_attackBuff_start").bind(ps), Callable(self, "deckOfCards_attackBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_damageBuff", Callable(self, "deckOfCards_damageBuff_start").bind(ps), Callable(self, "deckOfCards_damageBuff_end").bind(ps))
 	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_speedBuff", Callable(self, "deckOfCards_speedBuff_start").bind(ps), Callable(self, "deckOfCards_speedBuff_end").bind(ps))
 	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_healthBuff", Callable(self, "deckOfCards_healthBuff_start").bind(ps), Callable(self, "deckOfCards_healthBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_damageBuff2", Callable(self, "deckOfCards_damageBuff2_start").bind(ps), Callable(self, "deckOfCards_damageBuff2_end").bind(ps))
 func deckOfCards_onRoundStart(ps : Player_Test):
-	if(ps.statusEffects.hasStatus("deckOfCards_attackBuff")):
-		ps.statusEffects.removeStatus("deckOfCards_attackBuff")
+	if(ps.statusEffects.hasStatus("deckOfCards_damageBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_damageBuff")
 	if(ps.statusEffects.hasStatus("deckOfCards_speedBuff")):
 		ps.statusEffects.removeStatus("deckOfCards_speedBuff")
 	if(ps.statusEffects.hasStatus("deckOfCards_healthBuff")):
@@ -117,15 +118,22 @@ func deckOfCards_onRoundStart(ps : Player_Test):
 	var randomNum = rand.randi_range(0, 2)
 	match(randomNum):
 		0:
-			ps.statusEffects.giveStatus("deckOfCards_attackBuff")
+			ps.statusEffects.giveStatus("deckOfCards_damageBuff", StatusEffectManager.OverLapBehavior.IGNORE)
 		1:
-			ps.statusEffects.giveStatus("deckOfCards_speedBuff")
+			ps.statusEffects.giveStatus("deckOfCards_speedBuff", StatusEffectManager.OverLapBehavior.IGNORE)
 		2:
-			ps.statusEffects.giveStatus("deckOfCards_healthBuff")
-func deckOfCards_attackBuff_start(ps : Player_Test):
-	ps.attack += 10
-func deckOfCards_attackBuff_end(ps : Player_Test):
-	ps.attack -= 10
+			ps.statusEffects.giveStatus("deckOfCards_healthBuff", StatusEffectManager.OverLapBehavior.IGNORE)
+func deckOfCards_onGetHit(ps : Player_Test):
+	if(ps.health / ps.maxHealth <= .1):
+		if(!ps.statusEffects.hasStatus("deckOfCards_damageBuff2")):
+			ps.statusEffects.giveStatus("deckOfCards_damageBuff2")
+	else:
+		if(ps.statusEffects.hasStatus("deckOfCards_damageBuff2")):
+			ps.statusEffects.removeStatus("deckOfCards_damageBuff2")
+func deckOfCards_damageBuff_start(ps : Player_Test):
+	ps.damage += 10
+func deckOfCards_damageBuff_end(ps : Player_Test):
+	ps.damage -= 10
 func deckOfCards_speedBuff_start(ps : Player_Test):
 	ps.speed += 10
 func deckOfCards_speedBuff_end(ps : Player_Test):
@@ -134,3 +142,42 @@ func deckOfCards_healthBuff_start(ps : Player_Test):
 	ps.maxHealth += 10
 func deckOfCards_healthBuff_end(ps : Player_Test):
 	ps.maxHealth -= 10
+func deckOfCards_damageBuff2_start(ps : Player_Test):
+	ps.damage += 5
+func deckOfCards_damageBuff2_end(ps : Player_Test):
+	ps.damage -= 5
+
+func rainbowLolipop_onStart(ps : Player_Test):
+	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_buff", Callable(self,"rainbowLolipop_buff_start").bind(ps),Callable(self,"rainbowLolipop_buff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_tenasityBuff", Callable(self,"rainbowLolipop_tenasityBuff_start").bind(ps),Callable(self,"rainbowLolipop_tenasityBuff_end").bind(ps))
+func rainbowLolipop_onHit(ps : Player_Test):
+	ps.statusEffects.giveStatusTimed("rainbowLolipop_tenasityBuff", 3, StatusEffectManager.OverLapBehavior.STACK)
+	if(ps.health / ps.maxHealth <= .4):
+		if(!ps.statusEffects.hasStatus("rainbowLolipop_buff")):
+			ps.statusEffects.giveStatusTimed("rainbowLolipop_buff",8, StatusEffectManager.OverLapBehavior.REFRESH)
+	else:
+		if(ps.statusEffects.hasStatus("rainbowLolipop_buff")):
+			ps.statusEffects.removeStatus("rainbowLolipop_buff")
+func rainbowLolipop_buff_start(ps : Player_Test):
+	ps.damage += 2
+	ps.speed += 2
+func rainbowLolipop_buff_end(ps : Player_Test):
+	ps.damage -= 2
+	ps.speed -= 2
+func rainbowLolipop_tenasityBuff_start(ps : Player_Test):
+	ps.tenasity += 2
+func rainbowLolipop_tenasityBuff_end(ps : Player_Test):
+	ps.tenasity -= 2
+
+func rollerSkates_onStart(ps : Player_Test):
+	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, "rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
+func rollerSkates_onHit(ps : Player_Test):
+	print("try gib buf" , (int)((1 - ps.health / ps.maxHealth) * 10))
+	while(ps.statusEffects.hasStatus("rollerSkates_buff")):
+		ps.statusEffects.removeStatus("rollerSkates_buff")
+	for i in range(0, (int)((1- ps.health / ps.maxHealth) * 10)):
+		ps.statusEffects.giveStatus("rollerSkates_buff", StatusEffectManager.OverLapBehavior.STACK)
+func rollerSkates_buff_start(ps : Player_Test):
+	ps.speed += 1
+func rollerSkates_buff_end(ps : Player_Test):
+	ps.speed -= 1

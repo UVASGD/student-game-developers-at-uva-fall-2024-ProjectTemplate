@@ -14,7 +14,7 @@ enum FunctionTypes
 	OnAttack,
 	OnHit,
 	OnGetHit,
-	OnSwitchCharacter,
+	OnSwitchCharacter, #This is unused rn
 	OnRoundStart
 }
 
