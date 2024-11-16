@@ -47,6 +47,7 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	handle_move()
+	handle_attack()
 
 func handle_move() -> void:
 	var player_num = str(get_meta("player_num"))
@@ -86,19 +87,6 @@ func handle_damage(attackingPlayer: CharacterBody2D) -> void:
 	#UPDATE
 	#Health -= attackingPlayer.get_damage()
 	
-func shoot_projectile(projectile: PackedScene) -> void:
-	var proj_instance := projectile.instantiate()
-	# set the projectile instance at players locatio
-	proj_instance.position = self.global_position
-	# set direction of projectile towards mouse
-	proj_instance.direction = movement
-	# assign damage from players stats to projectiles damage
-	#UPDATE
-	proj_instance.set_damage(0.0)
-	# attach attacking player to projectile
-	proj_instance.set_attackingPlayer(self)
-	#spawn projectile
-	add_child(proj_instance)
 	
 func add_attack_instance_as_child(attack_scene: PackedScene) -> void:
 	var attack_instance := attack_scene.instantiate()
