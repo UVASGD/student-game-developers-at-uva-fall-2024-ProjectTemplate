@@ -42,8 +42,10 @@ enum Character {
 	GHOST,
 	PUMPKIN
 }
+
 @export var character : Character #SHOULD BE SET WHEN INSTANTIATING
 @export var isMonster : bool
+
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
 const Frank_Attack_Scene := preload("res://source/scenes/frankenstein_attack.tscn")
@@ -82,16 +84,13 @@ func round_start():
 	call_functions(onRoundStart)
 
 func handle_move() -> void:
-	#movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
+	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	playWalkOrIdleAnimation(velocity)
 	if not velocity.is_zero_approx(): direction = velocity
 	
 	if movement.length() :
 		Speed = move_toward(Speed, total_stats.speed, ACCELERATION)
 	
-	#if movement.x:
-		#var player_num = str(get_meta("player_num"))
-	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized() #this needs to use the input map
 	if not dash and Input.is_action_just_pressed("Dash"):
 		print("ENTERING DASH")
 		#dashing()
@@ -206,14 +205,14 @@ func playWalkOrIdleAnimation(_velocity: Vector2):
 	else:
 		sprite.play(model + "_walk_" + getDirectionWord(velocity))
 		
-func getDirectionWord(_direction: Vector2):
-	if _direction.is_zero_approx(): return "down"
-	if abs(_direction.x) >= abs(direction.y):
-		if _direction.x > 0: return "right"
-		elif _direction.x < 0: return "left"
+func getDirectionWord(direction: Vector2):
+	if direction.is_zero_approx(): return "down"
+	if abs(direction.x) >= abs(direction.y - 0.1):
+		if direction.x >= 0: return "right"
+		elif direction.x < 0: return "left"
 	else:
-		if _direction.y > 0: return "down"
-		elif _direction.y < 0: return "up"
+		if direction.y >= 0: return "down"
+		elif direction.y < 0: return "up"
 
 #currently unused
 #func changeModel(newModel: String):
