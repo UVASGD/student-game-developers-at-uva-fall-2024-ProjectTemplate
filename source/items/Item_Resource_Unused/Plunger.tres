@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b2odg7j76fhrt"]
 
-[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_qfutt"]
-[ext_resource type="Texture2D" uid="uid://6sjrjy3ts348" path="res://source/items/Item_Sprites/Plunger pixel art.png" id="2_qfg8s"]
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_c7p57"]
+[ext_resource type="Texture2D" uid="uid://6sjrjy3ts348" path="res://source/items/Item_Sprites/Plunger pixel art.png" id="2_2bdyh"]
 
 [resource]
-script = ExtResource("1_qfutt")
-sprite = ExtResource("2_qfg8s")
+script = ExtResource("1_c7p57")
+sprite = ExtResource("2_2bdyh")
 name = "Plunger"
 description = "Slightly increases damage and decreases cooldown"
 rarity = 0

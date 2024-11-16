@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b6mpfm5dfiriq"]
+
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_8e4kt"]
+[ext_resource type="Texture2D" uid="uid://di5sjyqlxreyo" path="res://source/items/Item_Sprites/hose.png" id="2_nss0t"]
+
+[resource]
+script = ExtResource("1_8e4kt")
+sprite = ExtResource("2_nss0t")
+name = ""
+description = "+ Tenacity
++ Attack Damage
+"
+rarity = 1
+cost = 0
+attackDamage = 1.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 1.0
+luck = 0.0
+functionTypes = Array[int]([])
+functionNames = Array[String]([])

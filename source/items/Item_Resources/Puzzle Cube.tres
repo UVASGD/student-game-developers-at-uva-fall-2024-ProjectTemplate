@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://wacyptunc1ys"]
+
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_jnjjl"]
+[ext_resource type="Texture2D" uid="uid://c1nu3oul7hqfv" path="res://source/items/Item_Sprites/puzzlecube.png" id="2_nj2do"]
+
+[resource]
+script = ExtResource("1_jnjjl")
+sprite = ExtResource("2_nj2do")
+name = "Puzzle Cube"
+description = "+ Attack Damage
+++ Tenacity
+Passive: You inflict - Speed to the Monster on hit for 2 seconds
+Passive: You gain + Speed for 3 seconds when you hit a Kid
+"
+rarity = 2
+cost = 0
+attackDamage = 1.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 2.0
+luck = 0.0
+functionTypes = Array[int]([2])
+functionNames = Array[String](["puzzleCube_onHit"])

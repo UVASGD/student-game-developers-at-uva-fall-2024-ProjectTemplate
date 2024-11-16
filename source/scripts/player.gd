@@ -7,9 +7,9 @@ var Speed := 0.0
 var movement := Vector2.ZERO
 var last_movement := Vector2(0,1)
 
-var TOP_SPEED_FACTOR := 15.0
-var ACCELERATION := 15.0
-var DECELERATION := 15.0
+#var TOP_SPEED_FACTOR := 15.0 replaced by total_stats.speed
+var ACCELERATION := 2
+var DECELERATION := 2
 var dash: bool
 @export var base_attackDamage: float
 @export var base_attackSpeed: float
@@ -18,17 +18,12 @@ var dash: bool
 @export var base_cooldownReduction : float
 @export var base_tenacity : float
 @export var base_luck : float
-var item_attackDamage: float
-var item_attackSpeed: float
-var item_maxHealth : float
-var item_speed : float
-var item_cooldownReduction : float
-var item_tenacity : float
-var item_luck : float
-#These are placeholder sprites for each character
-var sprite_list: Array = [preload("res://source/items/Item_Resources/BakingSoda.tres"), preload("res://source/items/Item_Resources/BaseballBat.tres"), 
-preload("res://source/items/Item_Resources/BaseballCap.tres"), preload("res://source/items/Item_Resources/BoxingGloves.tres")]
 
+var total_stats : Stats
+var base_stats : Stats
+var item_stats : Stats
+
+var statusEffects : StatusEffectManager
 #keep doing for each type of animation
 var run_animations: Array = [null, null, null, null]
 var hit_animations: Array = [null, null, null, null]
@@ -36,9 +31,10 @@ var hit_animations: Array = [null, null, null, null]
 #this is just a test repleca of the player
 @export var items: Array[Resource]
 
-var maxHealth : int = 12
-var damage : int = 0
-var topSpeed : int = 10
+#LEGACY replaced by total_stats
+#var maxHealth : int = 12
+#var damage : int = 0
+#var topSpeed : int = 10
 
 enum Character {
 	WITCH,
@@ -46,7 +42,9 @@ enum Character {
 	GHOST,
 	PUMPKIN
 }
-@export var character = Character.WITCH
+
+@export var character : Character #SHOULD BE SET WHEN INSTANTIATING
+@export var isMonster : bool
 
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
@@ -55,23 +53,25 @@ const Pumpkin_Attack_Scene := preload("res://source/scenes/pumpkin_attack.tscn")
 const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
-var health :int = 0
-#signal onAttack(player)#This signals will emit every attack
-#signal onGetHit(player)#This signal will emit every time the player gets hit
-#more signals to tell items when to trigger their effects
-
+var health : float = 0
+var candy : int
 var onAttackFunctions : Array[Callable]
-var onFireFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
 var onGetHitFunctions : Array[Callable]#When this one is called. should also call with the object hit as a parameter
+var onSwitchCharacter : Array[Callable]
+var onRoundStart : Array[Callable]
 
 var direction: Vector2 = Vector2(0, 1)
-var model: String = "ghost_kid"
+var model: String
 #@onready var statusEffects : StatusEffectManager = $StatusEffectManager
 @onready var sprite : AnimatedSprite2D = $PlayerSprite/Body
 
 func _ready() -> void:
 	player_num = str(get_meta("player_num"))
+	set_starting_stats()
+	set_model_name()
+	item_stats.statChanged.connect(update_totalStats)
+	health = total_stats.maxHealth
 	pass
 
 func _process(delta: float) -> void:
@@ -80,40 +80,57 @@ func _process(delta: float) -> void:
 	if(movement != Vector2.ZERO): 
 		last_movement = movement
 
+func round_start():
+	call_functions(onRoundStart)
+
 func handle_move() -> void:
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
-	
 	playWalkOrIdleAnimation(velocity)
 	if not velocity.is_zero_approx(): direction = velocity
 	
 	if movement.length() :
-		Speed = move_toward(Speed, topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
+		Speed = move_toward(Speed, total_stats.speed, ACCELERATION)
 	
-	#movement = Vector2(Input.get_axis("Left1", "Right1"), Input.get_axis("Up1", "Down1")).normalized()
-	#TOP_SPEED_FACTOR = 15
-	#ACCELERATION = 15
-	#DECELERATION = 15
-	#if not dash and Input.is_action_just_pressed("Dash"):
-		#print("ENTERING DASH")
+	if not dash and Input.is_action_just_pressed("Dash"):
+		print("ENTERING DASH")
 		#dashing()
-	#if movement.length(): # stats.topSpeed = 10
-		#Speed = move_toward(Speed, 10 * TOP_SPEED_FACTOR, ACCELERATION)
-	#else:
-		#Speed = move_toward(Speed, 0, DECELERATION) # Gradually decrease speed to zero
+	if movement.length(): # stats.topSpeed = 10
+		Speed = move_toward(Speed, total_stats.speed, total_stats.speed * ACCELERATION)
+	else:
+		Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION) # Gradually decrease speed to zero
 	
 	if movement.x:
 		velocity.x = movement.x * Speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, DECELERATION) # Gradually decrease horizontal velocity to zero
+		velocity.x = move_toward(velocity.x, 0, total_stats.speed * DECELERATION) # Gradually decrease horizontal velocity to zero
 	
 	if movement.y:
 		velocity.y = movement.y * Speed
 	else:
-		velocity.y = move_toward(velocity.y, 0, DECELERATION) # Gradually decrease vertical velocity to zero
+		velocity.y = move_toward(velocity.y, 0, total_stats.speed * DECELERATION) # Gradually decrease vertical velocity to zero
 	
 	move_and_slide() # Ensure velocity is passed to move_and_slide
 
+func set_starting_stats():
+	total_stats = Stats.new().setStats(base_attackDamage, base_attackSpeed, base_maxHealth, base_speed, base_cooldownReduction, base_tenacity, base_luck)
+	base_stats = Stats.new().setStatsCopy(total_stats)
+	item_stats = Stats.new().setStats(0,0,0,0,0,0,0)
+
+func set_model_name():
+	match character:
+		Character.WITCH:
+			model = "witch_" + ("monster" if isMonster else "kid")
+		Character.FRANKENSTEIN:
+			model = "frankenstein_" + ("monster" if isMonster else "kid")
+		Character.GHOST:
+			model = "ghost_" + ("monster" if isMonster else "kid")
+		Character.PUMPKIN:
+			model = "pumpkin_" + ("monster" if isMonster else "kid")
+		_:
+			print("ERROR: Player not assigned character")		
+
 func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
+	call_functions(onAttackFunctions)
 	match character:
 		#THIS NEEDS TO BE UPDATED AFTER ATTACK SCENES MADE
 		Character.WITCH:
@@ -128,7 +145,10 @@ func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
 			print("ERROR: Player not assigned character")
 	
 func handle_damage(attackingPlayer: CharacterBody2D) -> void:
-	pass
+	for i in onGetHitFunctions:
+		i.call(self,attackingPlayer)
+	attackingPlayer = attackingPlayer as Player
+	attackingPlayer.call_functions(attackingPlayer.onHitFunctions)
 	#UPDATE
 	#Health -= attackingPlayer.get_damage()
 	
@@ -151,37 +171,36 @@ func get_damage() -> float:
 
 
 func get_item(item : Item):
-	damage += item.damage
-	health += item.health
-	
+	item_stats.addStats(item.attackDamage, item.attackSpeed, item.maxHealth, item.speed, item.cooldownReduction, item.tenacity, item.luck)
 	for i in range(item.FunctionTypes.size()):
 		match item.functionTypes[i]:
 			Item.FunctionTypes.OnStart:
-				Callable(Item_Functions, item.functionNames[i]).bind(self).call()
-			Item.FunctionTypes.OnFire:
-				onFireFunctions.append(Callable(Item_Functions, item.functionNames[i]).bind(self))
+				Callable(ItemFunctions, item.functionNames[i]).bind(self).call()
+			Item.FunctionTypes.OnAttack:
+				onAttackFunctions.append(Callable(ItemFunctions, item.functionNames[i]).bind(self))
 			Item.FunctionTypes.OnHit:
-				onHitFunctions.append(Callable(Item_Functions, item.functionNames[i]).bind(self))
+				onHitFunctions.append(Callable(ItemFunctions, item.functionNames[i]))
 			Item.FunctionTypes.OnGetHit:
-				onGetHitFunctions.append(Callable(Item_Functions, item.functionNames[i]).bind(self))
+				onGetHitFunctions.append(Callable(ItemFunctions, item.functionNames[i]).bind(self))
+			Item.FunctionTypes.OnRoundStart:
+				onRoundStart.append(Callable(ItemFunctions, item.functionNames[i]).bind(self))
 
-func hit_object(ps: Player_Test):
-	pass
+func update_totalStats():
+	total_stats.setStats(base_stats.attackDamage + item_stats.attackDamage * .1 * base_stats.attackDamage, base_stats.attackSpeed + item_stats.attackSpeed * .1 * base_stats.attackSpeed, base_stats.maxHealth + item_stats.maxHealth * .25 * base_stats.maxHealth, base_stats.speed + item_stats.speed * .1 * base_stats.speed, base_stats.cooldownReduction + item_stats.cooldownReduction, base_stats.tenacity + item_stats.tenacity, base_stats.luck + item_stats.luck)
 
 func change_health(deltaHealth : float):
-	print("Player took " + str(-deltaHealth) + " damage") 
 	health += deltaHealth
-	#onGetHit.emit(self);
 	call_functions(onGetHitFunctions)
 	if(health < 0):
-		print("You died fool")
+		#handle death
+		pass
 
 func call_functions(arr : Array[Callable]):
 	for i in arr:
 		i.call()
 		
-func playWalkOrIdleAnimation(velocity: Vector2):
-	if velocity.is_zero_approx():
+func playWalkOrIdleAnimation(_velocity: Vector2):
+	if _velocity.is_zero_approx():
 		sprite.play(model + "_idle_" + getDirectionWord(direction))
 	else:
 		sprite.play(model + "_walk_" + getDirectionWord(velocity))
@@ -195,8 +214,9 @@ func getDirectionWord(direction: Vector2):
 		if direction.y >= 0: return "down"
 		elif direction.y < 0: return "up"
 
-func changeModel(newModel: String):
-	model = newModel
+#currently unused
+#func changeModel(newModel: String):
+	#model = newModel
 	
 
 #SPLIT

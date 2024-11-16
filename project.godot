@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Hallow's Thief"
-run/main_scene="res://source/scenes/game_container/game_container.tscn"
+run/main_scene="res://source/scenes/player.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-ItemAdvancedFunctions="*res://source/scripts/Item_Advanced_Functions.gd"
+ItemFunctions="*res://source/items/Item_Scripts/Item_Functions.gd"
 
 [display]
 
