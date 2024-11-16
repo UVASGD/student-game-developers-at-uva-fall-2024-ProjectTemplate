@@ -31,10 +31,16 @@ script = ExtResource("2_es7fm")
 
 [node name="AttackAnimation" type="AnimatedSprite2D" parent="Ghost"]
 
-[node name="RunAnimation" type="AnimatedSprite2D" parent="Ghost"]
+[node name="WalkLeftAnimation" type="AnimatedSprite2D" parent="Ghost"]
 
 [node name="IdleAnimation" type="AnimatedSprite2D" parent="Ghost"]
 
 [node name="DashAnimation" type="AnimatedSprite2D" parent="Ghost"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ghost"]
+
+[node name="WalkRightAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="WalkUpAnimation" type="AnimatedSprite2D" parent="Ghost"]
+
+[node name="WalkDownAnimation" type="AnimatedSprite2D" parent="Ghost"]

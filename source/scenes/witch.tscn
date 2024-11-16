@@ -38,3 +38,9 @@ script = ExtResource("2_g1yy8")
 [node name="DashAnimation" type="AnimatedSprite2D" parent="Witch"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Witch"]
+
+[node name="WalkRightAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="WalkUpAnimation" type="AnimatedSprite2D" parent="Witch"]
+
+[node name="WalkDownAnimation" type="AnimatedSprite2D" parent="Witch"]

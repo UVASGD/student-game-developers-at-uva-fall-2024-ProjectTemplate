@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item_Res" load_steps=2 format=3 uid="uid://b3dh2a4h4woge"]
+
+[ext_resource type="Script" path="res://source/item/item_resource.gd" id="1_dwp48"]
+
+[resource]
+script = ExtResource("1_dwp48")
+name = ""
+description = ""
+rarity = 0
+func_names = Array[String]([])
+health = 0.0
+topSpeed = 0.0
+attackSpeed = 0.0
+attackDamage = 0.0
+dashCooldown = 0.0
+abilityCooldown = 0.0
+cost = 0
