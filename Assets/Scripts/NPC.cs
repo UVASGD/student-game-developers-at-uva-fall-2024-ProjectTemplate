@@ -30,9 +30,10 @@ public class NPC : MonoBehaviour{
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
     private InnerMonologue imScript;
+    private DialogueManager dialogueManager;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
-    [SerializeField] private DialogueInventory.name NPCname;
+    [SerializeField] private DialogueInventory.Name NPCname;
 
     private float minXBoundary; // Minimum x boundary in screen space
     private float maxXBoundary; // Maximum x boundary in screen space
@@ -43,8 +44,7 @@ public class NPC : MonoBehaviour{
     private int curDialogue;
 
 
-    private Tuple<String[], DialogueInventory.flag[]>[] dialogueTuples;
-    private Tuple<String[], DialogueInventory.flag[]> curTuple;
+    private Tuple<String[], DialogueInventory.Flag[]>[] dialogueTuples;
 
     void Start()
     {
@@ -53,12 +53,13 @@ public class NPC : MonoBehaviour{
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
         imScript = InnerMonologue.GetImScript();
+        dialogueManager = DialogueManager.GetDialogueManager();
         arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
         uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
-        if (!DialogueInventory.GetDialogues(NPCname, out dialogueTuples))
-        {
-            Debug.LogError("NPC name '" + NPCname + "' not found");
-        }
+        // if (!DialogueInventory.GetDialogues(NPCname, out dialogueTuples))
+        // {
+        //     Debug.LogError("NPC name '" + NPCname + "' not found");
+        // }
         
 
         textbox.enabled = false;
@@ -71,7 +72,17 @@ public class NPC : MonoBehaviour{
         if (dist <= 50 && height <= 20 && !curDisplay && !dialogueMode)
         {
             curDisplay = true;
-            dialogueCheck();
+            if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
+            {
+                dialogueManager.StartDialogue(this, GetDialogue()); //Seb's function
+
+                /*AdjustDialogueArrow();
+                dialogueMode = true;
+                playerScript.moveLock = true;
+                spriteRenderer.sprite = dialogueQueue[0];
+                curDisplay = false;
+                displayDialogue();*/
+            }
         }
         else if ((dist > 70 || height > 20) && curDisplay)
         {
@@ -79,54 +90,38 @@ public class NPC : MonoBehaviour{
             spriteRenderer.sprite = dialogueQueue[0];
         }
 
-        if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
-        {
-           // dialogueManager.StartDialogue(curTuple); //Seb's function
-
-            /*AdjustDialogueArrow();
-            dialogueMode = true;
-            playerScript.moveLock = true;
-            spriteRenderer.sprite = dialogueQueue[0];
-            curDisplay = false;
-            displayDialogue();*/
-        }
+        
 
         /*if (Input.GetButtonDown("Space") && !uiEnabler.GetCurrentUIState() && dialogueMode)
         {
             displayDialogue();
         }*/
     }
-
-    void dialogueCheck()
+    Tuple<String[], DialogueInventory.Flag[]> GetDialogue()
     {
-        bool toRead = false;
-        for (int i = 1; i < dialogueTuples.Length && !toRead; i++)
+        
+        for (int i = 1; i < dialogueTuples.Length; i++)
         {
-            toRead = true;
-            curTuple = dialogueTuples[i];
-            if (!playerScript.dialogueFlags.Contains(curTuple.Item2.Last()))
+            var currentTuple = dialogueTuples[i];
+            var flags = currentTuple.Item2;
+            var flagAddedOnComplete = flags.Last();
+            if (!playerScript.dialogueFlags.Contains(flagAddedOnComplete))
             {
-                int len = curTuple.Item2.Length - 1;
-                for (int j = 0; j < len; j++)
+                int numOfRequiredFlags = flags.Length - 1;
+                for (int reqIndex = 0; reqIndex < numOfRequiredFlags ; reqIndex++)
                 {
-                    if (!playerScript.dialogueFlags.Contains(curTuple.Item2[j]))
+                    if (!playerScript.dialogueFlags.Contains(flags[reqIndex]))
                     {
-                        toRead = false;
+                        spriteRenderer.sprite = dialogueQueue[1];
+                        return dialogueTuples[i-1];
                     }
                 }
             }
         }
-
-        if (!toRead)
-        {
-            curTuple = dialogueTuples[0];
-            spriteRenderer.sprite = dialogueQueue[1];
-        }
-        else
-        {
-            spriteRenderer.sprite = dialogueQueue[2];
-        }
+        spriteRenderer.sprite = dialogueQueue[2];
+        return dialogueTuples.Last();
     }
+    
 
     /*void displayDialogue()
     {
@@ -164,7 +159,7 @@ public class NPC : MonoBehaviour{
     void AdjustDialogueArrow()
     {
         UnityEngine.Vector3 npcPosition = transform.position;
-                UnityEngine.Vector3 npcScreenPosition = camera.WorldToScreenPoint(npcPosition);
+        UnityEngine.Vector3 npcScreenPosition = camera.WorldToScreenPoint(npcPosition);
                 
                 if (npcScreenPosition.x > minXBoundary && npcScreenPosition.x < maxXBoundary)
                 {

@@ -29,9 +29,9 @@ public class InnerMonologue : MonoBehaviour
         "test dialogue|test|test2", 
         "yo baby. I have 7 cds|And three jam boxes"
     };
-    private DialogueInventory.flag[] flags = {
-        DialogueInventory.flag.monologueFlag1,
-        DialogueInventory.flag.monologueFlag2
+    private DialogueInventory.Flag[] flags = {
+        DialogueInventory.Flag.monologueFlag1,
+        DialogueInventory.Flag.monologueFlag2
     };
 
     public static InnerMonologue GetImScript()
@@ -73,7 +73,7 @@ public class InnerMonologue : MonoBehaviour
         }
     }
 
-    public void monologueCheck(DialogueInventory.flag f)
+    public void monologueCheck(DialogueInventory.Flag f)
     {
         //test conditions
         //needed both to test, but both can't be active at once
@@ -86,14 +86,14 @@ public class InnerMonologue : MonoBehaviour
             monologueStart(0, true);
         }*/
 
-        if (f == DialogueInventory.flag.testFlag2 && playerScript.dialogueFlags.Contains(DialogueInventory.flag.testItemFlag))
-        {
-            monologueStart(1, true);
-        }
-        else if (f == DialogueInventory.flag.testItemFlag && playerScript.dialogueFlags.Contains(DialogueInventory.flag.testFlag2))
-        {
-            monologueStart(1, false);
-        }
+        // if (f == DialogueInventory.Flag.monologueFlag1 && playerScript.dialogueFlags.Contains(DialogueInventory.Flag.testItemFlag))
+        // {
+        //     monologueStart(1, true);
+        // }
+        // else if (f == DialogueInventory.Flag.testItemFlag && playerScript.dialogueFlags.Contains(DialogueInventory.Flag.testFlag2))
+        // {
+        //     monologueStart(1, false);
+        // }
     }
 
     //If monologueStart is activated by picking up an item isDialogue=false, if it is activated by talking to an NPC isDialogue=true

@@ -5229,10 +5229,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1570264585}
     - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
-      propertyPath: NPCname
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: textbox
       value: 
       objectReference: {fileID: 2024628938}
@@ -8803,6 +8799,7 @@ GameObject:
   - component: {fileID: 2024628938}
   - component: {fileID: 2024628937}
   - component: {fileID: 2024628936}
+  - component: {fileID: 2024628940}
   m_Layer: 5
   m_Name: Dialogue - Canvas
   m_TagString: Untagged
@@ -8896,6 +8893,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2024628940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024628935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d27dd2f2685eb4f93bb36cdaa53464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2053550693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 108225653778528902, guid: 3e2accafa3a5f1b40ba86cf39bcb49a7, type: 3}
@@ -9237,10 +9246,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1570264585}
-    - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
-      propertyPath: NPCname
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9175809396761611137, guid: b2d0776e809bfdf4696ed64890adbe5e, type: 3}
       propertyPath: textbox
       value: 
