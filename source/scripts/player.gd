@@ -5,6 +5,7 @@ class_name Player
 var player_num
 var Speed := 0.0
 var movement := Vector2.ZERO
+var last_movement := Vector2(0,1)
 
 const TOP_SPEED_FACTOR := 15.0
 const ACCELERATION := 15.0
@@ -15,6 +16,20 @@ const ACCELERATION := 15.0
 var maxHealth : int = 12
 var damage : int = 0
 var topSpeed : int = 10
+
+enum Character {
+	WITCH,
+	FRANKENSTEIN,
+	GHOST,
+	PUMPKIN
+}
+var character = Character.WITCH
+
+#Enemy attack instances
+const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
+const Frank_Attack_Scene := preload("res://source/scenes/frankenstein_attack.tscn")
+const Pumpkin_Attack_Scene := preload("res://source/scenes/pumpkin_attack.tscn")
+const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
 var health :int = 0
@@ -38,6 +53,9 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	handle_move()
+	if Input.is_action_just_pressed("Attack" + player_num): handle_attack()
+	if(movement != Vector2.ZERO): 
+		last_movement = movement
 
 func handle_move() -> void:
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
@@ -59,6 +77,43 @@ func handle_move() -> void:
 		velocity.y = move_toward(velocity.y, 0, ACCELERATION)
 	
 	move_and_slide()
+
+func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
+	match character:
+		#THIS NEEDS TO BE UPDATED AFTER ATTACK SCENES MADE
+		Character.WITCH:
+			add_attack_instance_as_child(Projectile_Scene)
+		Character.FRANKENSTEIN:
+			add_attack_instance_as_child(Frank_Attack_Scene)
+		Character.GHOST:
+			add_attack_instance_as_child(Ghost_Attack_Scene)
+		Character.PUMPKIN:
+			add_attack_instance_as_child(Pumpkin_Attack_Scene)
+		_:
+			print("ERROR: Player not assigned character")
+	
+func handle_damage(attackingPlayer: CharacterBody2D) -> void:
+	pass
+	#UPDATE
+	#Health -= attackingPlayer.get_damage()
+	
+	
+func add_attack_instance_as_child(attack_scene: PackedScene) -> void:
+	var attack_instance := attack_scene.instantiate()
+	attack_instance.position = self.global_position
+	attack_instance.direction = last_movement #wsdaglobal_position.direction_to(get_global_mouse_position())
+	#UPDATE
+	#attack_instance.set_damage(stats.attackDamage)
+	attack_instance.set_attackingPlayer(self)
+	add_child(attack_instance)
+
+func getPlayerPosition() -> Vector2:
+	return position
+func get_damage() -> float:
+	return 0.0
+	#UPDATE
+	#return stats.attackDamage
+
 
 func get_item(item : Item):
 	damage += item.damage

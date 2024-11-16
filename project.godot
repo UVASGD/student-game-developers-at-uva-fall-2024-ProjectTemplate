@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Hallow's Thief"
-run/main_scene="res://source/scenes/demo_room.tscn"
+run/main_scene="res://source/scenes/game_container/game_container.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,17 @@ ItemAdvancedFunctions="*res://source/scripts/Item_Advanced_Functions.gd"
 window/size/mode=2
 window/stretch/mode="canvas_items"
 ItemFunctions="*res://source/Items_Final/Item_Scripts/Item_Functions.gd"
+
+[display]
+
+window/size/viewport_width=512
+window/size/viewport_height=320
+window/size/mode=2
+window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom_font="res://assets/fonts-shaders/PixelifySans-Regular.ttf"
 
 [input]
 
@@ -117,3 +128,32 @@ esc={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+Attack1={
+"deadzone": 0.5,
+"events": []
+}
+Attack2={
+"deadzone": 0.5,
+"events": []
+}
+Attack3={
+"deadzone": 0.5,
+"events": []
+}
+Attack4={
+"deadzone": 0.5,
+"events": []
+}
+
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="Players"
+2d_physics/layer_3="KidHurtbox"
+2d_physics/layer_4="MonsterHurtbox"
+2d_physics/layer_5="KidAttack"
+2d_physics/layer_6="MonsterAttack"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
