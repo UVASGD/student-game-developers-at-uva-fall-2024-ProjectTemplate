@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://source/scripts/Hitbox.gd" id="1_y4ubp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8irjp"]
-radius = 56.0
+radius = 59.0
 height = 188.0
 
 [node name="FrankensteinAttack" type="Node2D"]
