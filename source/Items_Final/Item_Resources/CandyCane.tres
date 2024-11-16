@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dkuwwm04cwu1a"]
+
+[ext_resource type="Script" path="res://source/Items_Final/Item_Scripts/Item.gd" id="1_7yeok"]
+[ext_resource type="Texture2D" uid="uid://bkbu28tulw66d" path="res://source/Items_Final/Item_Sprites/candycane.png" id="2_3hosa"]
+
+[resource]
+script = ExtResource("1_7yeok")
+sprite = ExtResource("2_3hosa")
+name = "Candy Cane"
+description = "++++ Speed
++ Health
++ Attack Damage
+Passive: Gain 1 candy per second while alive in combat
+"
+rarity = 2
+cost = 0
+attackDamage = 1.0
+attackSpeed = 0.0
+maxHealth = 1.0
+speed = 4.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([4])
+functionNames = Array[String](["candyCane_onRoundStart"])
