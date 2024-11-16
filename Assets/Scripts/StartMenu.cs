@@ -50,4 +50,9 @@ public class StartMenu : MonoBehaviour
             loadButton.color = new Color(32, 65, 29, 0.5f);
         }
     }
+
+    public void loadCredits()
+    {
+        SceneManager.LoadScene(sceneName: "Credits");
+    }
 }
