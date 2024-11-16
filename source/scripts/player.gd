@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
+var player_num
 var Speed := 0.0
 var movement := Vector2.ZERO
 
@@ -43,14 +44,14 @@ var onGetHitFunctions : Array[Callable]#When this one is called. should also cal
 #@onready var statusEffects : StatusEffectManager = $StatusEffectManager
 
 func _ready() -> void:
+	player_num = str(get_meta("player_num"))
 	pass
 
 func _process(delta) -> void:
 	handle_move()
-	handle_attack()
+	if Input.is_action_just_pressed("Attack" + player_num): handle_attack()
 
 func handle_move() -> void:
-	var player_num = str(get_meta("player_num"))
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	
 	if movement.length() :
@@ -91,7 +92,7 @@ func handle_damage(attackingPlayer: CharacterBody2D) -> void:
 func add_attack_instance_as_child(attack_scene: PackedScene) -> void:
 	var attack_instance := attack_scene.instantiate()
 	attack_instance.position = self.global_position
-	attack_instance.direction = global_position.direction_to(get_global_mouse_position())
+	attack_instance.direction = movement #wsdaglobal_position.direction_to(get_global_mouse_position())
 	#UPDATE
 	#attack_instance.set_damage(stats.attackDamage)
 	attack_instance.set_attackingPlayer(self)

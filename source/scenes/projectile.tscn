@@ -33,4 +33,4 @@ position = Vector2(38, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_h5cjd")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="lifespan_timer" type="Timer" parent="."]

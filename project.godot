@@ -117,3 +117,19 @@ esc={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+Attack1={
+"deadzone": 0.5,
+"events": []
+}
+Attack2={
+"deadzone": 0.5,
+"events": []
+}
+Attack3={
+"deadzone": 0.5,
+"events": []
+}
+Attack4={
+"deadzone": 0.5,
+"events": []
+}
