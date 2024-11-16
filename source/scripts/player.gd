@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
+var player_num
 var Speed := 0.0
 var movement := Vector2.ZERO
 
@@ -29,13 +30,13 @@ var onGetHitFunctions : Array[Callable]#When this one is called. should also cal
 #@onready var statusEffects : StatusEffectManager = $StatusEffectManager
 
 func _ready() -> void:
+	player_num = str(get_meta("player_num"))
 	pass
 
 func _process(delta) -> void:
 	handle_move()
 
 func handle_move() -> void:
-	var player_num = str(get_meta("player_num"))
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	
 	if movement.length() :
