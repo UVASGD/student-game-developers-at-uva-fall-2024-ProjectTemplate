@@ -61,3 +61,4 @@ func add_player():
 func remove_player():
 	player_insts[player_count].queue_free()
 	player_insts.remove_at(player_count)
+	player_classes[player_count] = 0
