@@ -11,6 +11,7 @@ var last_movement := Vector2(0,1)
 var ACCELERATION := 2
 var DECELERATION := 2
 var dash: bool
+var awaiting_dash: bool
 @export var base_attackDamage: float
 @export var base_attackSpeed: float
 @export var base_maxHealth : float
@@ -84,22 +85,19 @@ func round_start(): #called by game manager
 	call_functions(onRoundStart)
 
 func handle_move() -> void:
-
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
 	playWalkOrIdleAnimation()
   
 	if not velocity.is_zero_approx(): direction = velocity
 	
-	if movement.length() :
-		Speed = move_toward(Speed, total_stats.speed, ACCELERATION)
-	
-	if not dash and Input.is_action_just_pressed("Dash" + player_num):
+	if not awaiting_dash and Input.is_action_just_pressed("Dash" + player_num):
 		print("ENTERING DASH")
 		dashing()
-	if movement.length(): # stats.topSpeed = 10
-		Speed = move_toward(Speed, total_stats.speed, total_stats.speed * ACCELERATION)
-	else:
-		Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION) # Gradually decrease speed to zero
+	if not dash:
+		if movement.length(): # stats.topSpeed = 10
+			Speed = move_toward(Speed, total_stats.speed, total_stats.speed * ACCELERATION)
+		else:
+			Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION) # Gradually decrease speed to zero
 	
 	if movement.x:
 		velocity.x = movement.x * Speed
@@ -226,7 +224,7 @@ func playAttackAnimation():
 
 func getDirectionWord(_direction: Vector2):
 	if _direction.is_zero_approx(): return "down"
-	if abs(_direction.x) >= abs(direction.y):
+	if abs(_direction.x) >= abs(direction.y - 0.1):
 		if _direction.x >= 0: return "right"
 		elif _direction.x < 0: return "left"
 	else:
@@ -290,7 +288,10 @@ func getDirectionWord(_direction: Vector2):
 func dashing():
 	## dash values, please
 	dash = true
+	awaiting_dash = true
 	Speed = 750
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(0.05).timeout
 	dash = false
+	await get_tree().create_timer(2).timeout
+	awaiting_dash = false
 	Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION)
