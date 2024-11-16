@@ -382,7 +382,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"ghost_kid_walk_down",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -399,7 +399,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"ghost_kid_walk_left",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -416,7 +416,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"ghost_kid_walk_right",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -427,7 +427,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"ghost_kid_walk_up",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -672,9 +672,7 @@ metadata/player_num = "1"
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-animation = &"ghost_kid_attack_right"
-frame = 5
-frame_progress = 0.392947
+animation = &"ghost_kid_idle_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.25, 16.25)
