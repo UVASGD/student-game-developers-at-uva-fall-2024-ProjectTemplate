@@ -59,7 +59,7 @@ func topHat_speedBuff_end(ps : Player_Test):
 
 func winterHat_onStart(ps : Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("winterHat_damageBuff", Callable(self,"winterHat_damageBuff_start").bind(ps), Callable(self,"winterHat_damageBuff_end").bind(ps))
-func winterHat_onHit(ps : Player_Test):
+func winterHat_onGetHit(ps : Player_Test):
 	if(ps.health / ps.maxHealth < .5):
 		if(!ps.statusEffects.hasStatus("winterHat_damageBuff")):
 			ps.statusEffects.giveStatus("winterHat_damageBuff")
@@ -95,8 +95,10 @@ func puzzleCube_speedDebuff_start(other : Player_Test):
 func puzzleCube_speedDebuff_end(other : Player_Test):
 	other.speed += 2
 
-func sprayPaint_onHit(ps : Player_Test):
+func sprayPaint_onStart(ps : Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("sprayPaint_Buff", Callable(self,"sprayPaint_attackBuff_start").bind(ps), Callable(self,"sprayPaint_attackBuff_end").bind(ps))
+func sprayPaint_onGetHit(ps : Player_Test):
+	ps.statusEffects.giveStatusTimed("sprayPaint_Buff", 3, StatusEffectManager.OverLapBehavior.STACK)
 func sprayPaint_attackBuff_start(ps : Player_Test):
 	ps.speed += 2
 func sprayPaint_attackBuff_end(ps : Player_Test):
@@ -150,7 +152,7 @@ func deckOfCards_damageBuff2_end(ps : Player_Test):
 func rainbowLolipop_onStart(ps : Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_buff", Callable(self,"rainbowLolipop_buff_start").bind(ps),Callable(self,"rainbowLolipop_buff_end").bind(ps))
 	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_tenasityBuff", Callable(self,"rainbowLolipop_tenasityBuff_start").bind(ps),Callable(self,"rainbowLolipop_tenasityBuff_end").bind(ps))
-func rainbowLolipop_onHit(ps : Player_Test):
+func rainbowLolipop_onGetHit(ps : Player_Test):
 	ps.statusEffects.giveStatusTimed("rainbowLolipop_tenasityBuff", 3, StatusEffectManager.OverLapBehavior.STACK)
 	if(ps.health / ps.maxHealth <= .4):
 		if(!ps.statusEffects.hasStatus("rainbowLolipop_buff")):
@@ -172,7 +174,6 @@ func rainbowLolipop_tenasityBuff_end(ps : Player_Test):
 func rollerSkates_onStart(ps : Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, 	"rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
 func rollerSkates_onHit(ps : Player_Test):
-	print("try gib buf" , (int)((1 - ps.health / ps.maxHealth) * 10))
 	while(ps.statusEffects.hasStatus("rollerSkates_buff")):
 		ps.statusEffects.removeStatus("rollerSkates_buff")
 	for i in range(0, (int)((1- ps.health / ps.maxHealth) * 10)):

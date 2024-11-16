@@ -20,5 +20,5 @@ speed = 0.0
 cooldownReduction = 0.0
 tenacity = 0.0
 luck = 0.0
-functionTypes = Array[int]([0, 2])
-functionNames = Array[String](["rainbowLolipop_onStart", "rainbowLolipop_onHit"])
+functionTypes = Array[int]([0, 3])
+functionNames = Array[String](["rainbowLolipop_onStart", "rainbowLolipop_onGetHit"])
