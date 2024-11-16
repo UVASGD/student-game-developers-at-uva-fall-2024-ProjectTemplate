@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://drbxuyl0abu8b"]
+
+[ext_resource type="Script" path="res://source/Items_Final/Item_Scripts/Item.gd" id="1_qr3gi"]
+[ext_resource type="Texture2D" uid="uid://d2rve7du8b7ts" path="res://source/Items_Final/Item_Sprites/winterhat.png" id="2_54ulm"]
+
+[resource]
+script = ExtResource("1_qr3gi")
+sprite = ExtResource("2_54ulm")
+name = "Winter Hat"
+description = "++ Attack Damage
+Passive: When 50% hp, gain ++Attack damage
+"
+rarity = 1
+cost = 0
+attackDamage = 2.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([0, 3])
+functionNames = Array[String](["winterHat_onStart", "winterHat_onGetHit"])
