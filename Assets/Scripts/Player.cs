@@ -62,11 +62,19 @@ public class Player : MonoBehaviour
         }
 
         knownDialoguesSaveLocation = data.learnedDialogues;
+        if(knownDialoguesSaveLocation == null){
+            knownDialoguesSaveLocation = new List<DialogueInventory.ConvoMetadata>{};
+        }
         DialogueInventory.LoadData(this, in knownDialoguesSaveLocation);
         
         transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
         moveLock = true;
         Invoke("moveLockOff", 0.5f);
+
+        DialogueInventory.MarkDialogueDisplayed(DialogueInventory.Name.Timothy, 0);
+        DialogueInventory.MarkDialogueDisplayed(DialogueInventory.Name.Timothy, 1);
+        DialogueInventory.MarkDialogueDisplayed(DialogueInventory.Name.Janet, 1);
+        DialogueInventory.MarkDialogueDisplayed(DialogueInventory.Name.Janet, 0);
     }
 
     // Update is called once per frame

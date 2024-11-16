@@ -13,6 +13,8 @@ public class UI_Inventory : MonoBehaviour
 
     private Transform inventoryEnabler;
 
+    
+
 
     private bool itemTextState;
 

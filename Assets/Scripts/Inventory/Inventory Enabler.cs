@@ -6,10 +6,14 @@ public class InventoryEnabler : MonoBehaviour
     private bool inventoryEnabledState = false;
     private Image parentCanvasImage;
 
+    private ScrollBarText content;
+
     void Start()
     {
         // Find the parent Canvas and get its Image component
         Canvas parentCanvas = GetComponentInParent<Canvas>();
+        content = GameObject.Find("Content").GetComponent<ScrollBarText>();
+
         if (parentCanvas != null)
         {
             parentCanvasImage = parentCanvas.GetComponent<Image>();
@@ -33,6 +37,7 @@ public class InventoryEnabler : MonoBehaviour
         {
             inventoryEnabledState = !inventoryEnabledState;
             SetInventoryState(inventoryEnabledState);
+            content.ShowDialogue();
         }
     }
 

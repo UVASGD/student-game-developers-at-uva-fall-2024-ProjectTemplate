@@ -30,7 +30,7 @@ public class NPC : MonoBehaviour{
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
     private InnerMonologue imScript;
-    private DialogueManager dialogueManager;
+   // private DialogueManager dialogueManager;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] dialogueQueue; //0-empty, 1-?, 2-!
     [SerializeField] private DialogueInventory.Name NPCname;
@@ -53,7 +53,7 @@ public class NPC : MonoBehaviour{
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
         imScript = InnerMonologue.GetImScript();
-        dialogueManager = DialogueManager.GetDialogueManager();
+        //dialogueManager = DialogueManager.GetDialogueManager();
         arrowRectTransform = GameObject.Find("TextBubbleArrow").GetComponent<RectTransform>();
         uiEnabler = GameObject.Find("Inventory Enabler").GetComponent<InventoryEnabler>();
         // if (!DialogueInventory.GetDialogues(NPCname, out dialogueTuples))
@@ -74,7 +74,7 @@ public class NPC : MonoBehaviour{
             curDisplay = true;
             if (Input.GetButtonDown("E") && !uiEnabler.GetCurrentUIState() && curDisplay)
             {
-                dialogueManager.StartDialogue(this, GetDialogue()); //Seb's function
+                //dialogueManager.StartDialogue(this, GetDialogue()); //Seb's function
 
                 /*AdjustDialogueArrow();
                 dialogueMode = true;

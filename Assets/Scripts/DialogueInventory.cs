@@ -127,30 +127,49 @@ public class DialogueInventory : MonoBehaviour
     // and holds all the metadata in another list 
     public List<String> learnedDialogueStrings;
     private List<ConvoMetadata> _learnedDialogueMetadata;
+
+        public static DialogueInventory Get()
+    {
+        SetupSingleton();
+        return _singleton;
+    }
    
     
     private static void SetupSingleton(Player inPlayer = null)
     {
-        // setup flattened dialogue
-        _flattenedDialogues.Clear();
-        foreach (var npc in AllDialogues)
-        {
-            foreach (var convo in npc.Value)
-            {
-                _flattenedDialogues.Add(npc.Key, convo.Dialogue);
-            }
-        }
-        
-        if (_singleton != null)
+           if (_singleton != null)
         {
             return;
         }
+
+        _flattenedDialogues = new SortedDictionary<Name, String[]>();
+    
+
+        // setup flattened dialogue
+        _flattenedDialogues.Clear();
+
+        foreach (var npc in AllDialogues)
+        {
+           var strings = new List<string>();
+
+            foreach (var convo in npc.Value)
+            {
+                strings.AddRange(convo.Dialogue);
+            }
+
+            _flattenedDialogues.Add(npc.Key, strings.ToArray());
+        }
+        
+     
         if (inPlayer == null)
         {
             inPlayer = GameObject.Find("Player").GetComponent<Player>();
         }
         _singleton = inPlayer.AddComponent<DialogueInventory>();
         _singleton._player = inPlayer;
+
+        _singleton.learnedDialogueStrings = new List<String>();
+        _singleton._learnedDialogueMetadata = new List<ConvoMetadata>();
     }
     
     public static bool GetDialogues(Name inName, out Convo[] npcConvos)
@@ -180,6 +199,7 @@ public class DialogueInventory : MonoBehaviour
         SetupSingleton(player);
         _singleton.learnedDialogueStrings.Clear();
         _singleton._learnedDialogueMetadata.Clear();
+        
         foreach (ConvoMetadata metadata in data)
         {
             _singleton._learnedDialogueMetadata.Add(metadata);
