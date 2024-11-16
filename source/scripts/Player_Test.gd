@@ -59,6 +59,9 @@ func manage_test_input():
 func get_item(item : Item):
 	damage += item.attackDamage
 	health += item.maxHealth
+	speed += item.speed
+	tenasity += item.tenacity
+	luck += item.luck
 	
 	for i in range(item.functionTypes.size()):
 		match item.functionTypes[i]:
