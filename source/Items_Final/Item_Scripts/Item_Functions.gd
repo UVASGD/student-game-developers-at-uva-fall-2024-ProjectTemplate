@@ -170,7 +170,7 @@ func rainbowLolipop_tenasityBuff_end(ps : Player_Test):
 	ps.tenasity -= 2
 
 func rollerSkates_onStart(ps : Player_Test):
-	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, "rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, 	"rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
 func rollerSkates_onHit(ps : Player_Test):
 	print("try gib buf" , (int)((1 - ps.health / ps.maxHealth) * 10))
 	while(ps.statusEffects.hasStatus("rollerSkates_buff")):

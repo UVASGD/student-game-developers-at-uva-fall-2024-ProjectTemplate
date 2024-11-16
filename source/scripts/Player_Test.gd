@@ -37,7 +37,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	manage_test_input()
-	playerStat_Test_Textbox.text = "maxHealth: " + str(maxHealth) + "\ndamage: " + str(damage) + "\nspeed: " + str(speed) +"\ncurrentHealth: " + str(health) + "\ncandy: " + str(candy)
+	playerStat_Test_Textbox.text = "maxHealth: " + str(maxHealth) + "\ndamage: " + str(damage) + "\nspeed: " + str(speed) +"\ncurrentHealth: " + str(health) + "tenasity" + str(tenasity)  + "luck: " + str(luck) +"\ncandy: " + str(candy)
 func manage_test_input():
 	pass
 	#Press enter to get item (currently only the DmgBuffItem)
@@ -70,8 +70,6 @@ func get_item(item : Item):
 				onHitFunctions.append(Callable(ItemFunctions, item.functionNames[i]))
 			Item.FunctionTypes.OnGetHit:
 				onGetHitFunctions.append(Callable(ItemFunctions, item.functionNames[i]).bind(self))
-			Item.FunctionTypes.OnSwitchCharacter:
-				onSwitchCharacter.append(Callable(ItemFunctions, item.functionNames[i]).bind(self))
 			Item.FunctionTypes.OnRoundStart:
 				onRoundStart.append(Callable(ItemFunctions, item.functionNames[i]).bind(self))
 	#if(item.onStartFunctions != ""):
