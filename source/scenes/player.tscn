@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=6 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
 [ext_resource type="Script" path="res://source/scripts/Hurtbox.gd" id="2_lav1o"]
@@ -6,6 +6,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1d7hi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tx0kn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlfgb"]
+radius = 9.0
+height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ws1a7")
@@ -20,3 +24,6 @@ mesh = SubResource("CapsuleMesh_tx0kn")
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 script = ExtResource("2_lav1o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CapsuleShape2D_vlfgb")

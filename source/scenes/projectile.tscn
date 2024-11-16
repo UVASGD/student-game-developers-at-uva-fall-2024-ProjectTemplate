@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctpkxi0s1em0j"]
+
+[ext_resource type="Script" path="res://source/scripts/Hitbox.gd" id="1_2d1wf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kly78"]
+radius = 46.0
+height = 146.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h5cjd"]
+radius = 44.0
+height = 148.0
+
+[node name="Projectile" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="PlayerHitbox" type="Area2D" parent="."]
+script = ExtResource("1_2d1wf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+shape = SubResource("CapsuleShape2D_kly78")
+
+[node name="ImpactDetector" type="Area2D" parent="."]
+
+[node name="ID_ColShape" type="CollisionShape2D" parent="ImpactDetector"]
+shape = SubResource("CapsuleShape2D_h5cjd")
+
+[node name="Timer" type="Timer" parent="."]
