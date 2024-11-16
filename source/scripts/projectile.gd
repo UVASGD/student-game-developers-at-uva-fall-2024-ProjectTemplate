@@ -45,12 +45,7 @@ func set_speed( newSpeed : float ) -> void:
 
 func set_attackingPlayer(player: CharacterBody2D) -> void:
 	attackingPlayer = player
+	
 func get_attackingPlayer() -> CharacterBody2D:
 	return attackingPlayer
 	
-func explode_with_particles() -> void:
-	var particle = deathParticle.instance()
-	particle.position = global_position
-	particle.rotation = global_rotation
-	particle.emitting = true
-	get_tree().current_scene.add_child(particle);
