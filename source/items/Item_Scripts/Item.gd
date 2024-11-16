@@ -1,5 +1,5 @@
 extends Resource
-#class_name Item
+class_name Item
 
 enum Rarity {
 	COMMON,
@@ -11,9 +11,10 @@ enum Rarity {
 enum FunctionTypes
 {
 	OnStart,
-	OnFire,
+	OnAttack,
 	OnHit,
-	OnGetHit
+	OnGetHit,
+	OnRoundStart
 }
 
 #Info
