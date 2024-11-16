@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bdkpc5mux3txu"]
+
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_hltpr"]
+[ext_resource type="Texture2D" uid="uid://dpevv3slmjd0y" path="res://source/items/Item_Sprites/spraypaint.png" id="2_3coam"]
+
+[resource]
+script = ExtResource("1_hltpr")
+sprite = ExtResource("2_3coam")
+name = "Spray Paint"
+description = "+++ Attack Damage
++++ Health
++ Speed
+Passive: On taking damage: Gain ++ Attack Damage for 3 seconds
+"
+rarity = 2
+cost = 0
+attackDamage = 3.0
+attackSpeed = 0.0
+maxHealth = 3.0
+speed = 1.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([0, 3])
+functionNames = Array[String](["sprayPaint_onStart", "sprayPaint_onGetHit"])

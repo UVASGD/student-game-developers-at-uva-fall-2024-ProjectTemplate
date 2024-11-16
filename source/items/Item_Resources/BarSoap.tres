@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://d2jo1tq1mmi0s"]
+
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_owt4p"]
+[ext_resource type="Texture2D" uid="uid://cx60wpmn87dm1" path="res://source/items/Item_Sprites/soap.png" id="2_kfbiq"]
+
+[resource]
+script = ExtResource("1_owt4p")
+sprite = ExtResource("2_kfbiq")
+name = "Bar Soap"
+description = "+ Tenacity
++ Health
+"
+rarity = 1
+cost = 0
+attackDamage = 0.0
+attackSpeed = 0.0
+maxHealth = 1.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 1.0
+luck = 0.0
+functionTypes = Array[int]([])
+functionNames = Array[String]([])

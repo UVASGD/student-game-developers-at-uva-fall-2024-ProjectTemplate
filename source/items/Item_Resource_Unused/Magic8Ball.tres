@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cny0mhc6ffqvk"]
+
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_7qar8"]
+[ext_resource type="Texture2D" uid="uid://sqeho1chu66e" path="res://source/items/Item_Sprites/magic8ball.png" id="2_tmdtx"]
+
+[resource]
+script = ExtResource("1_7qar8")
+sprite = ExtResource("2_tmdtx")
+name = ""
+description = "++++ Luck
+On 10% hp: 
+++++++++ Attack damage
+++++ Speed
+"
+rarity = 3
+cost = 0
+attackDamage = 0.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 4.0
+functionTypes = Array[int]([])
+functionNames = Array[String]([])
