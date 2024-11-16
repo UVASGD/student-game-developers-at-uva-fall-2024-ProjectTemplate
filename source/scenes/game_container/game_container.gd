@@ -13,25 +13,23 @@ static var GAME_CONTAINER : GameContainer
 
 #Scenes
 @onready var main_menu : PackedScene = preload("res://source/scenes/menus/main_menu.tscn")
-#@onready var world : PackedScene = preload("res://source/stages/world.tscn")
 @onready var credits : PackedScene = preload("res://source/scenes/menus/credits.tscn")
 @onready var instructions : PackedScene = preload("res://source/scenes/menus/instructions.tscn")
 @onready var character_select : PackedScene = preload("res://source/scenes/menus/character_select.tscn")
 @onready var pre_game_cut_scene : PackedScene = preload("res://source/scenes/cut_scenes/pre_game_cut_scene.tscn")
 @onready var shop : PackedScene = preload("res://source/scenes/stages/shop.tscn")
 @onready var game_over : PackedScene = preload("res://source/scenes/menus/game_over.tscn")
-#@onready var stage1 : PackedScene = preload("res://source/stages/stage_template.tscn")
+@onready var stage1 : PackedScene = preload("res://source/scenes/stages/stage_template.tscn")
 
 @onready var scene_dict = {
 	"MainMenu" : main_menu,
-	#"World" : world,
 	"Credits" : credits,
 	"Instructions" : instructions,
 	"CharacterSelect" : character_select,
 	"PreGameCutScene" : pre_game_cut_scene,
 	"Shop" : shop,
-	"GameOver" : game_over
-	#"Stage1" : stage1
+	"GameOver" : game_over,
+	"Stage1" : stage1
 }
 
 #Scoring
