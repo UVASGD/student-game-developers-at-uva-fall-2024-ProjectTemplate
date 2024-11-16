@@ -43,7 +43,6 @@ func _on_start_button_pressed() -> void:
 			player.position.x = 512/5*(i+1)
 			player.position.y = 160
 			player.character = player_classes[i]
-			print(player.character)
 			get_parent().get_parent().get_node("Players").add_child(player)
 	game_container.get_node("Players").set_meta("player_classes", player_classes)
 	
