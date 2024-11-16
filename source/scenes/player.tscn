@@ -663,6 +663,10 @@ height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 0.0
 script = ExtResource("1_ws1a7")
 base_speed = 100.0
 character = 2
@@ -672,7 +676,6 @@ metadata/player_num = "1"
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-
 animation = &"ghost_kid_idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
