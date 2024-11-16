@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmg3rcypapom8"]
+[gd_scene load_steps=3 format=3 uid="uid://dmg3rcypapom8"]
 
 [ext_resource type="Script" path="res://source/scenes/menus/character_select.gd" id="1_f0ogi"]
+[ext_resource type="Texture2D" uid="uid://c44cemfbuaipe" path="res://assets/backgrounds/Character_Selection.png" id="2_u755h"]
 
 [node name="CharacterSelect" type="Node2D"]
 script = ExtResource("1_f0ogi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(255, 161)
+scale = Vector2(4.03125, 2.5625)
+texture = ExtResource("2_u755h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 8
