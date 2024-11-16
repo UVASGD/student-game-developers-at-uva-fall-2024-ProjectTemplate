@@ -1,6 +1,7 @@
 extends Control
 class_name Input_Controls
 
+@onready var label0 = $VBoxContainer/Label
 @onready var label = $VBoxContainer/HBoxContainer/Label as Label
 @onready var button = $VBoxContainer/HBoxContainer/Button as Button
 
@@ -8,6 +9,8 @@ class_name Input_Controls
 @onready var input_type = get_meta("input_type")
 
 func _ready() -> void:
+	label0.text = "Player " + str(player_num)
+	custom_minimum_size.y = 50*len($VBoxContainer.get_children())
 	if input_type == "Keyboard": set_meta("device_id", -1)
 
 func _process(delta) -> void:

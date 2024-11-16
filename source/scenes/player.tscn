@@ -662,6 +662,7 @@ height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ws1a7")
+metadata/player_num = ""
 
 [node name="PlayerSprite" type="Node2D" parent="."]
 

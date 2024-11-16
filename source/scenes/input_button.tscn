@@ -25,6 +25,7 @@ text = "Input Name"
 metadata/action_name = ""
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
