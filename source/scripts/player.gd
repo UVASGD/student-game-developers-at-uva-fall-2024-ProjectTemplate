@@ -46,7 +46,7 @@ enum Character {
 	GHOST,
 	PUMPKIN
 }
-var character = Character.WITCH
+@export var character = Character.WITCH
 
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
@@ -89,8 +89,6 @@ func handle_move() -> void:
 	if movement.length() :
 		Speed = move_toward(Speed, topSpeed * TOP_SPEED_FACTOR, ACCELERATION)
 	
-	if movement.x:
-		var player_num = str(get_meta("player_num"))
 	#movement = Vector2(Input.get_axis("Left1", "Right1"), Input.get_axis("Up1", "Down1")).normalized()
 	#TOP_SPEED_FACTOR = 15
 	#ACCELERATION = 15
@@ -102,18 +100,18 @@ func handle_move() -> void:
 		#Speed = move_toward(Speed, 10 * TOP_SPEED_FACTOR, ACCELERATION)
 	#else:
 		#Speed = move_toward(Speed, 0, DECELERATION) # Gradually decrease speed to zero
-	#
-	#if movement.x:
-		#velocity.x = movement.x * Speed
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, DECELERATION) # Gradually decrease horizontal velocity to zero
-	#
-	#if movement.y:
-		#velocity.y = movement.y * Speed
-	#else:
-		#velocity.y = move_toward(velocity.y, 0, DECELERATION) # Gradually decrease vertical velocity to zero
-	#
-	#move_and_slide() # Ensure velocity is passed to move_and_slide
+	
+	if movement.x:
+		velocity.x = movement.x * Speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, DECELERATION) # Gradually decrease horizontal velocity to zero
+	
+	if movement.y:
+		velocity.y = movement.y * Speed
+	else:
+		velocity.y = move_toward(velocity.y, 0, DECELERATION) # Gradually decrease vertical velocity to zero
+	
+	move_and_slide() # Ensure velocity is passed to move_and_slide
 
 func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
 	match character:
@@ -190,11 +188,11 @@ func playWalkOrIdleAnimation(velocity: Vector2):
 		
 func getDirectionWord(direction: Vector2):
 	if direction.is_zero_approx(): return "down"
-	if abs(direction.x) >= abs(direction.y):
-		if direction.x > 0: return "right"
+	if abs(direction.x) >= abs(direction.y - 0.1):
+		if direction.x >= 0: return "right"
 		elif direction.x < 0: return "left"
 	else:
-		if direction.y > 0: return "down"
+		if direction.y >= 0: return "down"
 		elif direction.y < 0: return "up"
 
 func changeModel(newModel: String):
