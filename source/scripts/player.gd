@@ -54,7 +54,7 @@ const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
 var health : float = 0
-var candy : int
+var candy : int = 0
 var onAttackFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
 var onGetHitFunctions : Array[Callable]#When this one is called. should also call with the object hit as a parameter
@@ -80,12 +80,14 @@ func _process(delta: float) -> void:
 	if(movement != Vector2.ZERO): 
 		last_movement = movement
 
-func round_start():
+func round_start(): #called by game manager
 	call_functions(onRoundStart)
 
 func handle_move() -> void:
+
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
-	playWalkOrIdleAnimation(velocity)
+	playWalkOrIdleAnimation()
+  
 	if not velocity.is_zero_approx(): direction = velocity
 	
 	if movement.length() :
@@ -93,7 +95,7 @@ func handle_move() -> void:
 	
 	if not dash and Input.is_action_just_pressed("Dash"):
 		print("ENTERING DASH")
-		#dashing()
+		dashing()
 	if movement.length(): # stats.topSpeed = 10
 		Speed = move_toward(Speed, total_stats.speed, total_stats.speed * ACCELERATION)
 	else:
@@ -149,6 +151,20 @@ func handle_damage(attackingPlayer: CharacterBody2D) -> void:
 		i.call(self,attackingPlayer)
 	attackingPlayer = attackingPlayer as Player
 	attackingPlayer.call_functions(attackingPlayer.onHitFunctions)
+	if(attackingPlayer.isMonster):
+		match attackingPlayer.character:
+			Character.WITCH:
+				statusEffects.giveStatusTimed("Poison", max(3 * (1 - total_stats.tenacity * 0.1), 0), StatusEffectManager.OverLapBehavior.STACK)
+			Character.FRANKENSTEIN:
+				statusEffects.giveStatusTimed("Stun", max(3 * (1 - total_stats.tenacity * 0.1), 0))
+			Character.GHOST:
+				statusEffects.giveStatusTimed("Spook", max(3 * (1 - total_stats.tenacity * 0.1), 0))
+			Character.PUMPKIN:
+				statusEffects.giveStatusTimed("Fire", max(3 * (1 - total_stats.tenacity * 0.1), 0))
+			_:
+				print("ERROR: attacking Player does not have a valid character")
+	if(!isMonster && attackingPlayer.isMonster):
+		candy += 1
 	#UPDATE
 	#Health -= attackingPlayer.get_damage()
 	
@@ -165,9 +181,7 @@ func add_attack_instance_as_child(attack_scene: PackedScene) -> void:
 func getPlayerPosition() -> Vector2:
 	return position
 func get_damage() -> float:
-	return 0.0
-	#UPDATE
-	#return stats.attackDamage
+	return total_stats.attackDamage
 
 
 func get_item(item : Item):
@@ -199,20 +213,22 @@ func call_functions(arr : Array[Callable]):
 	for i in arr:
 		i.call()
 		
-func playWalkOrIdleAnimation(_velocity: Vector2):
-	if _velocity.is_zero_approx():
+func playWalkOrIdleAnimation():
+	if velocity.is_zero_approx():
 		sprite.play(model + "_idle_" + getDirectionWord(direction))
 	else:
 		sprite.play(model + "_walk_" + getDirectionWord(velocity))
 		
-func getDirectionWord(direction: Vector2):
-	if direction.is_zero_approx(): return "down"
-	if abs(direction.x) >= abs(direction.y - 0.1):
-		if direction.x >= 0: return "right"
-		elif direction.x < 0: return "left"
+
+func getDirectionWord(_direction: Vector2):
+	if _direction.is_zero_approx(): return "down"
+	if abs(_direction.x) >= abs(direction.y):
+		if _direction.x >= 0: return "right"
+		elif _direction.x < 0: return "left"
 	else:
-		if direction.y >= 0: return "down"
-		elif direction.y < 0: return "up"
+		if _direction.y >= 0: return "down"
+		elif _direction.y < 0: return "up"
+
 
 #currently unused
 #func changeModel(newModel: String):
@@ -267,10 +283,10 @@ func getDirectionWord(direction: Vector2):
 	##add this in child Classes
 	#print("Player Attacked!")
 	#pass
-#func dashing():
+func dashing():
 	## dash values, please
-	#dash = true
-	#Speed = 750
-	#await get_tree().create_timer(2).timeout
-	#dash = false
-	##Speed = move_toward(Speed, 0, DECELERATION)
+	dash = true
+	Speed = 750
+	await get_tree().create_timer(2).timeout
+	dash = false
+	Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION)
