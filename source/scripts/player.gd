@@ -91,10 +91,10 @@ func shoot_projectile(projectile: PackedScene) -> void:
 	# set the projectile instance at players locatio
 	proj_instance.position = self.global_position
 	# set direction of projectile towards mouse
-	proj_instance.direction = global_position.direction_to(get_global_mouse_position())
+	proj_instance.direction = movement
 	# assign damage from players stats to projectiles damage
 	#UPDATE
-	#proj_instance.set_damage(stats.attackDamage)
+	proj_instance.set_damage(0.0)
 	# attach attacking player to projectile
 	proj_instance.set_attackingPlayer(self)
 	#spawn projectile
