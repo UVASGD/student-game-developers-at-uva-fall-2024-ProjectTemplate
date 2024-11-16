@@ -50,7 +50,7 @@ const Pumpkin_Attack_Scene := preload("res://source/scenes/pumpkin_attack.tscn")
 const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
-var health :int = 0
+var health : float = 0
 
 var onAttackFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
@@ -199,20 +199,20 @@ func call_functions(arr : Array[Callable]):
 	for i in arr:
 		i.call()
 		
-func playWalkOrIdleAnimation(velocity: Vector2):
-	if velocity.is_zero_approx():
+func playWalkOrIdleAnimation(_velocity: Vector2):
+	if _velocity.is_zero_approx():
 		sprite.play(model + "_idle_" + getDirectionWord(direction))
 	else:
 		sprite.play(model + "_walk_" + getDirectionWord(velocity))
 		
-func getDirectionWord(direction: Vector2):
-	if direction.is_zero_approx(): return "down"
-	if abs(direction.x) >= abs(direction.y):
-		if direction.x > 0: return "right"
-		elif direction.x < 0: return "left"
+func getDirectionWord(_direction: Vector2):
+	if _direction.is_zero_approx(): return "down"
+	if abs(_direction.x) >= abs(direction.y):
+		if _direction.x > 0: return "right"
+		elif _direction.x < 0: return "left"
 	else:
-		if direction.y > 0: return "down"
-		elif direction.y < 0: return "up"
+		if _direction.y > 0: return "down"
+		elif _direction.y < 0: return "up"
 
 #currently unused
 #func changeModel(newModel: String):

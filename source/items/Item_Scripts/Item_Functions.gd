@@ -27,7 +27,7 @@ func spook_end(ps : Player):
 
 func yoyo_onStart(ps: Player):
 	ps.statusEffects.addStatusStartAndEndFunction("yoyo_speedBuff", Callable(self,"yoyo_speedBuff_start").bind(ps), Callable(self,"yoyo_speedBuff_end").bind(ps))	
-func yoyo_onHit(ps: Player, other :Player):
+func yoyo_onHit(ps: Player, _other :Player):
 	ps.statusEffects.giveStatusTimed("yoyo_speedBuff", 3, StatusEffectManager.OverLapBehavior.STACK)
 func yoyo_speedBuff_start(ps: Player):
 	ps.speed += 2
