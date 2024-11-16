@@ -5,6 +5,7 @@ class_name Player
 var player_num
 var Speed := 0.0
 var movement := Vector2.ZERO
+var last_movement := Vector2(0,1)
 
 const TOP_SPEED_FACTOR := 15.0
 const ACCELERATION := 15.0
@@ -22,7 +23,7 @@ enum Character {
 	GHOST,
 	PUMPKIN
 }
-var character = Character.WITCH
+var character = Character.PUMPKIN
 
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
@@ -50,6 +51,8 @@ func _ready() -> void:
 func _process(delta) -> void:
 	handle_move()
 	if Input.is_action_just_pressed("Attack" + player_num): handle_attack()
+	if(movement != Vector2.ZERO): 
+		last_movement = movement
 
 func handle_move() -> void:
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
@@ -92,7 +95,7 @@ func handle_damage(attackingPlayer: CharacterBody2D) -> void:
 func add_attack_instance_as_child(attack_scene: PackedScene) -> void:
 	var attack_instance := attack_scene.instantiate()
 	attack_instance.position = self.global_position
-	attack_instance.direction = movement #wsdaglobal_position.direction_to(get_global_mouse_position())
+	attack_instance.direction = last_movement #wsdaglobal_position.direction_to(get_global_mouse_position())
 	#UPDATE
 	#attack_instance.set_damage(stats.attackDamage)
 	attack_instance.set_attackingPlayer(self)
