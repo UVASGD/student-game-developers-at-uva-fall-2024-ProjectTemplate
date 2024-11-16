@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://u4tmdtacb583"]
+
+[ext_resource type="Script" path="res://source/items/Item_Scripts/Item.gd" id="1_n5nyc"]
+[ext_resource type="Texture2D" uid="uid://bdh5om0n3ttan" path="res://source/items/Item_Sprites/fryingpan.png" id="2_cf5yb"]
+
+[resource]
+script = ExtResource("1_n5nyc")
+sprite = ExtResource("2_cf5yb")
+name = "Frying Pan"
+description = "+++ Attack Damage"
+rarity = 1
+cost = 0
+attackDamage = 3.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 0.0
+cooldownReduction = 0.0
+tenacity = 0.0
+luck = 0.0
+functionTypes = Array[int]([])
+functionNames = Array[String]([])

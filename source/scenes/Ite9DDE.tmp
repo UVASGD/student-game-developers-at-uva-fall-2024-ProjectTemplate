@@ -1,4 +1,11 @@
-class_name StatusEffectManager
+[gd_scene load_steps=4 format=3 uid="uid://csmmvcufjnsl2"]
+
+[ext_resource type="Script" path="res://source/scripts/Player_Test.gd" id="1_rryau"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f54gc"]
+
+[sub_resource type="GDScript" id="GDScript_iagei"]
+script/source = "#class_name StatusEffectManager
 extends Node
 
 var statuses : Array[String]
@@ -7,22 +14,22 @@ var statusFunctionsEnd : Dictionary#[String,Array[Callable]]
 
 var timers : Dictionary#[Timer, String]
 #might need to be list of statuses for status effect stacking
+@onready var player : Player_Test = get_parent()
 enum OverLapBehavior{
 	IGNORE,
 	REFRESH,
 	STACK
 }
 
+func _ready() -> void:
+	setStartingStatusFunctions(player)
+
 func setStartingStatusFunctions(ps : Player_Test):
 	#Temperary. StatusEffect behavior should be stored elsewhere
-	addStatusStartFunction("Fire", Callable(ItemFunctions,"fire_start").bind(ps))
-	addStatusEndFunction("FireTick", Callable(ItemFunctions,"fire_tick_end").bind(ps))
-	addStatusStartFunction("Poison", Callable(ItemFunctions, "poison_start").bind(ps))
-	addStatusEndFunction("PoisonTick", Callable(ItemFunctions,"poison_tick_end").bind(ps))
-	addStatusStartFunction("Stun", Callable(ItemFunctions, "stun_start").bind(ps))
-	addStatusEndFunction("Stun", Callable(ItemFunctions,"stun_end").bind(ps))
-	addStatusStartFunction("Spook", Callable(ItemFunctions, "spook_start").bind(ps))
-	addStatusEndFunction("Spook", Callable(ItemFunctions,"spook_end").bind(ps))
+	addStatusStartFunction(\"Fire\", Callable(Item,\"fire_start\").bind(ps))
+	addStatusEndFunction(\"FireTick\", Callable(Item_Functions,\"fire_tick_end\").bind(ps))
+	addStatusStartFunction(\"Damage Buff 2\", (func(x : Player_Test): x.damage += 3).bind(ps))
+	addStatusEndFunction(\"Damage Buff 2\", (func(x : Player_Test): x.damage -= 3).bind(ps))
 
 func giveStatus(status : String, overlapBehavior : OverLapBehavior = OverLapBehavior.IGNORE) -> void:
 	if(statusFunctionsStart.has(status)):
@@ -69,16 +76,16 @@ func create_timer(status : String, duration :float):
 	timer.one_shot = true
 	timers[timer] = status
 	timer.start()
-	timer.connect("timeout", Callable(self,"removeStatus").bind(status))
-	timer.connect("timeout", Callable(self, "remove_timer").bind(timer))
-	timer.connect("timeout", timer.queue_free)
+	timer.connect(\"timeout\", Callable(self,\"removeStatus\").bind(status))
+	timer.connect(\"timeout\", Callable(self, \"remove_timer\").bind(timer))
+	timer.connect(\"timeout\", timer.queue_free)
 
 func remove_timer(timer : Timer):
 	if(timers.has(timer)):
 		timers.erase(timer)
 		timer.queue_free()
 	else:
-		print("tried to remove timer without a that doesnt exist in timers list")
+		print(\"tried to remove timer without a that doesnt exist in timers list\")
 
 func removeStatus(status: String):
 	statuses.erase(status)
@@ -97,9 +104,7 @@ func addStatusEndFunction(statusName : String, function : Callable):
 		var newFunctions : Array[Callable]
 		statusFunctionsEnd[statusName] = newFunctions
 	statusFunctionsEnd[statusName].append(function)
-func addStatusStartAndEndFunction(statusName : String, startFunction : Callable, endFunction : Callable):
-	addStatusStartFunction(statusName, startFunction)
-	addStatusEndFunction(statusName, endFunction)
+	
 func call_start_functions(status : String) -> void:
 	for c in statusFunctionsStart[status]:
 		c.call()
@@ -108,3 +113,17 @@ func call_end_functions(status : String) -> void:
 	for c in statusFunctionsEnd[status]:
 		c.call()
 	
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_rryau")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("CircleShape2D_f54gc")
+
+[node name="StatusEffectManager" type="Node2D" parent="Player"]
+script = SubResource("GDScript_iagei")
