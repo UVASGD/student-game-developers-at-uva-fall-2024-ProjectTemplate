@@ -131,6 +131,7 @@ func set_model_name():
 
 func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
 	call_functions(onAttackFunctions)
+	playAttackAnimation()
 	match character:
 		#THIS NEEDS TO BE UPDATED AFTER ATTACK SCENES MADE
 		Character.WITCH:
@@ -217,6 +218,9 @@ func playWalkOrIdleAnimation():
 	else:
 		sprite.play(model + "_walk_" + getDirectionWord(velocity))
 		
+func playAttackAnimation():
+	print("AMONGUS")
+	sprite.play(model + "_attack_" + getDirectionWord(direction))
 
 func getDirectionWord(_direction: Vector2):
 	if _direction.is_zero_approx(): return "down"
