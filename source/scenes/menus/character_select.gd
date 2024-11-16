@@ -9,6 +9,10 @@ enum {NONE, FRANKENSTEIN, PUMPKIN, WITCH, GHOST}
 @onready var player_classes = [NONE, NONE, NONE, NONE]
 @onready var player_insts = []
 
+@onready var player_scene : PackedScene = preload("res://source/scenes/player.tscn")
+@onready var settings_scene : PackedScene = preload("res://source/scenes/settings.tscn")
+@onready var game_container = get_parent().get_parent()
+
 func _ready():
 	add_player()
 	add_player()
@@ -30,12 +34,23 @@ func _physics_process(_delta: float) -> void:
 			player_classes[3] = player_insts[3].value
 
 func _on_start_button_pressed() -> void:
-	var counter = 0
-	for x in player_classes:
-		if x == NONE:
-			counter += 1
-	if counter != 4:
-		get_parent().get_parent().switch_to_scene("Stage1")
+	get_parent().get_parent().switch_to_scene("Stage")
+	
+	for i in player_classes.size():
+		if player_classes[i] != 0:
+			var player = player_scene.instantiate()
+			player.set_meta("player_num", i+1)
+			player.position.x = 512/5*(i+1)
+			player.position.y = 160
+			player.character = player_classes[i]
+			get_parent().get_parent().get_node("Players").add_child(player)
+	game_container.get_node("Players").set_meta("player_classes", player_classes)
+	
+	var settings = settings_scene.instantiate()
+	settings.visible = false
+	settings.scale = Vector2(0.4, 0.4)
+	settings.position = Vector2(51.2, 57.6)
+	game_container.add_child(settings)
 
 func _on_left_button_1_pressed() -> void:
 	player_classes[0] -= 1

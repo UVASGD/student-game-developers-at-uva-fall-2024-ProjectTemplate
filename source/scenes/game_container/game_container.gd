@@ -19,7 +19,7 @@ static var GAME_CONTAINER : GameContainer
 @onready var pre_game_cut_scene : PackedScene = preload("res://source/scenes/cut_scenes/pre_game_cut_scene.tscn")
 @onready var shop : PackedScene = preload("res://source/scenes/stages/shop.tscn")
 @onready var game_over : PackedScene = preload("res://source/scenes/menus/game_over.tscn")
-@onready var stage1 : PackedScene = preload("res://source/scenes/stages/stage_template.tscn")
+@onready var stage : PackedScene = preload("res://source/scenes/stages/stage_template.tscn")
 
 @onready var scene_dict = {
 	"MainMenu" : main_menu,
@@ -29,7 +29,7 @@ static var GAME_CONTAINER : GameContainer
 	"PreGameCutScene" : pre_game_cut_scene,
 	"Shop" : shop,
 	"GameOver" : game_over,
-	"Stage1" : stage1
+	"Stage" : stage
 }
 
 #Scoring
@@ -49,6 +49,7 @@ func _process(_elta):
 
 func switch_to_scene(scene_name : String):
 	switch_active_scene(scene_dict[scene_name])
+	
 	#below: debug code, above: actual code
 	#if scene == shop:
 		#award_point_to_player(1)
