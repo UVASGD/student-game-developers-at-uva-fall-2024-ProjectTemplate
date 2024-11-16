@@ -44,7 +44,7 @@ func _ready():
 	GAME_CONTAINER = self
 	switch_to_scene("MainMenu")
 
-func _process(delta):
+func _process(_delta):
 	#quit if Q pressed - DEBUG
 	if Input.is_key_pressed(KEY_Q) :
 		get_tree().quit()

@@ -8,7 +8,7 @@ var maxHealth : int = 12
 var damage :int = 0
 
 
-var health :int = 0
+var health : int = 0
 #signal onAttack(player)#This signals will emit every attack
 #signal onGetHit(player)#This signal will emit every time the player gets hit
 #more signals to tell items when to trigger their effects
@@ -80,7 +80,7 @@ func get_item(item : Item):
 func hit_object(ps: Player_Test):
 	pass
 
-func change_health(deltaHealth : float):
+func change_health(deltaHealth : int):
 	print("Player took " + str(-deltaHealth) + " damage") 
 	health += deltaHealth
 	#onGetHit.emit(self);
