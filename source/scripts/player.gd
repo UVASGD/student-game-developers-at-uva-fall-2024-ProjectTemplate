@@ -23,7 +23,7 @@ enum Character {
 	GHOST,
 	PUMPKIN
 }
-var character = Character.PUMPKIN
+var character = Character.WITCH
 
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
