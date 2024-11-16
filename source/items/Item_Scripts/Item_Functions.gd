@@ -161,24 +161,35 @@ func rainbowLolipop_onGetHit(ps : Player):
 		if(ps.statusEffects.hasStatus("rainbowLolipop_buff")):
 			ps.statusEffects.removeStatus("rainbowLolipop_buff")
 func rainbowLolipop_buff_start(ps : Player):
-	ps.damage += 2
-	ps.speed += 2
+	ps.item_stats.modifyAttackDamage(2)
+	ps.item_stats.modifySpeed(2)
 func rainbowLolipop_buff_end(ps : Player):
-	ps.damage -= 2
-	ps.speed -= 2
+	ps.item_stats.modifyAttackDamage(-2)
+	ps.item_stats.modifySpeed(-2)
 func rainbowLolipop_tenasityBuff_start(ps : Player):
-	ps.tenasity += 2
+	ps.item_stats.modifyTenasity(2)
 func rainbowLolipop_tenasityBuff_end(ps : Player):
-	ps.tenasity -= 2
+	ps.item_stats.modifyTenasity(-2)
 
 func rollerSkates_onStart(ps : Player):
-	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, 	"rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, "rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
 func rollerSkates_onHit(ps : Player):
 	while(ps.statusEffects.hasStatus("rollerSkates_buff")):
 		ps.statusEffects.removeStatus("rollerSkates_buff")
 	for i in range(0, (int)((1- ps.health / ps.maxHealth) * 10)):
 		ps.statusEffects.giveStatus("rollerSkates_buff", StatusEffectManager.OverLapBehavior.STACK)
 func rollerSkates_buff_start(ps : Player):
-	ps.speed += 1
+	ps.item_stats.modifySpeed(1)
 func rollerSkates_buff_end(ps : Player):
-	ps.speed -= 1
+	ps.item_stats.modifySpeed(-1)
+
+func magic8Ball_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("magic8Ball_buff", Callable(self, "magic8Ball_buff_start"), Callable(self, "magic8Ball_buff_end"))
+func magic8Ball_onGetHit(ps : Player):
+	pass
+func magic8Ball_buff_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(8)
+	ps.item_stats.modifySpeed(4)
+func magic8Ball_buff_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(-8)
+	ps.item_stats.modifySpeed(-4)

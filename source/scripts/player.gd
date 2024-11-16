@@ -23,6 +23,7 @@ var total_stats : Stats
 var base_stats : Stats
 var item_stats : Stats
 
+var statusEffects : StatusEffectManager
 #keep doing for each type of animation
 var run_animations: Array = [null, null, null, null]
 var hit_animations: Array = [null, null, null, null]
@@ -67,6 +68,7 @@ func _ready() -> void:
 	player_num = str(get_meta("player_num"))
 	set_starting_stats()
 	set_model_name()
+	item_stats.statChanged.connect(update_totalStats)
 	health = total_stats.maxHealth
 	pass
 
@@ -171,7 +173,6 @@ func get_damage() -> float:
 
 func get_item(item : Item):
 	item_stats.addStats(item.attackDamage, item.attackSpeed, item.maxHealth, item.speed, item.cooldownReduction, item.tenacity, item.luck)
-	
 	for i in range(item.FunctionTypes.size()):
 		match item.functionTypes[i]:
 			Item.FunctionTypes.OnStart:
