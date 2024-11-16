@@ -1,13 +1,14 @@
 extends Control
 
-@onready var vbox = $TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer
+@onready var hbox = $TabContainer/Controls/MarginContainer/ScrollContainer/HBoxContainer
 
 var deviceIDs = []
 var old_joypads = []
 
 func _ready():
-	for node in vbox.get_children():
-		if node.has_meta("player_num"): deviceIDs.append(node.get_meta("device_id"))
+	for vbox in hbox.get_children():
+		for node in vbox.get_children():
+			if node.has_meta("player_num"): deviceIDs.append(node.get_meta("device_id"))
 	
 	for joy in Input.get_connected_joypads():
 		old_joypads.append(Input.get_joy_guid(joy))
@@ -25,9 +26,10 @@ func _process(delta):
 			if(get_node("..").has_node("ItemSelector")):
 				get_node("../ItemSelector").visible = false
 	
-	for node in vbox.get_children():
-		if node.has_meta("player_num"):
-			deviceIDs[node.get_meta("player_num") - 1] = node.get_meta("device_id")
+	for vbox in hbox.get_children():
+		for node in vbox.get_children():
+			if node.has_meta("player_num"):
+				deviceIDs[node.get_meta("player_num") - 1] = node.get_meta("device_id")
 	
 	if deviceIDs.has(4):
 		for i in range(4):
@@ -50,6 +52,7 @@ func _process(delta):
 		for joy in Input.get_connected_joypads():
 			old_joypads.append(Input.get_joy_guid(joy))
 	
-	for node in vbox.get_children():
-		if node.has_meta("player_num"):
-			node.set_meta("device_id", deviceIDs[node.get_meta("player_num") - 1])
+	for vbox in hbox.get_children():
+		for node in vbox.get_children():
+			if node.has_meta("player_num"):
+				node.set_meta("device_id", deviceIDs[node.get_meta("player_num") - 1])
