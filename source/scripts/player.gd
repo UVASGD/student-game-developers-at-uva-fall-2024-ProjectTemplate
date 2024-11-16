@@ -52,7 +52,7 @@ const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
 var health : float = 0
-
+var candy : int
 var onAttackFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
 var onGetHitFunctions : Array[Callable]#When this one is called. should also call with the object hit as a parameter

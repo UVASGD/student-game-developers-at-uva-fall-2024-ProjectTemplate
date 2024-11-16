@@ -16,23 +16,23 @@ func poison_tick_end(ps : Player):
 		ps.statusEffects.giveStatusTimed("PoisonTick", 1, StatusEffectManager.OverLapBehavior.STACK)
 
 func stun_start(ps : Player): #GAME DESIGN WARNING. this just gives a speed debuff using the speed bonus stat. maybe it should modify the player's base stats?
-	ps.speed -= 4
+	ps.item_stats.modifySpeed(-4)
 func stun_end(ps : Player):
-	ps.speed += 4
+	ps.item_stats.modifySpeed(4)
 
 func spook_start(ps : Player):
-	ps.damage -= 4
+	ps.item_stats.modifyAttackDamage(-4)
 func spook_end(ps : Player):
-	ps.damage += 4
+	ps.item_stats.modifyAttackDamage(4)
 
 func yoyo_onStart(ps: Player):
 	ps.statusEffects.addStatusStartAndEndFunction("yoyo_speedBuff", Callable(self,"yoyo_speedBuff_start").bind(ps), Callable(self,"yoyo_speedBuff_end").bind(ps))	
 func yoyo_onHit(ps: Player, _other :Player):
 	ps.statusEffects.giveStatusTimed("yoyo_speedBuff", 3, StatusEffectManager.OverLapBehavior.STACK)
 func yoyo_speedBuff_start(ps: Player):
-	ps.speed += 2
+	ps.item_stats.modifySpeed(2)
 func yoyo_speedBuff_end(ps: Player):
-	ps.speed -= 2
+	ps.item_stats.modifySpeed(-2)
 
 func propellerHat_onStart(ps: Player):
 	ps.statusEffects.addStatusStartAndEndFunction("Fire", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
@@ -41,11 +41,11 @@ func propellerHat_onStart(ps: Player):
 	ps.statusEffects.addStatusStartAndEndFunction("Spook", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
 func propellerHat_speedBuff_start(ps : Player):
 	if not(ps.statusEffects.hasStatus("propellerHat_speedBuff")):
-		ps.speed += 2
+		ps.item_stats.modifySpeed(2)
 		ps.statusEffects.giveStatus("propellerHat_speedBuff")
 func propellerHat_speedBuff_end(ps : Player):
 	if not(ps.statusEffects.hasStatus("Fire") or ps.statusEffects.hasStatus("Poison") or ps.statusEffects.hasStatus("Stun") or ps.statusEffects.hasStatus("Spook")):
-		ps.speed -= 2
+		ps.item_stats.modifySpeed(-2)
 		ps.statusEffects.removeStatus("propellerHat_speedBuff")
 
 func topHat_onStart(ps: Player):
@@ -53,9 +53,9 @@ func topHat_onStart(ps: Player):
 func topHat_onAttack(ps : Player):
 	ps.statusEffects.giveStatusTimed("topHat_speedBuff", 1, StatusEffectManager.OverLapBehavior.REFRESH)
 func topHat_speedBuff_start(ps : Player):
-	ps.speed += 1
+	ps.item_stats.modifySpeed(1)
 func topHat_speedBuff_end(ps : Player):
-	ps.speed -= 1
+	ps.item_stats.modifySpeed(-1)
 
 func winterHat_onStart(ps : Player):
 	ps.statusEffects.addStatusStartAndEndFunction("winterHat_damageBuff", Callable(self,"winterHat_damageBuff_start").bind(ps), Callable(self,"winterHat_damageBuff_end").bind(ps))
@@ -67,12 +67,12 @@ func winterHat_onGetHit(ps : Player):
 		if(ps.statusEffects.hasStatus("winterHat_damageBuff")):
 			ps.statusEffects.removeStatus("winterHat_damageBuff")
 func winterHat_damageBuff_start(ps : Player):
-	ps.damage += 2
+	ps.item_stats.modifyAttackDamage(2)
 func winterHat_damageBuff_end(ps : Player):
-	ps.damage -= 2
+	ps.item_stats.modifyAttackDamage(-2)
 	
 func rubberDuck_onRoundStart(ps : Player):
-	ps.maxHealth += 1
+	ps.item_stats.modifyMaxHealth(1)
 
 func candyCane_onRoundStart(ps : Player):
 	ps.statusEffects.addStatusEndFunction("candyCane_buff", Callable(self,"candyCane_buff_end").bind(ps))
@@ -87,22 +87,22 @@ func puzzleCube_onHit(ps : Player, other : Player):
 	else:
 		ps.statusEffects.addStatusStartAndEndFunction("puzzleCube_speedBuff",  Callable(self,"puzzleCube_speedBuff_start").bind(ps), Callable(self,"puzzleCube_speedBuff_end").bind(ps))
 func puzzleCube_speedBuff_start(ps : Player):
-	ps.speed += 2
+	ps.item_stats.modifySpeed(2)
 func puzzleCube_speedBuff_end(ps : Player):
-	ps.speed -= 2
+	ps.item_stats.modifySpeed(-2)
 func puzzleCube_speedDebuff_start(other : Player):
-	other.speed -= 2
+	other.item_stats.modifySpeed(-2)
 func puzzleCube_speedDebuff_end(other : Player):
-	other.speed += 2
+	other.item_stats.modifySpeed(2)
 
 func sprayPaint_onStart(ps : Player):
 	ps.statusEffects.addStatusStartAndEndFunction("sprayPaint_Buff", Callable(self,"sprayPaint_attackBuff_start").bind(ps), Callable(self,"sprayPaint_attackBuff_end").bind(ps))
 func sprayPaint_onGetHit(ps : Player):
 	ps.statusEffects.giveStatusTimed("sprayPaint_Buff", 3, StatusEffectManager.OverLapBehavior.STACK)
 func sprayPaint_attackBuff_start(ps : Player):
-	ps.speed += 2
+	ps.item_stats.modifySpeed(2)
 func sprayPaint_attackBuff_end(ps : Player):
-	ps.speed -= 2
+	ps.item_stats.modifySpeed(-2)
 
 func deckOfCards_onStart(ps : Player):
 	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_damageBuff", Callable(self, "deckOfCards_damageBuff_start").bind(ps), Callable(self, "deckOfCards_damageBuff_end").bind(ps))
@@ -133,21 +133,21 @@ func deckOfCards_onGetHit(ps : Player):
 		if(ps.statusEffects.hasStatus("deckOfCards_damageBuff2")):
 			ps.statusEffects.removeStatus("deckOfCards_damageBuff2")
 func deckOfCards_damageBuff_start(ps : Player):
-	ps.damage += 10
+	ps.item_stats.modifyAttackDamage(10)
 func deckOfCards_damageBuff_end(ps : Player):
-	ps.damage -= 10
+	ps.item_stats.modifyAttackDamage(-10)
 func deckOfCards_speedBuff_start(ps : Player):
-	ps.speed += 10
+	ps.item_stats.modifySpeed(10)
 func deckOfCards_speedBuff_end(ps : Player):
-	ps.speed -= 10
+	ps.item_stats.modifySpeed(-10)
 func deckOfCards_healthBuff_start(ps : Player):
-	ps.maxHealth += 10
+	ps.item_stats.modifyMaxHealth(10)
 func deckOfCards_healthBuff_end(ps : Player):
-	ps.maxHealth -= 10
+	ps.item_stats.modifyMaxHealth(-10)
 func deckOfCards_damageBuff2_start(ps : Player):
-	ps.damage += 5
+	ps.item_stats.modifyAttackDamage(5)
 func deckOfCards_damageBuff2_end(ps : Player):
-	ps.damage -= 5
+	ps.item_stats.modifyAttackDamage(-5)
 
 func rainbowLolipop_onStart(ps : Player):
 	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_buff", Callable(self,"rainbowLolipop_buff_start").bind(ps),Callable(self,"rainbowLolipop_buff_end").bind(ps))
