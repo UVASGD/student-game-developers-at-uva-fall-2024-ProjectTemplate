@@ -25,7 +25,7 @@ static func damage_when_on_fire(ps : Player_Test):
 
 static func damage_when_low_health(ps : Player_Test):
 	print("Im checking health")
-	if(ps.health / ps.maxHealth < .5):
+	if((ps.health / ps.maxHealth) < .5):
 		if(!ps.statusEffects.hasStatus("Damage Buff 2")):
 			ps.statusEffects.giveStatus("Damage Buff 2")
 	else:
