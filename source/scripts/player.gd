@@ -21,13 +21,13 @@ enum Character {
 	GHOST,
 	PUMPKIN
 }
-var character = Character.PUMPKIN
+var character = Character.WITCH
 
 #Enemy attack instances
-#const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
-#const Frank_Attack_Scene := preload("res://source/scenes/frankenstein_attack.tscn")
-#const Pumpkin_Attack_Scene := preload("res://source/scenes/pumpkin_attack.tscn")
-#const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
+const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
+const Frank_Attack_Scene := preload("res://source/scenes/frankenstein_attack.tscn")
+const Pumpkin_Attack_Scene := preload("res://source/scenes/pumpkin_attack.tscn")
+const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
 var health :int = 0
@@ -71,17 +71,13 @@ func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
 	match character:
 		#THIS NEEDS TO BE UPDATED AFTER ATTACK SCENES MADE
 		Character.WITCH:
-			pass
-			#add_attack_instance_as_child(Projectile_Scene)
+			add_attack_instance_as_child(Projectile_Scene)
 		Character.FRANKENSTEIN:
-			pass
-			#add_attack_instance_as_child(Frank_Attack_Scene)
+			add_attack_instance_as_child(Frank_Attack_Scene)
 		Character.GHOST:
-			pass
-			#add_attack_instance_as_child(Ghost_Attack_Scene)
+			add_attack_instance_as_child(Ghost_Attack_Scene)
 		Character.PUMPKIN:
-			pass
-			#add_attack_instance_as_child(Pumpkin_Attack_Scene)
+			add_attack_instance_as_child(Pumpkin_Attack_Scene)
 		_:
 			print("ERROR: Player not assigned character")
 	
