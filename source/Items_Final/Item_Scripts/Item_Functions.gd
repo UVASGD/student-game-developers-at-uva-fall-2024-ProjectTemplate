@@ -51,7 +51,7 @@ func propellerHat_speedBuff_end(ps : Player_Test):
 func topHat_onStart(ps: Player_Test):
 	ps.statusEffects.addStatusStartAndEndFunction("topHat_speedBuff", Callable(self,"topHat_speedBuff_start").bind(ps), Callable(self,"topHat_speedBuff_end").bind(ps))
 func topHat_onAttack(ps : Player_Test):
-	ps.statusEffects.giveStatusTimed("topHat_speedBuff", 0.1, StatusEffectManager.OverLapBehavior.REFRESH)
+	ps.statusEffects.giveStatusTimed("topHat_speedBuff", 1, StatusEffectManager.OverLapBehavior.REFRESH)
 func topHat_speedBuff_start(ps : Player_Test):
 	ps.speed += 1
 func topHat_speedBuff_end(ps : Player_Test):

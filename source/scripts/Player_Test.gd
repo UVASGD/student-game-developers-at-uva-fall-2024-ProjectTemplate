@@ -37,7 +37,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	manage_test_input()
-	playerStat_Test_Textbox.text = "maxHealth: " + str(maxHealth) + "\ndamage: " + str(damage) + "\nspeed: " + str(speed) +"\ncurrentHealth: " + str(health) + "\ntenasity" + str(tenasity)  + "\nluck: " + str(luck) +"\ncandy: " + str(candy)
+	playerStat_Test_Textbox.text = "maxHealth: " + str(maxHealth) + "\ndamage: " + str(damage) + "\nspeed: " + str(speed) +"\ncurrentHealth: " + str(health) + "\ntenasity: " + str(tenasity)  + "\nluck: " + str(luck) +"\ncandy: " + str(candy)
 func manage_test_input():
 	pass
 	#Press enter to get item (currently only the DmgBuffItem)
@@ -53,11 +53,13 @@ func manage_test_input():
 		pass
 	if Input.is_action_just_pressed("Right1"):
 		call_functions(onRoundStart)
+		print("round start")
 
 	##press right mouse to check damage stat
 	if Input.is_action_just_pressed("mouse0_Test"):
 		hit_object(null)
 		print("I hit something")
+		call_functions(onAttackFunctions)
 func get_item(item : Item):
 	damage += item.attackDamage
 	health += item.maxHealth
