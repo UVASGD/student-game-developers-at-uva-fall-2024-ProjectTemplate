@@ -37,7 +37,7 @@ var hit_animations: Array = [null, null, null, null]
 #var topSpeed : int = 10
 
 enum Character {
-	WITCH,
+	WITCH = 1,
 	FRANKENSTEIN,
 	GHOST,
 	PUMPKIN
@@ -91,7 +91,7 @@ func handle_move() -> void:
 	if movement.length() :
 		Speed = move_toward(Speed, total_stats.speed, ACCELERATION)
 	
-	if not dash and Input.is_action_just_pressed("Dash"):
+	if not dash and Input.is_action_just_pressed("Dash" + player_num):
 		print("ENTERING DASH")
 		#dashing()
 	if movement.length(): # stats.topSpeed = 10
@@ -127,7 +127,7 @@ func set_model_name():
 		Character.PUMPKIN:
 			model = "pumpkin_" + ("monster" if isMonster else "kid")
 		_:
-			print("ERROR: Player not assigned character")		
+			print("ERROR: Player not assigned character")
 
 func handle_attack(): #Right now, just enables, hitbox for 0.5 seconds
 	call_functions(onAttackFunctions)
