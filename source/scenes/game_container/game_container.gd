@@ -34,7 +34,7 @@ static var GAME_CONTAINER : GameContainer
 
 #Scoring
 var player_scores : Array[int] = [0,0,0,0]
-var winning_score : int = 5
+var winning_score : int = 3
 
 #### METHODS ####
 
@@ -57,3 +57,9 @@ func award_point_to_player(player : int) :
 	player_scores[player-1] += 1
 	if player_scores[player-1] > 2:
 		switch_to_scene("GameOver")
+
+func check_player_states():
+	var is_monster_dead = 0
+	for player in Players.get_children():
+		if player.isMonster == 1 and player.isAlive == 0:
+			get_parent().get_parent().switch_to_scene("Stage")

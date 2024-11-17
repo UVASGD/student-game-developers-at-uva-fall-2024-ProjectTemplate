@@ -20,11 +20,11 @@ text = "Credits"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
-offset_left = 39.0
-offset_top = 77.0
-offset_right = 656.0
-offset_bottom = 298.0
-theme_override_font_sizes/font_size = 10
+offset_left = 47.0
+offset_top = 85.0
+offset_right = 664.0
+offset_bottom = 307.0
+theme_override_font_sizes/font_size = 9
 text = "Luke Webb - Co-Director, Lead Programmer
 Kedrick Fudala - Co-Director, Lead Game Designer, Programmer
 Joey Giordano - Game Designer, Programmer
@@ -39,6 +39,7 @@ Aidan Liu - Programmer
 Alissa Emond - Artist, Game Designer
 Megan Vu - Game Designer, Artist, Musician
 Angela Yu - Artist
+Kuthan Kukrer - Programmer
 "
 
 [node name="BackButton" type="Button" parent="."]

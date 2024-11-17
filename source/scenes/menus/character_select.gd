@@ -18,7 +18,8 @@ func _ready():
 	add_player()
 
 func _physics_process(_delta: float) -> void:
-	test.text = str("Player Count: ") + str(player_count) + str(" ") + str(player_classes)
+	#test.text = str("Player Count: ") + str(player_count) + str(" ") + str(player_classes)
+	test.text = str("Player Count: ") + str(player_count)
 	match(len(player_insts) - 1):
 		1:
 			player_classes[0] = player_insts[0].value
