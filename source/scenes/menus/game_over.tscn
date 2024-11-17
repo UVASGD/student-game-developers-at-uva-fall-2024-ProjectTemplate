@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cby3remb66qik"]
+
+[node name="GameOver" type="Node2D"]
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "MainMenu"
+
+[node name="TEMP" type="Label" parent="."]
+offset_left = 144.0
+offset_top = 130.0
+offset_right = 308.0
+offset_bottom = 179.0
+text = "Game_Over
+Player 1 Wins"

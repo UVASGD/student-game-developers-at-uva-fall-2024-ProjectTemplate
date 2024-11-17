@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhuom4ivjp0be"]
+
+[ext_resource type="Script" path="res://source/scenes/menus/credits.gd" id="1_y2hqy"]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_y2hqy")
+
+[node name="CreditsLabel" type="Label" parent="."]
+offset_left = 119.0
+offset_top = 15.0
+offset_right = 387.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 43.0
+offset_top = 96.0
+offset_right = 660.0
+offset_bottom = 254.0
+theme_override_font_sizes/font_size = 10
+text = "Kedrick Fudala - Lead Designer, Part-time programmer
+Luke Webb - Lead Programmer, part-time networks and cloud computing person
+Joey Giordano - Personality Hire, did some stuff
+Quintin Levy - Programmer
+Felix
+Vincent
+Haseeb"
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 236.0
+offset_top = 245.0
+offset_right = 282.0
+offset_bottom = 273.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,195 @@
+#Needs to be a global script
+extends Node
+
+func fire_start(ps : Player):
+	ps.statusEffects.giveStatusTimed("FireTick", 0.5, StatusEffectManager.OverLapBehavior.IGNORE)
+func fire_tick_end(ps : Player):
+	ps.change_health(-5)
+	if(ps.statusEffects.hasStatus("Fire")):
+		ps.statusEffects.giveStatusTimed("FireTick", 0.5, StatusEffectManager.OverLapBehavior.IGNORE)
+
+func poison_start(ps : Player):
+	ps.statusEffects.giveStatusTimed("PoisonTick", 1, StatusEffectManager.OverLapBehavior.STACK)
+func poison_tick_end(ps : Player):
+	ps.change_health(-1)
+	if(ps.statusEffects.hasStatus("Poison")):
+		ps.statusEffects.giveStatusTimed("PoisonTick", 1, StatusEffectManager.OverLapBehavior.STACK)
+
+func stun_start(ps : Player): #GAME DESIGN WARNING. this just gives a speed debuff using the speed bonus stat. maybe it should modify the player's base stats?
+	ps.item_stats.modifySpeed(-4)
+func stun_end(ps : Player):
+	ps.item_stats.modifySpeed(4)
+
+func spook_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(-4)
+func spook_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(4)
+
+func yoyo_onStart(ps: Player):
+	ps.statusEffects.addStatusStartAndEndFunction("yoyo_speedBuff", Callable(self,"yoyo_speedBuff_start").bind(ps), Callable(self,"yoyo_speedBuff_end").bind(ps))	
+func yoyo_onHit(ps: Player, _other :Player):
+	ps.statusEffects.giveStatusTimed("yoyo_speedBuff", 3, StatusEffectManager.OverLapBehavior.STACK)
+func yoyo_speedBuff_start(ps: Player):
+	ps.item_stats.modifySpeed(2)
+func yoyo_speedBuff_end(ps: Player):
+	ps.item_stats.modifySpeed(-2)
+
+func propellerHat_onStart(ps: Player):
+	ps.statusEffects.addStatusStartAndEndFunction("Fire", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Poison", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Stun", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("Spook", Callable(self,"propellerHat_speedBuff_start").bind(ps), Callable(self,"propellerHat_speedBuff_end").bind(ps))
+func propellerHat_speedBuff_start(ps : Player):
+	if not(ps.statusEffects.hasStatus("propellerHat_speedBuff")):
+		ps.item_stats.modifySpeed(2)
+		ps.statusEffects.giveStatus("propellerHat_speedBuff")
+func propellerHat_speedBuff_end(ps : Player):
+	if not(ps.statusEffects.hasStatus("Fire") or ps.statusEffects.hasStatus("Poison") or ps.statusEffects.hasStatus("Stun") or ps.statusEffects.hasStatus("Spook")):
+		ps.item_stats.modifySpeed(-2)
+		ps.statusEffects.removeStatus("propellerHat_speedBuff")
+
+func topHat_onStart(ps: Player):
+	ps.statusEffects.addStatusStartAndEndFunction("topHat_speedBuff", Callable(self,"topHat_speedBuff_start").bind(ps), Callable(self,"topHat_speedBuff_end").bind(ps))
+func topHat_onAttack(ps : Player):
+	ps.statusEffects.giveStatusTimed("topHat_speedBuff", 1, StatusEffectManager.OverLapBehavior.REFRESH)
+func topHat_speedBuff_start(ps : Player):
+	ps.item_stats.modifySpeed(1)
+func topHat_speedBuff_end(ps : Player):
+	ps.item_stats.modifySpeed(-1)
+
+func winterHat_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("winterHat_damageBuff", Callable(self,"winterHat_damageBuff_start").bind(ps), Callable(self,"winterHat_damageBuff_end").bind(ps))
+func winterHat_onGetHit(ps : Player):
+	if(ps.health / ps.maxHealth < .5):
+		if(!ps.statusEffects.hasStatus("winterHat_damageBuff")):
+			ps.statusEffects.giveStatus("winterHat_damageBuff")
+	else:
+		if(ps.statusEffects.hasStatus("winterHat_damageBuff")):
+			ps.statusEffects.removeStatus("winterHat_damageBuff")
+func winterHat_damageBuff_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(2)
+func winterHat_damageBuff_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(-2)
+	
+func rubberDuck_onRoundStart(ps : Player):
+	ps.item_stats.modifyMaxHealth(1)
+
+func candyCane_onRoundStart(ps : Player):
+	ps.statusEffects.addStatusEndFunction("candyCane_buff", Callable(self,"candyCane_buff_end").bind(ps))
+	ps.statusEffects.giveStatusTimed("candyCane_buff", 1, StatusEffectManager.OverLapBehavior.REFRESH)
+func candyCane_buff_end(ps : Player):
+	ps.candy += 1
+	ps.statusEffects.giveStatusTimed("candyCane_buff", 1, StatusEffectManager.OverLapBehavior.REFRESH)
+	
+func puzzleCube_onHit(ps : Player, other : Player):
+	if other.isMonster:
+		other.statusEffects.addStatusStartAndEndFunction("puzzleCube_speedDebuff",  Callable(self,"puzzleCube_speedDebuff_start").bind(other), Callable(self,"puzzleCube_speedDebuff_end").bind(other))
+	else:
+		ps.statusEffects.addStatusStartAndEndFunction("puzzleCube_speedBuff",  Callable(self,"puzzleCube_speedBuff_start").bind(ps), Callable(self,"puzzleCube_speedBuff_end").bind(ps))
+func puzzleCube_speedBuff_start(ps : Player):
+	ps.item_stats.modifySpeed(2)
+func puzzleCube_speedBuff_end(ps : Player):
+	ps.item_stats.modifySpeed(-2)
+func puzzleCube_speedDebuff_start(other : Player):
+	other.item_stats.modifySpeed(-2)
+func puzzleCube_speedDebuff_end(other : Player):
+	other.item_stats.modifySpeed(2)
+
+func sprayPaint_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("sprayPaint_Buff", Callable(self,"sprayPaint_attackBuff_start").bind(ps), Callable(self,"sprayPaint_attackBuff_end").bind(ps))
+func sprayPaint_onGetHit(ps : Player):
+	ps.statusEffects.giveStatusTimed("sprayPaint_Buff", 3, StatusEffectManager.OverLapBehavior.STACK)
+func sprayPaint_attackBuff_start(ps : Player):
+	ps.item_stats.modifySpeed(2)
+func sprayPaint_attackBuff_end(ps : Player):
+	ps.item_stats.modifySpeed(-2)
+
+func deckOfCards_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_damageBuff", Callable(self, "deckOfCards_damageBuff_start").bind(ps), Callable(self, "deckOfCards_damageBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_speedBuff", Callable(self, "deckOfCards_speedBuff_start").bind(ps), Callable(self, "deckOfCards_speedBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_healthBuff", Callable(self, "deckOfCards_healthBuff_start").bind(ps), Callable(self, "deckOfCards_healthBuff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("deckOfCards_damageBuff2", Callable(self, "deckOfCards_damageBuff2_start").bind(ps), Callable(self, "deckOfCards_damageBuff2_end").bind(ps))
+func deckOfCards_onRoundStart(ps : Player):
+	if(ps.statusEffects.hasStatus("deckOfCards_damageBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_damageBuff")
+	if(ps.statusEffects.hasStatus("deckOfCards_speedBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_speedBuff")
+	if(ps.statusEffects.hasStatus("deckOfCards_healthBuff")):
+		ps.statusEffects.removeStatus("deckOfCards_healthBuff")
+	var rand = RandomNumberGenerator.new()
+	var randomNum = rand.randi_range(0, 2)
+	match(randomNum):
+		0:
+			ps.statusEffects.giveStatus("deckOfCards_damageBuff", StatusEffectManager.OverLapBehavior.IGNORE)
+		1:
+			ps.statusEffects.giveStatus("deckOfCards_speedBuff", StatusEffectManager.OverLapBehavior.IGNORE)
+		2:
+			ps.statusEffects.giveStatus("deckOfCards_healthBuff", StatusEffectManager.OverLapBehavior.IGNORE)
+func deckOfCards_onGetHit(ps : Player):
+	if(ps.health / ps.maxHealth <= .1):
+		if(!ps.statusEffects.hasStatus("deckOfCards_damageBuff2")):
+			ps.statusEffects.giveStatus("deckOfCards_damageBuff2")
+	else:
+		if(ps.statusEffects.hasStatus("deckOfCards_damageBuff2")):
+			ps.statusEffects.removeStatus("deckOfCards_damageBuff2")
+func deckOfCards_damageBuff_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(10)
+func deckOfCards_damageBuff_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(-10)
+func deckOfCards_speedBuff_start(ps : Player):
+	ps.item_stats.modifySpeed(10)
+func deckOfCards_speedBuff_end(ps : Player):
+	ps.item_stats.modifySpeed(-10)
+func deckOfCards_healthBuff_start(ps : Player):
+	ps.item_stats.modifyMaxHealth(10)
+func deckOfCards_healthBuff_end(ps : Player):
+	ps.item_stats.modifyMaxHealth(-10)
+func deckOfCards_damageBuff2_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(5)
+func deckOfCards_damageBuff2_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(-5)
+
+func rainbowLolipop_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_buff", Callable(self,"rainbowLolipop_buff_start").bind(ps),Callable(self,"rainbowLolipop_buff_end").bind(ps))
+	ps.statusEffects.addStatusStartAndEndFunction("rainbowLolipop_tenasityBuff", Callable(self,"rainbowLolipop_tenasityBuff_start").bind(ps),Callable(self,"rainbowLolipop_tenasityBuff_end").bind(ps))
+func rainbowLolipop_onGetHit(ps : Player):
+	ps.statusEffects.giveStatusTimed("rainbowLolipop_tenasityBuff", 3, StatusEffectManager.OverLapBehavior.STACK)
+	if(ps.health / ps.maxHealth <= .4):
+		if(!ps.statusEffects.hasStatus("rainbowLolipop_buff")):
+			ps.statusEffects.giveStatusTimed("rainbowLolipop_buff",8, StatusEffectManager.OverLapBehavior.REFRESH)
+	else:
+		if(ps.statusEffects.hasStatus("rainbowLolipop_buff")):
+			ps.statusEffects.removeStatus("rainbowLolipop_buff")
+func rainbowLolipop_buff_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(2)
+	ps.item_stats.modifySpeed(2)
+func rainbowLolipop_buff_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(-2)
+	ps.item_stats.modifySpeed(-2)
+func rainbowLolipop_tenasityBuff_start(ps : Player):
+	ps.item_stats.modifyTenasity(2)
+func rainbowLolipop_tenasityBuff_end(ps : Player):
+	ps.item_stats.modifyTenasity(-2)
+
+func rollerSkates_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("rollerSkates_buff", Callable(self, "rollerSkates_buff_start").bind(ps), Callable(self, "rollerSkates_buff_end").bind(ps))
+func rollerSkates_onHit(ps : Player):
+	while(ps.statusEffects.hasStatus("rollerSkates_buff")):
+		ps.statusEffects.removeStatus("rollerSkates_buff")
+	for i in range(0, (int)((1- ps.health / ps.maxHealth) * 10)):
+		ps.statusEffects.giveStatus("rollerSkates_buff", StatusEffectManager.OverLapBehavior.STACK)
+func rollerSkates_buff_start(ps : Player):
+	ps.item_stats.modifySpeed(1)
+func rollerSkates_buff_end(ps : Player):
+	ps.item_stats.modifySpeed(-1)
+
+func magic8Ball_onStart(ps : Player):
+	ps.statusEffects.addStatusStartAndEndFunction("magic8Ball_buff", Callable(self, "magic8Ball_buff_start"), Callable(self, "magic8Ball_buff_end"))
+func magic8Ball_onGetHit(ps : Player):
+	pass
+func magic8Ball_buff_start(ps : Player):
+	ps.item_stats.modifyAttackDamage(8)
+	ps.item_stats.modifySpeed(4)
+func magic8Ball_buff_end(ps : Player):
+	ps.item_stats.modifyAttackDamage(-8)
+	ps.item_stats.modifySpeed(-4)

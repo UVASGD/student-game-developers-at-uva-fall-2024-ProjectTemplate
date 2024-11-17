@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn5ejiljdkkwe"]
+
+[ext_resource type="Script" path="res://source/scenes/cut_scenes/pre_game_cut_scene.gd" id="1_cs6en"]
+
+[node name="PreGameCutScene" type="Node2D"]
+script = ExtResource("1_cs6en")
+
+[node name="ContinueButton" type="Button" parent="."]
+offset_left = 202.0
+offset_top = 191.0
+offset_right = 330.0
+offset_bottom = 222.0
+text = "Continue"
+
+[node name="CutSceneLabel" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 27.0
+offset_right = 494.0
+offset_bottom = 139.0
+theme_override_font_sizes/font_size = 13
+text = "4 kids enter a spooky, haunted mansion on halloween night, looking for fun
+
+But they find a cursed amulet that transforms them into monsters!
+
+Now they must fight amongst themselves for the powerful amulet!"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
