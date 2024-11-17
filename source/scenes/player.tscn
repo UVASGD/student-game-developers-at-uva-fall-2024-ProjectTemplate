@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=173 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
 [ext_resource type="Texture2D" uid="uid://balmtbxy73uxl" path="res://source/anims/ghost_kid_attack/down/attack_down_1.PNG" id="2_2aqtn"]
@@ -158,6 +158,42 @@ atlas = ExtResource("26_hc2k5")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8que"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18g2g"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfnh5"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtf3c"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qme1"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tff2p"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvbfc"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m4py"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgn88"]
+atlas = ExtResource("26_hc2k5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6njr"]
 atlas = ExtResource("26_hc2k5")
 region = Rect2(128, 0, 64, 64)
 
@@ -367,6 +403,48 @@ animations = [{
 }],
 "loop": true,
 "name": &"frankenstein_monster_attack_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18g2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfnh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtf3c")
+}],
+"loop": true,
+"name": &"frankenstein_monster_attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qme1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tff2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvbfc")
+}],
+"loop": true,
+"name": &"frankenstein_monster_attack_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m4py")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgn88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6njr")
+}],
+"loop": true,
+"name": &"frankenstein_monster_attack_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1222,7 +1300,7 @@ metadata/player_num = "1"
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-animation = &"pumpkin_monster_walk_down_1"
+animation = &"witch_monster_idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.875)
