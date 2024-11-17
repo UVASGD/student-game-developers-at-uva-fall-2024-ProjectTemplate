@@ -67,6 +67,7 @@ var model: String
 #@onready var statusEffects : StatusEffectManager = $StatusEffectManager
 @onready var sprite : AnimatedSprite2D = $PlayerSprite/Body
 @onready var collider = $PlayerHurtbox/CollisionShape2D
+@onready var attack_particle = $GPUParticles2D
 
 func _ready() -> void:
 	player_num = str(get_meta("player_num"))
@@ -155,10 +156,14 @@ func handle_damage(attackingPlayer: CharacterBody2D) -> void:
 		i.call(self,attackingPlayer)
 	attackingPlayer = attackingPlayer as Player
 	attackingPlayer.call_functions(attackingPlayer.onHitFunctions)
+	blood_particles()
 	#UPDATE
 	#Health -= attackingPlayer.get_damage()
 	
+func blood_particles():
+	pass
 	
+
 func add_attack_instance_as_child(attack_scene: PackedScene) -> void:
 	var attack_instance := attack_scene.instantiate()
 	attack_instance.position = self.global_position
