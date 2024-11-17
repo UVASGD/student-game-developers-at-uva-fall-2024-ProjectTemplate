@@ -86,8 +86,8 @@ func round_start(): #called by game manager
 
 func handle_move() -> void:
 	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
-	playWalkOrIdleAnimation()
-  
+	if sprite.animation != model + "_attack_" + getDirectionWord(direction) || sprite.animation == model + "_attack_" + getDirectionWord(direction) && !sprite.is_playing(): playWalkOrIdleAnimation()
+	
 	if not velocity.is_zero_approx(): direction = velocity
 	
 	if not awaiting_dash and Input.is_action_just_pressed("Dash" + player_num):

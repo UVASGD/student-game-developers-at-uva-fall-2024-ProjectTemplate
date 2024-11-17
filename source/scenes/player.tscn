@@ -154,7 +154,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_0xhk2")
 }],
-"loop": true,
+"loop": false,
 "name": &"ghost_kid_attack_down",
 "speed": 30.0
 }, {
@@ -213,7 +213,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_7kwbr")
 }],
-"loop": true,
+"loop": false,
 "name": &"ghost_kid_attack_left",
 "speed": 30.0
 }, {
@@ -272,7 +272,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("38_bxq05")
 }],
-"loop": true,
+"loop": false,
 "name": &"ghost_kid_attack_right",
 "speed": 30.0
 }, {
@@ -325,7 +325,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("49_k5hgi")
 }],
-"loop": true,
+"loop": false,
 "name": &"ghost_kid_attack_up",
 "speed": 30.0
 }, {
@@ -676,7 +676,7 @@ metadata/player_num = "1"
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-animation = &"ghost_kid_idle_down"
+animation = &"ghost_kid_attack_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.875)
