@@ -55,6 +55,7 @@ const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 var health : float = 0
 var candy : int
+var is_dead : bool = false
 var onAttackFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
 var onGetHitFunctions : Array[Callable]#When this one is called. should also call with the object hit as a parameter
@@ -65,51 +66,56 @@ var direction: Vector2 = Vector2(0, 1)
 var model: String
 #@onready var statusEffects : StatusEffectManager = $StatusEffectManager
 @onready var sprite : AnimatedSprite2D = $PlayerSprite/Body
+@onready var collider = $PlayerHurtbox/CollisionShape2D
 
 func _ready() -> void:
 	player_num = str(get_meta("player_num"))
 	set_starting_stats()
 	set_model_name()
 	item_stats.statChanged.connect(update_totalStats)
-	health = total_stats.maxHealth
 	pass
 
 func _process(delta: float) -> void:
 	handle_move()
-	if Input.is_action_just_pressed("Attack" + player_num): handle_attack()
+	isDeath()
+	if Input.is_action_just_pressed("Attack" + player_num) and not is_dead: handle_attack()
 	if(movement != Vector2.ZERO): 
 		last_movement = movement
 
 func round_start():
+	is_dead = false
+	health = total_stats.maxHealth
+	collider.disabled = false
 	call_functions(onRoundStart)
 
 func handle_move() -> void:
-	movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
-	playWalkOrIdleAnimation(velocity)
-	if not velocity.is_zero_approx(): direction = velocity
-	
-	if movement.length() :
-		Speed = move_toward(Speed, total_stats.speed, ACCELERATION)
-	
-	if not dash and Input.is_action_just_pressed("Dash"):
-		print("ENTERING DASH")
-		#dashing()
-	if movement.length(): # stats.topSpeed = 10
-		Speed = move_toward(Speed, total_stats.speed, total_stats.speed * ACCELERATION)
-	else:
-		Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION) # Gradually decrease speed to zero
-	
-	if movement.x:
-		velocity.x = movement.x * Speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, total_stats.speed * DECELERATION) # Gradually decrease horizontal velocity to zero
-	
-	if movement.y:
-		velocity.y = movement.y * Speed
-	else:
-		velocity.y = move_toward(velocity.y, 0, total_stats.speed * DECELERATION) # Gradually decrease vertical velocity to zero
-	
-	move_and_slide() # Ensure velocity is passed to move_and_slide
+	if not is_dead:
+		movement = Vector2(Input.get_axis("Left" + player_num, "Right" + player_num), Input.get_axis("Up" + player_num, "Down" + player_num)).normalized()
+		playWalkOrIdleAnimation(velocity)
+		if not velocity.is_zero_approx(): direction = velocity
+		
+		if movement.length() :
+			Speed = move_toward(Speed, total_stats.speed, ACCELERATION)
+		
+		if not dash and Input.is_action_just_pressed("Dash"):
+			print("ENTERING DASH")
+			#dashing()
+		if movement.length(): # stats.topSpeed = 10
+			Speed = move_toward(Speed, total_stats.speed, total_stats.speed * ACCELERATION)
+		else:
+			Speed = move_toward(Speed, 0, total_stats.speed * DECELERATION) # Gradually decrease speed to zero
+		
+		if movement.x:
+			velocity.x = movement.x * Speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, total_stats.speed * DECELERATION) # Gradually decrease horizontal velocity to zero
+		
+		if movement.y:
+			velocity.y = movement.y * Speed
+		else:
+			velocity.y = move_toward(velocity.y, 0, total_stats.speed * DECELERATION) # Gradually decrease vertical velocity to zero
+		
+		move_and_slide() # Ensure velocity is passed to move_and_slide
 
 func set_starting_stats():
 	total_stats = Stats.new().setStats(base_attackDamage, base_attackSpeed, base_maxHealth, base_speed, base_cooldownReduction, base_tenacity, base_luck)
@@ -213,6 +219,20 @@ func getDirectionWord(direction: Vector2):
 	else:
 		if direction.y >= 0: return "down"
 		elif direction.y < 0: return "up"
+
+func isDeath():
+	if health  < 0 and not is_dead:
+		playDeathAnimation()
+		collider.disabled = true
+		is_dead = true
+
+func playDeathAnimation():
+	if health < 0:
+		sprite.play(model + "_death")
+		await get_tree().create_timer(2).timeout
+		sprite.play(model + "_death_idle")
+		
+	
 
 #currently unused
 #func changeModel(newModel: String):
