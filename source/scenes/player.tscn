@@ -1,4 +1,4 @@
-[gd_scene load_steps=163 format=3 uid="uid://rgfnpcsvv534"]
+[gd_scene load_steps=164 format=3 uid="uid://rgfnpcsvv534"]
 
 [ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ws1a7"]
 [ext_resource type="Texture2D" uid="uid://balmtbxy73uxl" path="res://source/anims/ghost_kid_attack/down/attack_down_1.PNG" id="2_2aqtn"]
@@ -141,6 +141,7 @@
 [ext_resource type="Texture2D" uid="uid://b0cajweijv8hs" path="res://source/anims/witch_kid_walk/witch-walk-2 (4).png" id="138_3xg5g"]
 [ext_resource type="Texture2D" uid="uid://bhbqxovkiopx0" path="res://source/anims/witch_kid_walk/witch-walk-1 (4).png" id="139_jtcoh"]
 [ext_resource type="Texture2D" uid="uid://yot2mywv47hr" path="res://source/anims/witch_kid_walk/witch-walk-1 (3).png" id="140_o2jn0"]
+[ext_resource type="Texture2D" uid="uid://y6y5te2y1sn0" path="res://source/anims/witch_kid_walk/witch-walk-1 (2).png" id="141_ir77n"]
 [ext_resource type="Texture2D" uid="uid://b580hftee6jg4" path="res://source/anims/witch_kid_walk/witch-walk-1 (1).png" id="142_xh7pt"]
 [ext_resource type="Texture2D" uid="uid://dlqkanvc6gif3" path="res://source/anims/witch_kid_walk/witch-walk-2 (1).png" id="143_ylkd0"]
 [ext_resource type="Texture2D" uid="uid://bdi6itq5iq6cn" path="res://source/anims/witch_kid_walk/witch-walk-1.png" id="144_74qtm"]
@@ -960,6 +961,94 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("39_4mq0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_pfkgl")
+}],
+"loop": true,
+"name": &"pumpkin_monster_idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_aehjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_dhmis")
+}],
+"loop": true,
+"name": &"pumpkin_monster_idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("42_r2hxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_4vste")
+}],
+"loop": true,
+"name": &"pumpkin_monster_idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_eohrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_pbfcj")
+}],
+"loop": true,
+"name": &"pumpkin_monster_idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_j5o2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_48yp3")
+}],
+"loop": true,
+"name": &"pumpkin_monster_walk_down_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_k30tv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_5debl")
+}],
+"loop": true,
+"name": &"pumpkin_monster_walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_j3sls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_k13c4")
+}],
+"loop": true,
+"name": &"pumpkin_monster_walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("52_7geue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_ynnor")
+}],
+"loop": true,
+"name": &"pumpkin_monster_walk_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("139_jtcoh")
 }],
 "loop": true,
@@ -1033,6 +1122,82 @@ animations = [{
 "loop": true,
 "name": &"witch_kid_walk_up",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("138_3xg5g")
+}],
+"loop": true,
+"name": &"witch_monster_idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("147_1qdxw")
+}],
+"loop": true,
+"name": &"witch_monster_idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("143_ylkd0")
+}],
+"loop": true,
+"name": &"witch_monster_idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("145_2yl1a")
+}],
+"loop": true,
+"name": &"witch_monster_idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("138_3xg5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_jtcoh")
+}],
+"loop": true,
+"name": &"witch_monster_walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("141_ir77n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_o2jn0")
+}],
+"loop": true,
+"name": &"witch_monster_walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("143_ylkd0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_xh7pt")
+}],
+"loop": true,
+"name": &"witch_monster_walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("144_74qtm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_2yl1a")
+}],
+"loop": true,
+"name": &"witch_monster_walk_up",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bd1v"]
@@ -1057,7 +1222,7 @@ metadata/player_num = "1"
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerSprite"]
 sprite_frames = SubResource("SpriteFrames_1n7tg")
-animation = &"witch_kid_walk_left"
+animation = &"pumpkin_monster_walk_down_1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.875)
