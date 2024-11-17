@@ -45,7 +45,8 @@ enum Character {
 }
 
 @export var character : Character #SHOULD BE SET WHEN INSTANTIATING
-@export var isMonster : bool
+@onready var isMonster : bool = 0
+@onready var isAlive : bool = 1
 
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
