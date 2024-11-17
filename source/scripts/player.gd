@@ -45,8 +45,8 @@ enum Character {
 }
 
 @export var character : Character #SHOULD BE SET WHEN INSTANTIATING
-@onready var isMonster : bool = 0
-@onready var isAlive : bool = 1
+@onready var isMonster : bool = false
+@onready var isAlive : bool = true
 
 #Enemy attack instances
 const Projectile_Scene := preload("res://source/scenes/projectile.tscn")
@@ -55,8 +55,8 @@ const Pumpkin_Attack_Scene := preload("res://source/scenes/pumpkin_attack.tscn")
 const Ghost_Attack_Scene := preload("res://source/scenes/ghost_attack.tscn")
 
 
-var health : float = 0
-var candy : int = 0
+@onready var health : float
+@onready var candy : int = 0
 var onAttackFunctions : Array[Callable]
 var onHitFunctions : Array[Callable]
 var onGetHitFunctions : Array[Callable]#When this one is called. should also call with the object hit as a parameter
@@ -206,7 +206,7 @@ func change_health(deltaHealth : float):
 	health += deltaHealth
 	call_functions(onGetHitFunctions)
 	if(health < 0):
-		#handle death
+		die()
 		pass
 
 func call_functions(arr : Array[Callable]):
@@ -232,7 +232,10 @@ func getDirectionWord(_direction: Vector2):
 		if _direction.y >= 0: return "down"
 		elif _direction.y < 0: return "up"
 
-
+func die():
+	get_parent().get_parent().check_player_states()
+	
+	
 #currently unused
 #func changeModel(newModel: String):
 	#model = newModel

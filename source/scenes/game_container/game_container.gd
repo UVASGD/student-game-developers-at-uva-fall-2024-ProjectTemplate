@@ -11,6 +11,8 @@ static var GAME_CONTAINER : GameContainer
 #The player nodes are instantiated in the Players node, they can be hidden and frozen when necessary
 @onready var Players = $Players
 
+@onready var Player_Insts = []
+
 #Scenes
 @onready var main_menu : PackedScene = preload("res://source/scenes/menus/main_menu.tscn")
 @onready var credits : PackedScene = preload("res://source/scenes/menus/credits.tscn")
@@ -58,8 +60,22 @@ func award_point_to_player(player : int) :
 	if player_scores[player-1] > 2:
 		switch_to_scene("GameOver")
 
-func check_player_states():
-	var is_monster_dead = 0
+func start_game():
 	for player in Players.get_children():
-		if player.isMonster == 1 and player.isAlive == 0:
+		Player_Insts.append(player)
+	reset_stats()
+
+func check_player_states():
+	var isMonsterDead = false
+	for player in Player_Insts:
+		if player.isMonster == true and player.isAlive == false:
+			reset_stats()
 			get_parent().get_parent().switch_to_scene("Stage")
+
+func reset_stats():
+	for player in Player_Insts:
+		player.isAlive = 1
+		if player.isMonster == false:
+			player.health = 100
+		else:
+			player.health = 800
