@@ -52,6 +52,8 @@ func _on_start_button_pressed() -> void:
 	settings.scale = Vector2(0.4, 0.4)
 	settings.position = Vector2(51.2, 57.6)
 	game_container.add_child(settings)
+	
+	game_container.start_game()
 
 func _on_left_button_1_pressed() -> void:
 	player_classes[0] -= 1
