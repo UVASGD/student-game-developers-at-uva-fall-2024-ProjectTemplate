@@ -663,6 +663,7 @@ height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
+floor_max_angle = 0.0
 script = ExtResource("1_ws1a7")
 base_speed = 100.0
 character = 2

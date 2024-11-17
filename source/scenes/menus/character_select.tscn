@@ -7,8 +7,8 @@
 script = ExtResource("1_f0ogi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(255, 161)
-scale = Vector2(4.03125, 2.5625)
+position = Vector2(256, 160)
+scale = Vector2(4, 2.5)
 texture = ExtResource("2_u755h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
