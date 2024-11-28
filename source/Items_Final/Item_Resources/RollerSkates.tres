@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://diypms4rxy1n7"]
+
+[ext_resource type="Script" path="res://source/Items_Final/Item_Scripts/Item.gd" id="1_4vsr6"]
+[ext_resource type="Texture2D" uid="uid://dfxoi3ybrks0c" path="res://source/Items_Final/roller skates.png" id="2_djkfx"]
+
+[resource]
+script = ExtResource("1_4vsr6")
+sprite = ExtResource("2_djkfx")
+name = "Roller Skates"
+description = "(Legendary) Roller Skates
+++++ Tenacity
+++++ Speed
+Passive: Every 10% hp lost = + Speed
+"
+rarity = 3
+cost = 0
+attackDamage = 0.0
+attackSpeed = 0.0
+maxHealth = 0.0
+speed = 4.0
+cooldownReduction = 0.0
+tenacity = 4.0
+luck = 0.0
+functionTypes = Array[int]([0, 3])
+functionNames = Array[String](["rollerSkates_onStart", "rollerSkates_onHit"])
