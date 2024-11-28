@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0gynvjp0ikqw"]
+
+[ext_resource type="Script" path="res://source/scripts/pumpkin_attack.gd" id="1_6rkj1"]
+[ext_resource type="Script" path="res://source/scripts/Hitbox.gd" id="1_gy47r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nhxfr"]
+radius = 14.0
+height = 376.0
+
+[node name="pumpkin_attack" type="Node2D"]
+script = ExtResource("1_6rkj1")
+
+[node name="PlayerHitbox" type="Area2D" parent="."]
+script = ExtResource("1_gy47r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+position = Vector2(188, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nhxfr")
+
+[node name="lifespan_timer" type="Timer" parent="."]

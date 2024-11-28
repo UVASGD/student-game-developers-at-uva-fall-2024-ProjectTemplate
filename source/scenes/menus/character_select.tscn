@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmg3rcypapom8"]
+
+[ext_resource type="Script" path="res://source/scenes/menus/character_select.gd" id="1_f0ogi"]
+[ext_resource type="Texture2D" uid="uid://c44cemfbuaipe" path="res://assets/backgrounds/Character_Selection.png" id="2_u755h"]
+
+[node name="CharacterSelect" type="Node2D"]
+script = ExtResource("1_f0ogi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(256, 160)
+scale = Vector2(4, 2.5)
+texture = ExtResource("2_u755h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 511.0
+offset_bottom = 321.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="CharacterSelectLabel" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 25.0
+offset_right = 414.0
+offset_bottom = 91.0
+theme_override_font_sizes/font_size = 36
+text = "Character Select"
+
+[node name="test" type="Label" parent="."]
+offset_left = 203.0
+offset_top = 68.0
+offset_right = 243.0
+offset_bottom = 88.0
+
+[node name="RemovePlayerButton" type="Button" parent="."]
+offset_left = 216.0
+offset_top = 96.0
+offset_right = 241.0
+offset_bottom = 124.0
+text = "-"
+
+[node name="AddPlayerButton" type="Button" parent="."]
+offset_left = 261.0
+offset_top = 96.0
+offset_right = 286.0
+offset_bottom = 124.0
+text = "+"
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 230.0
+offset_top = 260.0
+offset_right = 289.0
+offset_bottom = 288.0
+text = "Start"
+
+[connection signal="pressed" from="RemovePlayerButton" to="." method="_on_remove_player_button_pressed"]
+[connection signal="pressed" from="AddPlayerButton" to="." method="_on_add_player_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

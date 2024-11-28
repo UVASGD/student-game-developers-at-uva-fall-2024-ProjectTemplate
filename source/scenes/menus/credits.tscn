@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhuom4ivjp0be"]
+
+[ext_resource type="Script" path="res://source/scenes/menus/credits.gd" id="1_y2hqy"]
+[ext_resource type="Texture2D" uid="uid://cn6xb12yf77o8" path="res://assets/backgrounds/titlescreen_1.png" id="2_sw1rd"]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_y2hqy")
+
+[node name="MainMenuBackground" type="Sprite2D" parent="."]
+position = Vector2(256, 160)
+texture = ExtResource("2_sw1rd")
+
+[node name="CreditsLabel" type="Label" parent="."]
+offset_left = 119.0
+offset_top = 15.0
+offset_right = 387.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 47.0
+offset_top = 85.0
+offset_right = 664.0
+offset_bottom = 307.0
+theme_override_font_sizes/font_size = 9
+text = "Luke Webb - Co-Director, Lead Programmer
+Kedrick Fudala - Co-Director, Lead Game Designer, Programmer
+Joey Giordano - Game Designer, Programmer
+Quintin Levy - Programmer
+Felix Young - Game Designer, Artist
+Jason Chen - Game Designer, Artist, Musician
+Vincent Chan - Programmer
+Henry Singh - Game Designer, Artist
+Aiden Ha - Programmer, Emotional Support Animal
+Haseeb Tahir - Game Designer, Programmer
+Aidan Liu - Programmer
+Alissa Emond - Artist, Game Designer
+Megan Vu - Game Designer, Artist, Musician
+Angela Yu - Artist
+Kuthan Kukrer - Programmer
+"
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 357.0
+offset_top = 251.0
+offset_right = 403.0
+offset_bottom = 279.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
